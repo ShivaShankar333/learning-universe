@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Certificate - Learning Universe</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🌌 Learning Universe
+        </div>
+
+        <button
+            class="login-btn"
+            onclick="location.href='index.html'">
+
+            Home
+
+        </button>
+
+    </header>
+
+
+    <main class="certificate-page">
+
+        <div class="certificate">
+
+            <div class="certificate-icon">
+                🏆
+            </div>
+
+            <p class="certificate-small">
+                LEARNING UNIVERSE
+            </p>
+
+            <h1>
+                Certificate of Completion
+            </h1>
+
+            <p>
+                This certificate is proudly presented to
+            </p>
+
+            <h2 class="student-name">
+                Student Name
+            </h2>
+
+            <p>
+                for successfully completing the course
+            </p>
+
+            <h2>
+                🐍 Python Programming
+            </h2>
+
+            <p class="certificate-text">
+
+                The student has successfully completed
+                the course lessons and final assessment.
+
+            </p>
+
+
+            <div class="certificate-details">
+
+                <div>
+                    <strong>Score</strong>
+                    <span>70%+</span>
+                </div>
+
+                <div>
+                    <strong>Date</strong>
+                    <span id="certificateDate"></span>
+                </div>
+
+                <div>
+                    <strong>Certificate ID</strong>
+                    <span>LU-PY-001</span>
+                </div>
+
+            </div>
+
+
+            <div class="certificate-footer">
+
+                <div>
+                    __________________
+                    <br>
+                    Learning Universe
+                </div>
+
+                <div>
+                    __________________
+                    <br>
+                    Course Instructor
+                </div>
+
+            </div>
+
+
+            <button
+                class="complete-btn"
+                onclick="window.print()">
+
+                🖨️ Print / Save Certificate
+
+            </button>
+
+            <br><br>
+
+            <a href="courses.html">
+                ← Back to Courses
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const today =
+            new Date();
+
+        document.getElementById(
+            "certificateDate"
+        ).textContent =
+            today.toLocaleDateString();
+
+    </script>
+
+</body>
+
+</html>

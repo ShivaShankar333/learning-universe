@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blind Accessibility Login - Learning Universe</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #e9e4ff, transparent 35%),
+        radial-gradient(circle at bottom right, #dff8f3, transparent 35%),
+        #f7f8ff;
+    color: #20243a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    width: 500px;
+    max-width: 100%;
+    background: white;
+    padding: 38px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(40,40,80,0.15);
+}
+
+.back {
+    color: #6c4df6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.icon {
+    text-align: center;
+    font-size: 50px;
+    margin: 25px 0 10px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #697188;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 16px 0 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 11px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #6c4df6;
+    outline: 3px solid rgba(108,77,246,0.2);
+}
+
+.login-btn,
+.voice-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 11px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn {
+    margin-top: 25px;
+    background: #6c4df6;
+}
+
+.voice-btn {
+    margin-top: 15px;
+    background: #16a085;
+}
+
+.status {
+    display: none;
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    background: #f0fff4;
+    color: #16753b;
+}
+
+.help {
+    margin-top: 25px;
+    padding: 18px;
+    background: #f3f1ff;
+    border-radius: 14px;
+    line-height: 1.7;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media(max-width:550px) {
+    .login-container {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<a href="disability-login.html" class="back">
+    ← Back to Accessibility
+</a>
+
+<div class="icon" aria-hidden="true">
+    👁️
+</div>
+
+<h1>
+    Blind / Visual Accessibility
+</h1>
+
+<p class="subtitle">
+    Screen-reader friendly login with voice guidance
+    and keyboard navigation.
+</p>
+
+<form id="loginForm">
+
+<label for="email">
+    Email Address
+</label>
+
+<input
+    id="email"
+    type="email"
+    placeholder="Enter your email"
+    autocomplete="email"
+    required
+>
+
+<label for="password">
+    Password
+</label>
+
+<input
+    id="password"
+    type="password"
+    placeholder="Enter your password"
+    autocomplete="current-password"
+    required
+>
+
+<button
+    class="login-btn"
+    type="submit"
+    id="loginButton">
+
+    Login
+</button>
+
+</form>
+
+<button
+    class="voice-btn"
+    id="voiceButton"
+    type="button"
+    onclick="enableVoice()">
+
+    🔊 Enable Voice Guidance
+</button>
+
+<div class="help">
+    <strong>Keyboard Navigation</strong><br>
+    Tab = Move between controls<br>
+    Enter = Select / Activate<br>
+    L = Login<br>
+    Esc = Stop Voice
+</div>
+
+<div
+    class="status"
+    id="status"
+    aria-live="assertive">
+</div>
+
+<div
+    class="sr-only"
+    id="announcement"
+    aria-live="assertive">
+</div>
+
+</div>
+<script>
+
+let voiceEnabled = false;
+
+
+/* =========================
+   VOICE
+========================= */
+
+function speak(text) {
+
+    if (!voiceEnabled) {
+        return;
+    }
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const message =
+        new SpeechSynthesisUtterance(text);
+
+    message.rate = 0.9;
+    message.pitch = 1;
+    message.volume = 1;
+
+    window.speechSynthesis.speak(message);
+}
+
+
+/* =========================
+   ENABLE VOICE
+========================= */
+
+function enableVoice() {
+
+    voiceEnabled = true;
+
+    document.getElementById("voiceButton")
+        .textContent =
+        "🔊 Voice Guidance ON";
+
+    speak(
+        "Welcome to Blind Visual Accessibility Login. " +
+        "Use Tab to navigate. " +
+        "Enter to activate a control. " +
+        "Enter your email address and password. " +
+        "Press L to login."
+    );
+}
+
+
+/* =========================
+   PAGE LOAD
+========================= */
+
+window.addEventListener("load", function() {
+
+    speak(
+        "Blind Visual Accessibility Login page. " +
+        "Press the Voice Guidance button to enable voice guidance."
+    );
+
+});
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    const key =
+        event.key.toLowerCase();
+
+    /* Escape = Stop Voice */
+
+    if (event.key === "Escape") {
+
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+        }
+
+        return;
+    }
+
+
+    /* L = Login */
+
+    if (
+        key === "l" &&
+        event.target.tagName !== "INPUT"
+    ) {
+
+        event.preventDefault();
+
+        document.getElementById("loginForm")
+            .requestSubmit();
+
+        return;
+    }
+
+});
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document.getElementById("loginForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const status =
+        document.getElementById("status");
+
+
+    status.style.display = "block";
+    status.textContent = "Logging in...";
+
+    speak("Logging in. Please wait.");
+
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:3000/api/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            status.textContent =
+                data.message || "Login failed.";
+
+            speak(
+                data.message ||
+                "Login failed. Please check your details."
+            );
+
+            return;
+        }
+
+
+        localStorage.setItem(
+            "token",
+            data.token
+        );
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify(data.user)
+        );
+
+
+        status.textContent =
+            "Login successful.";
+
+        speak(
+            "Login successful. Opening your accessible dashboard."
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "disability-dashboard.html";
+
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent =
+            "Backend connection failed. Start the server first.";
+
+        speak(
+            "Backend connection failed. Please start the server first."
+        );
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Python Programming - Learning Universe</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 14px;
+        }
+
+        .transcript {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="missions.html">Missions</a>
+        <a href="career.html">Career</a>
+    </nav>
+
+    <button
+        class="login-btn"
+        onclick="location.href='index.html'">
+        Logout
+    </button>
+
+</header>
+
+<main class="course-learning">
+
+    <section class="course-header">
+
+        <h1>🐍 Python Programming</h1>
+
+        <p>
+            Learn Python from basics to practical programming.
+        </p>
+
+        <div class="progress-area">
+
+            <div class="progress-info">
+                <span>Course Progress</span>
+                <strong id="progressText">0%</strong>
+            </div>
+
+            <div class="progress-bar">
+                <div id="progressFill"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="learning-layout">
+
+        <section class="lesson-content">
+
+            <h2 id="lessonTitle">
+                Lesson 1: Introduction to Python
+            </h2>
+
+            <div class="video-container">
+
+                <iframe
+                    id="lessonVideo"
+                    src="https://www.youtube.com/embed/rfscVS0vtbw?start=0"
+                    title="Python Programming Lesson"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <div class="accessibility-tools">
+
+                <button onclick="showTranscript()">
+                    📝 Captions / Transcript
+                </button>
+
+                <button onclick="speakLesson()">
+                    🔊 Read Lesson
+                </button>
+
+            </div>
+
+            <div id="transcript" class="transcript">
+
+                <h3>Lesson Transcript</h3>
+
+                <p id="transcriptText">
+                    Welcome to Python programming.
+                    Learn what Python is, why it is useful
+                    and where it is used.
+                </p>
+
+            </div>
+
+            <button
+                class="complete-btn"
+                onclick="completeLesson()">
+
+                ✅ Complete Lesson
+
+            </button>
+
+        </section>
+        <aside class="lesson-list">
+
+            <h2>Course Lessons</h2>
+
+            <button
+                class="lesson active"
+                onclick="selectLesson(1)">
+
+                <span>01</span>
+
+                <div>
+                    <strong>
+                        Introduction to Python
+                    </strong>
+
+                    <small>
+                        10 min
+                    </small>
+                </div>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(2)">
+
+                <span>02</span>
+
+                <div>
+                    <strong>
+                        Variables & Data Types
+                    </strong>
+
+                    <small>
+                        12 min
+                    </small>
+                </div>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(3)">
+
+                <span>03</span>
+
+                <div>
+                    <strong>
+                        Strings & Numbers
+                    </strong>
+
+                    <small>
+                        15 min
+                    </small>
+                </div>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(4)">
+
+                <span>04</span>
+
+                <div>
+                    <strong>
+                        Lists & Functions
+                    </strong>
+
+                    <small>
+                        18 min
+                    </small>
+                </div>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(5)">
+
+                <span>05</span>
+
+                <div>
+                    <strong>
+                        Conditions & Loops
+                    </strong>
+
+                    <small>
+                        20 min
+                    </small>
+                </div>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(6)">
+
+                <span>06</span>
+
+                <div>
+                    <strong>
+                        Classes & Objects
+                    </strong>
+
+                    <small>
+                        20 min
+                    </small>
+                </div>
+
+            </button>
+
+        </aside>
+
+    </div>
+
+</main>
+<script>
+
+let currentLesson = 1;
+
+let completedLessons = 0;
+
+const totalLessons = 6;
+
+
+const lessons = [
+
+    {
+        title: "Lesson 1: Introduction to Python",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=0",
+
+        text:
+            "Welcome to Python programming. Learn what Python is, why it is useful and where it is used."
+    },
+
+
+    {
+        title: "Lesson 2: Variables & Data Types",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=906",
+
+        text:
+            "Learn about Python variables and basic data types such as strings, integers and floating point numbers."
+    },
+
+
+    {
+        title: "Lesson 3: Strings & Numbers",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=1627",
+
+        text:
+            "Learn how Python handles strings, numbers and common operations."
+    },
+
+
+    {
+        title: "Lesson 4: Lists & Functions",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=3783",
+
+        text:
+            "Learn about Python lists and how functions organize reusable code."
+    },
+
+
+    {
+        title: "Lesson 5: Conditions & Loops",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=6006",
+
+        text:
+            "Learn how if, elif and else conditions work and how loops repeat instructions."
+    },
+
+
+    {
+        title: "Lesson 6: Classes & Objects",
+
+        video:
+            "https://www.youtube.com/embed/rfscVS0vtbw?start=13436",
+
+        text:
+            "Learn the basics of classes and objects and how object-oriented programming works in Python."
+    }
+
+];
+
+
+function selectLesson(number) {
+
+    currentLesson = number;
+
+
+    const buttons =
+        document.querySelectorAll(".lesson");
+
+
+    buttons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+    });
+
+
+    buttons[number - 1]
+        .classList.add("active");
+
+
+    document.getElementById("lessonTitle")
+        .textContent =
+        lessons[number - 1].title;
+
+
+    document.getElementById("lessonVideo")
+        .src =
+        lessons[number - 1].video;
+
+
+    document.getElementById("transcriptText")
+        .textContent =
+        lessons[number - 1].text;
+
+}
+function completeLesson() {
+
+    if (completedLessons < currentLesson) {
+
+        completedLessons =
+            currentLesson;
+
+    }
+
+
+    const progress =
+        Math.round(
+            (completedLessons / totalLessons) * 100
+        );
+
+
+    document.getElementById("progressFill")
+        .style.width =
+        progress + "%";
+
+
+    document.getElementById("progressText")
+        .textContent =
+        progress + "%";
+
+
+    if (progress === 100) {
+
+        alert(
+            "🎉 Python course completed! Your 15-question final quiz is ready."
+        );
+
+        location.href =
+            "quiz.html";
+
+    } else {
+
+        alert(
+            "✅ Lesson " +
+            currentLesson +
+            " completed!"
+        );
+
+    }
+
+}
+
+
+function showTranscript() {
+
+    const transcript =
+        document.getElementById("transcript");
+
+
+    if (transcript.style.display === "block") {
+
+        transcript.style.display = "none";
+
+    } else {
+
+        transcript.style.display = "block";
+
+    }
+
+}
+
+
+function speakLesson() {
+
+    const text =
+        document.getElementById("transcriptText")
+        .textContent;
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.rate = 0.9;
+
+
+    window.speechSynthesis.speak(speech);
+
+}
+
+</script>
+
+</body>
+
+</html>

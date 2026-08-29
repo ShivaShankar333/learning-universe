@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deaf Accessibility Dashboard - Learning Universe</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #e2f8f4, transparent 35%),
+        radial-gradient(circle at bottom right, #e9e4ff, transparent 35%),
+        #f7f8ff;
+    color: #20243a;
+    line-height: 1.6;
+}
+
+header {
+    background: #20243a;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logout-btn {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #16a085;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+main {
+    max-width: 1150px;
+    margin: auto;
+    padding: 45px 7%;
+}
+
+.welcome {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    border-left: 6px solid #16a085;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 35px rgba(40,40,80,0.07);
+}
+
+.welcome h1 {
+    margin-top: 0;
+    font-size: 34px;
+}
+
+.welcome p {
+    color: #697188;
+}
+
+.caption-banner {
+    background: #eafbf7;
+    border: 2px solid #16a085;
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+}
+
+.caption-banner h2 {
+    margin-top: 0;
+}
+
+.caption-banner p {
+    margin-bottom: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+    border: 2px solid #e5e5ef;
+    box-shadow: 0 8px 25px rgba(40,40,80,0.06);
+}
+
+.card:focus,
+button:focus,
+a:focus {
+    outline: 4px solid #6c4df6;
+    outline-offset: 3px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.card p {
+    color: #697188;
+}
+
+.card a,
+.card button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #16a085;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.features {
+    margin-top: 30px;
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+}
+
+.features h2 {
+    margin-top: 0;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feature {
+    padding: 20px;
+    background: #f4fffc;
+    border-radius: 14px;
+    border-left: 4px solid #16a085;
+}
+
+.feature strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.progress {
+    margin-top: 30px;
+    background: white;
+    padding: 28px;
+    border-radius: 20px;
+}
+
+.progress-bar {
+    height: 14px;
+    background: #e5e6ef;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar div {
+    width: 35%;
+    height: 100%;
+    background: #16a085;
+}
+
+.status {
+    margin-top: 25px;
+    padding: 18px;
+    background: #eef8ff;
+    border-radius: 12px;
+    color: #155a80;
+    font-weight: bold;
+}
+
+@media(max-width:750px) {
+
+    header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .grid,
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome h1 {
+        font-size: 28px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Learning Universe 🌌
+</div>
+
+<button
+    class="logout-btn"
+    type="button"
+    onclick="logout()">
+
+    Logout
+
+</button>
+
+</header>
+
+
+<main>
+
+<section
+    class="welcome"
+    aria-labelledby="welcomeTitle">
+
+<h1 id="welcomeTitle">
+Deaf Accessibility Dashboard
+</h1>
+
+<p id="welcomeMessage">
+Welcome to your visual-friendly learning space.
+</p>
+
+</section>
+
+
+<section
+    class="caption-banner"
+    aria-labelledby="captionTitle">
+
+<h2 id="captionTitle">
+🎬 Caption Mode Enabled
+</h2>
+
+<p>
+All supported learning videos should provide
+captions so that spoken information can also
+be understood visually.
+</p>
+
+</section>
+
+
+<section
+    class="grid"
+    aria-label="Learning options">
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+📚 My Courses
+</h2>
+
+<p>
+Continue your programming, web development
+and AI learning journey.
+</p>
+
+<a
+    href="courses.html"
+    onclick="showStatus('Opening courses')">
+
+Open Courses
+
+</a>
+
+</article>
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+🎬 Captioned Lessons
+</h2>
+
+<p>
+Access lessons designed with captions
+and visual learning support.
+</p>
+
+<button
+    type="button"
+    onclick="showStatus('Captioned lessons selected')">
+
+View Lessons
+
+</button>
+
+</article>
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+🤖 AI Learning Assistant
+</h2>
+
+<p>
+Use AI assistance to understand concepts,
+practice coding and solve learning problems.
+</p>
+
+<a
+    href="ai.html"
+    onclick="showStatus('Opening AI Learning Assistant')">
+
+Open AI Assistant
+
+</a>
+
+</article>
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+🎯 Quiz
+
+</h2>
+
+<p>
+Test your knowledge after completing
+your learning modules.
+</p>
+
+<button
+    type="button"
+    onclick="showStatus('Quiz selected')">
+
+Start Quiz
+
+</button>
+
+</article>
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+🏆 Certificate
+</h2>
+
+<p>
+View your certificate after completing
+your course requirements.
+</p>
+
+<a
+    href="certificate.html"
+    onclick="showStatus('Opening certificate')">
+
+View Certificate
+
+</a>
+
+</article>
+
+
+<article
+    class="card"
+    tabindex="0">
+
+<h2>
+♿ Accessibility Settings
+</h2>
+
+<p>
+Manage accessibility features and
+visual learning preferences.
+</p>
+
+<a
+    href="accessibility.html">
+
+Settings
+
+</a>
+
+</article>
+
+</section>
+
+
+<section
+    class="features"
+    aria-labelledby="featuresTitle">
+
+<h2 id="featuresTitle">
+Accessibility Features
+</h2>
+
+<div class="feature-list">
+
+<div class="feature">
+<strong>🎬 Captions</strong>
+Spoken lesson content can be displayed as text.
+</div>
+
+<div class="feature">
+<strong>🔔 Visual Alerts</strong>
+Important notifications are displayed visually.
+</div>
+
+<div class="feature">
+<strong>⌨️ Keyboard Navigation</strong>
+Use Tab and Enter to navigate the dashboard.
+</div>
+
+</div>
+
+</section>
+
+
+<section
+    class="progress"
+    aria-labelledby="progressTitle">
+
+<h2 id="progressTitle">
+📊 Learning Progress
+</h2>
+
+<p>
+Your current learning progress is 35 percent.
+</p>
+
+<div
+    class="progress-bar"
+    role="progressbar"
+    aria-valuenow="35"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Learning progress 35 percent">
+
+<div></div>
+
+</div>
+
+</section>
+
+
+<div
+    class="status"
+    id="status"
+    aria-live="polite">
+
+Accessibility mode is active.
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   USER INFORMATION
+========================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        const user =
+            localStorage.getItem("user");
+
+        if (!user) {
+            return;
+        }
+
+        try {
+
+            const userData =
+                JSON.parse(user);
+
+            const name =
+                userData.name || "Student";
+
+            document.getElementById(
+                "welcomeMessage"
+            ).textContent =
+                "Welcome " +
+                name +
+                ". Your visual-friendly learning dashboard is ready.";
+
+        } catch(error) {
+
+            console.log(
+                "User information unavailable."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   VISUAL STATUS
+========================= */
+
+function showStatus(message) {
+
+    const status =
+        document.getElementById("status");
+
+    status.textContent =
+        message;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    localStorage.removeItem("user");
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+</html>

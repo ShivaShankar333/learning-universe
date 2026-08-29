@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Career Roadmap - Learning Universe</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+    <style>
+
+        .career-page {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .career-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .career-header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .career-header p {
+            color: #697188;
+            font-size: 17px;
+        }
+
+        .roadmap {
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto 50px;
+        }
+
+        .roadmap::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #ddd7ff;
+            transform: translateX(-50%);
+        }
+
+        .roadmap-step {
+            position: relative;
+            width: 50%;
+            padding: 15px 35px;
+            margin-bottom: 20px;
+        }
+
+        .roadmap-step:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .roadmap-step:nth-child(even) {
+            left: 50%;
+        }
+
+        .step-card {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #6c4df6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            top: 25px;
+            z-index: 2;
+        }
+
+        .roadmap-step:nth-child(odd) .step-number {
+            right: -21px;
+        }
+
+        .roadmap-step:nth-child(even) .step-number {
+            left: -21px;
+        }
+
+        .step-card h2 {
+            margin-top: 5px;
+        }
+
+        .step-card p {
+            color: #697188;
+            line-height: 1.5;
+        }
+
+        .step-button {
+            border: none;
+            padding: 11px 17px;
+            border-radius: 9px;
+            background: #6c4df6;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .step-button.completed {
+            background: #2e9b62;
+        }
+
+        .career-title {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .career-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .career-card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .career-card .icon {
+            font-size: 45px;
+        }
+
+        .career-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .career-card p {
+            color: #697188;
+            line-height: 1.5;
+        }
+
+        .career-card li {
+            margin: 9px 0;
+        }
+
+        .career-card button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #6c4df6;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .progress-box {
+            background: white;
+            max-width: 850px;
+            margin: 0 auto 40px;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 14px;
+            background: #e8e6f5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #6c4df6;
+            transition: width .4s;
+        }
+
+        @media (max-width: 700px) {
+
+            .roadmap::before {
+                left: 20px;
+            }
+
+            .roadmap-step,
+            .roadmap-step:nth-child(even) {
+                width: 100%;
+                left: 0;
+                text-align: left;
+                padding-left: 60px;
+            }
+
+            .roadmap-step:nth-child(odd) .step-number,
+            .roadmap-step:nth-child(even) .step-number {
+                left: -1px;
+                right: auto;
+            }
+
+            .career-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .career-header h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="courses.html">
+            Courses
+        </a>
+
+        <a href="missions.html">
+            Missions
+        </a>
+
+        <a href="career.html">
+            Career
+        </a>
+
+    </nav>
+
+
+    <button
+        class="login-btn"
+        onclick="location.href='index.html'">
+
+        Home
+
+    </button>
+
+</header>
+
+
+
+<main class="career-page">
+
+
+    <section class="career-header">
+
+        <h1>
+            🚀 Career Roadmap
+        </h1>
+
+        <p>
+            Follow the roadmap, build skills,
+            complete missions and prepare for your career.
+        </p>
+
+    </section>
+
+
+
+    <!-- PROGRESS -->
+
+    <section class="progress-box">
+
+        <div class="progress-info">
+
+            <span>
+                Career Progress
+            </span>
+
+            <span id="progressText">
+                0 / 7 Completed
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MAIN ROADMAP -->
+
+    <section class="roadmap">
+
+
+        <!-- STEP 1 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    🌱 Beginner
+                </h2>
+
+                <p>
+                    Start your programming journey
+                    with basic computer and coding concepts.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 1)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 2 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    📚 Learn Programming
+                </h2>
+
+                <p>
+                    Learn Python, Java or Web Development
+                    and understand programming fundamentals.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 2)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 3 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    📝 Complete Quizzes
+                </h2>
+
+                <p>
+                    Test your knowledge through course
+                    quizzes and improve your understanding.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 3)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 4 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    🎯 Complete Missions
+                </h2>
+
+                <p>
+                    Finish Learning Universe missions
+                    and earn points.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 4)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 5 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                5
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    🤖 Build with AI Assistant
+                </h2>
+
+                <p>
+                    Use the AI Programming Assistant
+                    to practice coding and create programs.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 5)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 6 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                6
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    🛠️ Build Projects
+                </h2>
+
+                <p>
+                    Apply your skills by creating
+                    practical programming projects.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 6)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STEP 7 -->
+
+        <div class="roadmap-step">
+
+            <div class="step-number">
+                7
+            </div>
+
+            <div class="step-card">
+
+                <h2>
+                    💼 Career Ready
+                </h2>
+
+                <p>
+                    Build your portfolio, improve your
+                    skills and prepare for future opportunities.
+                </p>
+
+                <button
+                    class="step-button"
+                    onclick="completeStep(this, 7)">
+
+                    Mark Complete
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- CAREER PATHS -->
+
+    <h2 class="career-title">
+        🧭 Choose Your Career Path
+    </h2>
+
+
+    <div class="career-grid">
+
+
+        <!-- PYTHON -->
+
+        <div class="career-card">
+
+            <div class="icon">
+                🐍
+            </div>
+
+            <h2>
+                Python Developer
+            </h2>
+
+            <p>
+                Learn Python, APIs, databases
+                and backend development.
+            </p>
+
+            <h3>
+                Skills
+            </h3>
+
+            <ul>
+
+                <li>
+                    Python
+                </li>
+
+                <li>
+                    SQL
+                </li>
+
+                <li>
+                    APIs
+                </li>
+
+                <li>
+                    Git
+                </li>
+
+            </ul>
+
+
+            <button
+                onclick="selectCareer('Python Developer')">
+
+                Select Python Path
+
+            </button>
+
+        </div>
+
+
+
+        <!-- WEB -->
+
+        <div class="career-card">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <h2>
+                Web Developer
+            </h2>
+
+            <p>
+                Build modern websites and
+                web applications.
+            </p>
+
+            <h3>
+                Skills
+            </h3>
+
+            <ul>
+
+                <li>
+                    HTML
+                </li>
+
+                <li>
+                    CSS
+                </li>
+
+                <li>
+                    JavaScript
+                </li>
+
+                <li>
+                    React
+                </li>
+
+            </ul>
+
+
+            <button
+                onclick="selectCareer('Web Developer')">
+
+                Select Web Path
+
+            </button>
+
+        </div>
+
+
+
+        <!-- AI -->
+
+        <div class="career-card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h2>
+                AI Developer
+            </h2>
+
+            <p>
+                Learn programming, AI concepts
+                and intelligent applications.
+            </p>
+
+            <h3>
+                Skills
+            </h3>
+
+            <ul>
+
+                <li>
+                    Python
+                </li>
+
+                <li>
+                    AI Basics
+                </li>
+
+                <li>
+                    APIs
+                </li>
+
+                <li>
+                    Prompting
+                </li>
+
+            </ul>
+
+
+            <button
+                onclick="selectCareer('AI Developer')">
+
+                Select AI Path
+
+            </button>
+
+        </div>
+
+
+
+        <!-- DATA -->
+
+        <div class="career-card">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h2>
+                Data Analyst
+            </h2>
+
+            <p>
+                Learn data analysis and turn
+                data into useful insights.
+            </p>
+
+            <h3>
+                Skills
+            </h3>
+
+            <ul>
+
+                <li>
+                    Python
+                </li>
+
+                <li>
+                    Excel
+                </li>
+
+                <li>
+                    SQL
+                </li>
+
+                <li>
+                    Data Visualization
+                </li>
+
+            </ul>
+
+
+            <button
+                onclick="selectCareer('Data Analyst')">
+
+                Select Data Path
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================
+   ROADMAP PROGRESS
+========================= */
+
+function updateProgress() {
+
+    let completed = 0;
+
+
+    for (
+        let i = 1;
+        i <= 7;
+        i++
+    ) {
+
+        if (
+            localStorage.getItem(
+                "career_step_" + i
+            ) === "completed"
+        ) {
+
+            completed++;
+
+        }
+
+    }
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+        completed + " / 7 Completed";
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        ((completed / 7) * 100) + "%";
+
+
+    updateStepButtons();
+
+}
+
+
+
+/* =========================
+   COMPLETE STEP
+========================= */
+
+function completeStep(
+    button,
+    step
+) {
+
+    localStorage.setItem(
+        "career_step_" + step,
+        "completed"
+    );
+
+
+    button.textContent =
+        "✅ Completed";
+
+
+    button.classList.add(
+        "completed"
+    );
+
+
+    button.disabled = true;
+
+
+    updateProgress();
+
+}
+
+
+
+/* =========================
+   RESTORE BUTTONS
+========================= */
+
+function updateStepButtons() {
+
+    const buttons =
+        document.querySelectorAll(
+            ".step-button"
+        );
+
+
+    buttons.forEach(
+        function(button, index) {
+
+            const step =
+                index + 1;
+
+
+            if (
+                localStorage.getItem(
+                    "career_step_" + step
+                ) === "completed"
+            ) {
+
+                button.textContent =
+                    "✅ Completed";
+
+                button.classList.add(
+                    "completed"
+                );
+
+                button.disabled = true;
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   CAREER SELECTION
+========================= */
+
+function selectCareer(
+    career
+) {
+
+    localStorage.setItem(
+        "selectedCareer",
+        career
+    );
+
+
+    alert(
+        "🚀 " +
+        career +
+        " path selected!\n\n" +
+        "Follow the roadmap and build your skills."
+    );
+
+}
+
+
+
+/* =========================
+   START
+========================= */
+
+updateProgress();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Universe</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .voice-guide {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 3000;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 12px;
+            background: #6c4df6;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .voice-guide:focus,
+        button:focus,
+        a:focus {
+            outline: 3px solid #16a085;
+            outline-offset: 3px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(15, 18, 40, 0.7);
+        }
+
+        .modal-box {
+            width: 450px;
+            max-width: 100%;
+            padding: 35px;
+            background: white;
+            border-radius: 22px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-box h2 {
+            margin-top: 0;
+            font-size: 30px;
+        }
+
+        .modal-box p {
+            color: #697188;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            border: none;
+            background: transparent;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .login-option {
+            width: 100%;
+            margin-top: 15px;
+            padding: 18px;
+            border-radius: 13px;
+            border: 2px solid #ddd;
+            background: #f7f5ff;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .login-option:hover,
+        .login-option:focus {
+            border-color: #6c4df6;
+            background: #f0edff;
+        }
+
+        .login-option small {
+            display: block;
+            margin-top: 7px;
+            color: #697188;
+            font-weight: normal;
+        }
+
+        .keyboard-help {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        Learning Universe 🌌
+    </div>
+
+    <nav aria-label="Main navigation">
+
+        <a href="index.html">Home</a>
+
+        <a href="courses.html">Courses</a>
+
+        <a href="accessibility.html">Accessibility</a>
+
+        <a href="missions.html">Missions</a>
+
+        <a href="career.html">Career</a>
+
+    </nav>
+
+    <button
+        class="login-btn"
+        id="mainLoginButton"
+        type="button"
+        onclick="openLoginModal()"
+        aria-label="Login">
+
+        Login
+
+    </button>
+
+</header>
+
+
+<main>
+
+    <section class="hero" aria-labelledby="heroTitle">
+
+        <div class="hero-content">
+
+            <p class="tagline">
+                LEARN • GROW • ACHIEVE
+            </p>
+
+            <h1 id="heroTitle">
+                Learn Without
+                <span>Limits</span>
+            </h1>
+
+            <p>
+                Welcome to Learning Universe —
+                an inclusive learning platform designed
+                to make education accessible, engaging
+                and enjoyable for everyone.
+            </p>
+
+            <div class="buttons">
+
+                <button
+                    class="start-btn"
+                    type="button"
+                    onclick="openLoginModal()">
+
+                    Start Learning 🚀
+
+                </button>
+
+                <button
+                    class="start-btn"
+                    type="button"
+                    onclick="window.location.href='courses.html'">
+
+                    Explore Courses →
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="features" aria-labelledby="featuresTitle">
+
+        <h2 id="featuresTitle">
+            Why Learning Universe?
+        </h2>
+
+        <div class="feature-container">
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">📚</div>
+
+                <h3>Quality Learning</h3>
+
+                <p>
+                    Learn through structured courses,
+                    practical content and easy-to-understand
+                    lessons.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">♿</div>
+
+                <h3>Accessible Education</h3>
+
+                <p>
+                    Designed with accessibility and
+                    inclusive learning features.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">🤖</div>
+
+                <h3>AI Assistance</h3>
+
+                <p>
+                    Get intelligent assistance while
+                    learning and coding.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">🎯</div>
+
+                <h3>Learn at Your Pace</h3>
+
+                <p>
+                    Study whenever you want and continue
+                    your learning journey.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">🏆</div>
+
+                <h3>Achieve Your Goals</h3>
+
+                <p>
+                    Complete courses, take quizzes and
+                    build your skills.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card">
+
+                <div class="icon" aria-hidden="true">🌍</div>
+
+                <h3>Learning for Everyone</h3>
+
+                <p>
+                    A friendly learning environment where
+                    every student can learn and grow.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- VOICE GUIDANCE -->
+
+<button
+    id="voiceGuideButton"
+    class="voice-guide"
+    type="button"
+    onclick="enableVoiceGuidance()"
+    aria-label="Enable voice guidance">
+
+    🔊 Enable Voice Guidance
+
+</button>
+
+
+<!-- SCREEN READER ANNOUNCEMENT -->
+
+<div
+    id="screenReaderAnnouncement"
+    class="sr-only"
+    aria-live="assertive"
+    aria-atomic="true">
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div
+    class="modal"
+    id="loginModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="loginTitle"
+    aria-hidden="true">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            id="closeLoginButton"
+            type="button"
+            onclick="closeLoginModal()"
+            aria-label="Close login options">
+
+            ×
+
+        </button>
+
+
+        <h2 id="loginTitle">
+            Choose Login Type
+        </h2>
+
+
+        <p id="loginInstruction">
+
+            Press R for Regular Login.
+            Press A for Accessibility Login.
+
+        </p>
+
+
+        <!-- REGULAR LOGIN -->
+
+        <button
+            class="login-option"
+            id="regularLoginButton"
+            type="button"
+            onclick="selectRegular()"
+            aria-label="Regular Student Login. Press R.">
+
+            👨‍🎓 Regular Student Login
+
+            <small>
+                Press R for Regular Login
+            </small>
+
+        </button>
+
+
+        <!-- ACCESSIBILITY LOGIN -->
+
+        <button
+            class="login-option"
+            id="accessibilityLoginButton"
+            type="button"
+            onclick="selectAccessibility()"
+            aria-label="Accessibility Student Login. Press A.">
+
+            ♿ Accessibility Student Login
+
+            <small>
+                Press A for Accessibility Login
+            </small>
+
+        </button>
+
+
+        <p class="keyboard-help">
+
+            <strong>R</strong>
+            = Regular Login
+
+            &nbsp; | &nbsp;
+
+            <strong>A</strong>
+            = Accessibility Login
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<script src="./script.js"></script>
+
+</body>
+
+</html>

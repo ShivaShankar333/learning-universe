@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Programming Assistant</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f6ff;
+    color:#20243a;
+}
+
+header{
+    background:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+    color:#6c4df6;
+    font-size:22px;
+    font-weight:bold;
+}
+
+nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:#30344b;
+    font-weight:bold;
+}
+
+.container{
+    max-width:850px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 12px 35px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+}
+
+.subtitle{
+    text-align:center;
+    color:#697188;
+}
+
+label{
+    display:block;
+    margin-top:25px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+textarea{
+    width:100%;
+    min-height:130px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:13px 20px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.primary{
+    background:#6c4df6;
+    color:white;
+}
+
+.secondary{
+    background:#eeeaff;
+    color:#6c4df6;
+}
+
+pre{
+    background:#20243a;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    min-height:120px;
+    white-space:pre-wrap;
+    overflow:auto;
+}
+
+.output{
+    background:#f2f2f2;
+    padding:18px;
+    border-radius:12px;
+    min-height:70px;
+    white-space:pre-wrap;
+}
+
+.status{
+    margin-top:15px;
+    font-weight:bold;
+    text-align:center;
+}
+
+@media(max-width:700px){
+    nav{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="accessibility.html">Accessibility</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<h1>🤖 AI Programming Assistant</h1>
+
+<p class="subtitle">
+Ask for a simple programming program using text or voice.
+</p>
+
+
+<label>
+🎙️ Programming Request
+</label>
+
+<textarea
+id="request"
+placeholder="Example: Add two numbers in Python">
+</textarea>
+
+
+<div class="buttons">
+
+<button
+class="secondary"
+onclick="startVoice()">
+🎙️ Speak
+</button>
+
+<button
+class="primary"
+onclick="generateCode()">
+✨ Generate Code
+</button>
+
+</div>
+
+
+<div
+id="status"
+class="status">
+</div>
+
+
+<label>
+💻 Generated Code
+</label>
+
+<pre id="codeOutput">Your generated code will appear here...</pre>
+
+
+<div class="buttons">
+
+<button
+class="secondary"
+onclick="copyCode()">
+📋 Copy Code
+</button>
+
+<button
+class="primary"
+onclick="runCode()">
+▶️ Run
+</button>
+
+</div>
+
+
+<label>
+📤 Program Output
+</label>
+
+<div
+id="programOutput"
+class="output">
+Program output will appear here.
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let currentLanguage = "";
+
+
+/* =========================
+   GENERATE CODE
+========================= */
+
+function generateCode(){
+
+    const request =
+        document.getElementById("request")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const code =
+        document.getElementById("codeOutput");
+
+    const status =
+        document.getElementById("status");
+
+    if(!request){
+
+        status.textContent =
+            "⚠️ Please enter a programming request.";
+
+        return;
+    }
+
+    status.textContent = "Generating code...";
+
+
+    /* =========================
+       PYTHON
+    ========================= */
+
+    if(request.includes("python")){
+
+        currentLanguage = "python";
+
+        if(
+            request.includes("add") ||
+            request.includes("two numbers")
+        ){
+
+            code.textContent =
+`a = 10
+b = 20
+
+result = a + b
+
+print(result)`;
+
+        }else if(request.includes("hello")){
+
+            code.textContent =
+`print("Hello World!")`;
+
+        }else{
+
+            code.textContent =
+`# Python Program
+
+print("Learning Universe")`;
+
+        }
+
+        status.textContent =
+            "✅ Python code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       JAVA
+    ========================= */
+
+    if(request.includes("java")){
+
+        currentLanguage = "java";
+
+        if(
+            request.includes("add") ||
+            request.includes("two numbers")
+        ){
+
+            code.textContent =
+`public class Main {
+
+    public static void main(String[] args) {
+
+        int a = 10;
+        int b = 20;
+
+        int result = a + b;
+
+        System.out.println(result);
+    }
+}`;
+
+        }else if(request.includes("hello")){
+
+            code.textContent =
+`public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("Hello World!");
+
+    }
+}`;
+
+        }else{
+
+            code.textContent =
+`public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("Learning Universe");
+
+    }
+}`;
+
+        }
+
+        status.textContent =
+            "✅ Java code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       C
+    ========================= */
+
+    if(
+        request.includes(" c ") ||
+        request.startsWith("c ") ||
+        request.includes(" c programming")
+    ){
+
+        currentLanguage = "c";
+
+        if(
+            request.includes("add") ||
+            request.includes("two numbers")
+        ){
+
+            code.textContent =
+`#include <stdio.h>
+
+int main() {
+
+    int a = 10;
+    int b = 20;
+
+    int result = a + b;
+
+    printf("%d", result);
+
+    return 0;
+}`;
+
+        }else if(request.includes("hello")){
+
+            code.textContent =
+`#include <stdio.h>
+
+int main() {
+
+    printf("Hello World!");
+
+    return 0;
+}`;
+
+        }else{
+
+            code.textContent =
+`#include <stdio.h>
+
+int main() {
+
+    printf("Learning Universe");
+
+    return 0;
+}`;
+
+        }
+
+        status.textContent =
+            "✅ C code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       C++
+    ========================= */
+
+    if(
+        request.includes("c++") ||
+        request.includes("cpp")
+    ){
+
+        currentLanguage = "cpp";
+
+        if(
+            request.includes("add") ||
+            request.includes("two numbers")
+        ){
+
+            code.textContent =
+`#include <iostream>
+using namespace std;
+
+int main() {
+
+    int a = 10;
+    int b = 20;
+
+    int result = a + b;
+
+    cout << result;
+
+    return 0;
+}`;
+
+        }else if(request.includes("hello")){
+
+            code.textContent =
+`#include <iostream>
+using namespace std;
+
+int main() {
+
+    cout << "Hello World!";
+
+    return 0;
+}`;
+
+        }else{
+
+            code.textContent =
+`#include <iostream>
+using namespace std;
+
+int main() {
+
+    cout << "Learning Universe";
+
+    return 0;
+}`;
+
+        }
+
+        status.textContent =
+            "✅ C++ code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       JAVASCRIPT
+    ========================= */
+
+    if(
+        request.includes("javascript") ||
+        request.includes("js")
+    ){
+
+        currentLanguage = "javascript";
+
+        if(
+            request.includes("add") ||
+            request.includes("two numbers")
+        ){
+
+            code.textContent =
+`let a = 10;
+let b = 20;
+
+let result = a + b;
+
+console.log(result);`;
+
+        }else if(request.includes("hello")){
+
+            code.textContent =
+`console.log("Hello World!");`;
+
+        }else{
+
+            code.textContent =
+`console.log("Learning Universe");`;
+
+        }
+
+        status.textContent =
+            "✅ JavaScript code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       HTML
+    ========================= */
+
+    if(
+        request.includes("html") ||
+        request.includes("web")
+    ){
+
+        currentLanguage = "html";
+
+        code.textContent =
+`<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Learning Universe</title>
+
+</head>
+
+<body>
+
+    <h1>Hello World!</h1>
+
+    <p>Welcome to Learning Universe.</p>
+
+</body>
+
+</html>`;
+
+        status.textContent =
+            "✅ HTML code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       CSS
+    ========================= */
+
+    if(request.includes("css")){
+
+        currentLanguage = "css";
+
+        code.textContent =
+`body {
+
+    background: #f5f6ff;
+    font-family: Arial, sans-serif;
+
+}
+
+h1 {
+
+    color: #6c4df6;
+
+}`;
+
+        status.textContent =
+            "✅ CSS code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       SQL
+    ========================= */
+
+    if(
+        request.includes("sql") ||
+        request.includes("database")
+    ){
+
+        currentLanguage = "sql";
+
+        code.textContent =
+`CREATE TABLE students (
+
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+
+);
+
+INSERT INTO students
+(id, name, email)
+
+VALUES
+(1, 'Student', 'student@example.com');
+
+SELECT * FROM students;`;
+
+        status.textContent =
+            "✅ SQL code generated.";
+
+        return;
+    }
+
+
+    /* =========================
+       UNKNOWN LANGUAGE
+    ========================= */
+
+    currentLanguage = "unknown";
+
+    code.textContent =
+`// AI Programming Assistant
+
+// Please mention a programming language.
+
+// Supported languages:
+//
+// Python
+// Java
+// C
+// C++
+// JavaScript
+// HTML
+// CSS
+// SQL
+`;
+
+    status.textContent =
+        "⚠️ Please mention a supported programming language.";
+}
+
+/* =========================
+   RUN PROGRAM
+========================= */
+
+function runCode(){
+
+    const code =
+        document.getElementById("codeOutput").textContent;
+
+    const output =
+        document.getElementById("programOutput");
+
+    if(
+        !code ||
+        code.includes("Your generated code")
+    ){
+
+        output.textContent =
+            "⚠️ Generate the code first.";
+
+        return;
+    }
+
+
+    /* =========================
+       PYTHON
+    ========================= */
+
+    if(currentLanguage === "python"){
+
+        if(code.includes("a + b")){
+
+            output.textContent = "30";
+
+        }
+        else if(code.includes("Hello World")){
+
+            output.textContent = "Hello World!";
+
+        }
+        else{
+
+            output.textContent =
+                "Learning Universe";
+
+        }
+
+        return;
+    }
+
+
+    /* =========================
+       JAVA
+    ========================= */
+
+    if(currentLanguage === "java"){
+
+        if(code.includes("a + b")){
+
+            output.textContent = "30";
+
+        }
+        else if(code.includes("Hello World")){
+
+            output.textContent = "Hello World!";
+
+        }
+        else{
+
+            output.textContent =
+                "Learning Universe";
+
+        }
+
+        return;
+    }
+
+
+    /* =========================
+       C
+    ========================= */
+
+    if(currentLanguage === "c"){
+
+        if(code.includes("a + b")){
+
+            output.textContent = "30";
+
+        }
+        else if(code.includes("Hello World")){
+
+            output.textContent = "Hello World!";
+
+        }
+        else{
+
+            output.textContent =
+                "Learning Universe";
+
+        }
+
+        return;
+    }
+
+
+    /* =========================
+       C++
+    ========================= */
+
+    if(currentLanguage === "cpp"){
+
+        if(code.includes("a + b")){
+
+            output.textContent = "30";
+
+        }
+        else if(code.includes("Hello World")){
+
+            output.textContent = "Hello World!";
+
+        }
+        else{
+
+            output.textContent =
+                "Learning Universe";
+
+        }
+
+        return;
+    }
+
+
+    /* =========================
+       JAVASCRIPT
+    ========================= */
+
+    if(currentLanguage === "javascript"){
+
+        if(code.includes("a + b")){
+
+            output.textContent = "30";
+
+        }
+        else if(code.includes("Hello World")){
+
+            output.textContent = "Hello World!";
+
+        }
+        else{
+
+            output.textContent =
+                "Learning Universe";
+
+        }
+
+        return;
+    }
+
+
+    /* =========================
+       HTML
+    ========================= */
+
+    if(currentLanguage === "html"){
+
+        output.textContent =
+            "✅ HTML program generated successfully.\n\n" +
+            "The HTML code is ready to run in a browser.";
+
+        return;
+    }
+
+
+    /* =========================
+       CSS
+    ========================= */
+
+    if(currentLanguage === "css"){
+
+        output.textContent =
+            "✅ CSS code generated successfully.\n\n" +
+            "The CSS can be applied to an HTML page.";
+
+        return;
+    }
+
+
+    /* =========================
+       SQL
+    ========================= */
+
+    if(currentLanguage === "sql"){
+
+        output.textContent =
+            "id | name | email\n" +
+            "1  | Student | student@example.com";
+
+        return;
+    }
+
+
+    output.textContent =
+        "⚠️ This program cannot be executed in demo mode yet.";
+}
+
+/* =========================
+   COPY CODE
+========================= */
+
+async function copyCode(){
+
+    const code =
+        document.getElementById("codeOutput")
+        .textContent;
+
+    try{
+
+        await navigator.clipboard.writeText(code);
+
+        document.getElementById("status")
+            .textContent =
+            "✅ Code copied successfully.";
+
+    }
+    catch(error){
+
+        document.getElementById("status")
+            .textContent =
+            "⚠️ Copy is not available in this browser.";
+
+    }
+
+}
+
+
+/* =========================
+   VOICE INPUT
+========================= */
+
+function startVoice(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    if(!SpeechRecognition){
+
+        alert(
+            "Voice input is not supported in this browser. Try Google Chrome."
+        );
+
+        return;
+    }
+
+
+    const recognition =
+        new SpeechRecognition();
+
+
+    recognition.lang = "en-US";
+
+    recognition.continuous = false;
+
+    recognition.interimResults = false;
+
+
+    const status =
+        document.getElementById("status");
+
+
+    status.textContent =
+        "🎙️ Listening... Speak now.";
+
+
+    recognition.start();
+
+
+    recognition.onresult =
+        function(event){
+
+            const text =
+                event.results[0][0].transcript;
+
+
+            document.getElementById("request")
+                .value = text;
+
+
+            status.textContent =
+                "✅ Voice input received.";
+
+        };
+
+
+    recognition.onerror =
+        function(event){
+
+            status.textContent =
+                "⚠️ Voice error: " +
+                event.error;
+
+        };
+
+
+    recognition.onend =
+        function(){
+
+            if(
+                status.textContent.includes("Listening")
+            ){
+
+                status.textContent =
+                    "Voice input ended.";
+
+            }
+
+        };
+
+}
+
+</script>
+
+</body>
+</html>

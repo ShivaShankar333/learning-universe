@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Java Programming - Learning Universe</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.video-container{
+    width:100%;
+    aspect-ratio:16/9;
+    margin:20px 0;
+}
+
+.video-container iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    border-radius:14px;
+}
+
+.transcript{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="missions.html">Missions</a>
+        <a href="career.html">Career</a>
+    </nav>
+
+    <button
+        class="login-btn"
+        onclick="location.href='index.html'">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="course-learning">
+
+<section class="course-header">
+
+    <h1>☕ Java Programming</h1>
+
+    <p>
+        Learn Java from basics to object-oriented programming.
+    </p>
+
+    <div class="progress-area">
+
+        <div class="progress-info">
+
+            <span>Course Progress</span>
+
+            <strong id="progressText">
+                0%
+            </strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div id="progressFill"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="learning-layout">
+
+
+<section class="lesson-content">
+
+    <h2 id="lessonTitle">
+        Lesson 1: Introduction to Java
+    </h2>
+
+
+    <div class="video-container">
+
+        <iframe
+            id="lessonVideo"
+            src="https://www.youtube.com/embed/eIrMbAQSU34"
+            title="Java Programming Lesson"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+
+    <div class="accessibility-tools">
+
+        <button onclick="showTranscript()">
+            📝 Captions / Transcript
+        </button>
+
+        <button onclick="speakLesson()">
+            🔊 Read Lesson
+        </button>
+
+    </div>
+
+
+    <div id="transcript" class="transcript">
+
+        <h3>
+            Lesson Transcript
+        </h3>
+
+        <p id="transcriptText">
+            Welcome to Java programming.
+            Learn what Java is and how Java programs work.
+        </p>
+
+    </div>
+
+
+    <button
+        class="complete-btn"
+        onclick="completeLesson()">
+
+        ✅ Complete Lesson
+
+    </button>
+
+</section>
+
+
+<aside class="lesson-list">
+
+    <h2>
+        Course Lessons
+    </h2>
+
+
+    <button
+        class="lesson active"
+        onclick="selectLesson(1)">
+
+        <span>01</span>
+
+        <div>
+
+            <strong>
+                Introduction to Java
+            </strong>
+
+            <small>
+                10 min
+            </small>
+
+        </div>
+
+    </button>
+
+
+    <button
+        class="lesson"
+        onclick="selectLesson(2)">
+
+        <span>02</span>
+
+        <div>
+
+            <strong>
+                Variables & Data Types
+            </strong>
+
+            <small>
+                12 min
+            </small>
+
+        </div>
+
+    </button>
+
+
+    <button
+        class="lesson"
+        onclick="selectLesson(3)">
+
+        <span>03</span>
+
+        <div>
+
+            <strong>
+                Operators & Conditions
+            </strong>
+
+            <small>
+                15 min
+            </small>
+
+        </div>
+
+    </button>
+    <button
+        class="lesson"
+        onclick="selectLesson(4)">
+
+        <span>04</span>
+
+        <div>
+
+            <strong>
+                Loops & Arrays
+            </strong>
+
+            <small>
+                18 min
+            </small>
+
+        </div>
+
+    </button>
+
+
+    <button
+        class="lesson"
+        onclick="selectLesson(5)">
+
+        <span>05</span>
+
+        <div>
+
+            <strong>
+                Methods & Classes
+            </strong>
+
+            <small>
+                20 min
+            </small>
+
+        </div>
+
+    </button>
+
+
+    <button
+        class="lesson"
+        onclick="selectLesson(6)">
+
+        <span>06</span>
+
+        <div>
+
+            <strong>
+                Object-Oriented Programming
+            </strong>
+
+            <small>
+                20 min
+            </small>
+
+        </div>
+
+    </button>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<script>
+
+let currentLesson = 1;
+
+let completedLessons = 0;
+
+const totalLessons = 6;
+
+
+const lessons = [
+
+    {
+        title:
+        "Lesson 1: Introduction to Java",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34",
+
+        text:
+        "Learn what Java is, why it is popular and how Java programs are created."
+    },
+
+
+    {
+        title:
+        "Lesson 2: Variables & Data Types",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34?start=600",
+
+        text:
+        "Learn Java variables, integers, strings, floating point values and other data types."
+    },
+
+
+    {
+        title:
+        "Lesson 3: Operators & Conditions",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34?start=1200",
+
+        text:
+        "Learn operators and how if, else and conditional statements work in Java."
+    },
+
+
+    {
+        title:
+        "Lesson 4: Loops & Arrays",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34?start=1800",
+
+        text:
+        "Learn for loops, while loops and arrays in Java."
+    },
+
+
+    {
+        title:
+        "Lesson 5: Methods & Classes",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34?start=2400",
+
+        text:
+        "Learn methods, classes and how to organize Java programs."
+    },
+
+
+    {
+        title:
+        "Lesson 6: Object-Oriented Programming",
+
+        video:
+        "https://www.youtube.com/embed/eIrMbAQSU34?start=3000",
+
+        text:
+        "Learn the basic principles of object-oriented programming using Java."
+    }
+
+];
+
+
+function selectLesson(number){
+
+    currentLesson = number;
+
+    const buttons =
+        document.querySelectorAll(".lesson");
+
+    buttons.forEach(function(button){
+
+        button.classList.remove("active");
+
+    });
+
+    buttons[number - 1]
+        .classList.add("active");
+
+
+    document.getElementById("lessonTitle")
+        .textContent =
+        lessons[number - 1].title;
+
+
+    document.getElementById("lessonVideo")
+        .src =
+        lessons[number - 1].video;
+
+
+    document.getElementById("transcriptText")
+        .textContent =
+        lessons[number - 1].text;
+
+}
+function completeLesson(){
+
+    if(completedLessons < currentLesson){
+
+        completedLessons =
+            currentLesson;
+
+    }
+
+
+    const progress =
+        Math.round(
+            (completedLessons / totalLessons) * 100
+        );
+
+
+    document.getElementById("progressFill")
+        .style.width =
+        progress + "%";
+
+
+    document.getElementById("progressText")
+        .textContent =
+        progress + "%";
+
+
+    if(progress === 100){
+
+        alert(
+            "🎉 Java course completed! Your 15-question final quiz is ready."
+        );
+
+        location.href =
+            "quiz.html";
+
+    }else{
+
+        alert(
+            "✅ Lesson " +
+            currentLesson +
+            " completed!"
+        );
+
+    }
+
+}
+
+
+function showTranscript(){
+
+    const transcript =
+        document.getElementById("transcript");
+
+
+    if(
+        transcript.style.display === "block"
+    ){
+
+        transcript.style.display = "none";
+
+    }else{
+
+        transcript.style.display = "block";
+
+    }
+
+}
+
+
+function speakLesson(){
+
+    const text =
+        document.getElementById("transcriptText")
+        .textContent;
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.rate = 0.9;
+
+
+    window.speechSynthesis.speak(speech);
+
+}
+
+</script>
+
+</body>
+
+</html>

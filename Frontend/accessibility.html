@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Accessibility Learning - Learning Universe</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f7ff;
+            color: #20243a;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #6c4df6;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #30344b;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            border: none;
+            background: #6c4df6;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #697188;
+            font-size: 17px;
+        }
+
+        .progress-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 13px;
+            background: #e4e4ee;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #progressFill {
+            width: 0%;
+            height: 100%;
+            background: #6c4df6;
+            transition: 0.3s;
+        }
+
+        .learning-layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 25px;
+        }
+
+        .lesson-content,
+        .lesson-list {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .lesson-content h2 {
+            margin-top: 0;
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin-top: 20px;
+            background: #111;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .no-video {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .tools {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tools button,
+        .complete-btn,
+        .quiz-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tools button {
+            background: #eeeaff;
+            color: #5b3fe0;
+        }
+
+        .complete-btn {
+            margin-top: 20px;
+            background: #6c4df6;
+            color: white;
+            width: 100%;
+        }
+
+        .transcript {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            background: #f5f3ff;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .lesson-list h2 {
+            margin-top: 0;
+        }
+
+        .lesson {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 14px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: #f6f7ff;
+            cursor: pointer;
+        }
+
+        .lesson.active {
+            border-color: #6c4df6;
+            background: #eeeaff;
+        }
+
+        .lesson.completed {
+            background: #e8f8ee;
+        }
+
+        .lesson-number {
+            min-width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #6c4df6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .lesson-info strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .lesson-info small {
+            color: #697188;
+        }
+
+        .quiz-box {
+            display: none;
+            margin-top: 25px;
+            padding: 25px;
+            background: white;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .quiz-btn {
+            background: #20243a;
+            color: white;
+            margin-top: 12px;
+        }
+
+        .large-text {
+            font-size: 125%;
+        }
+
+        .high-contrast {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        .high-contrast .lesson-content,
+        .high-contrast .lesson-list,
+        .high-contrast .progress-box,
+        .high-contrast .quiz-box,
+        .high-contrast .navbar {
+            background: #000 !important;
+            color: #fff !important;
+            border: 1px solid white;
+        }
+
+        @media (max-width: 850px) {
+
+            .learning-layout {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="courses.html">Courses</a>
+
+        <a href="accessibility.html">Accessibility</a>
+
+    </nav>
+
+    <button onclick="location.href='ai-assistance.html'">
+    Open AI Assistant
+</button>
+
+<button onclick="location.href='ai-assistance.html'">
+    Start Voice Assistant
+</button>
+
+</header>
+
+
+<main class="page">
+
+
+    <section class="header">
+
+        <h1>
+            ♿ Accessibility Learning
+        </h1>
+
+        <p>
+            Learn accessibility and inclusive communication
+            through six structured lessons.
+        </p>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <section class="progress-box">
+
+        <div class="progress-info">
+
+            <span>
+                Course Progress
+            </span>
+
+            <span id="progressText">
+                0%
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div id="progressFill"></div>
+
+        </div>
+
+    </section>
+
+
+    <div class="learning-layout">
+
+
+        <!-- LESSON CONTENT -->
+
+        <section class="lesson-content">
+
+            <h2 id="lessonTitle">
+                Lesson 1: Introduction to Sign Language
+            </h2>
+
+
+            <p id="lessonDescription">
+                Learn why sign language is important
+                and how it supports inclusive communication.
+            </p>
+
+
+            <!-- VIDEO -->
+
+            <div class="video-container"
+                 id="videoContainer">
+
+                <iframe
+                    id="lessonVideo"
+                    src="https://www.youtube.com/embed/VsnFbywWAcI"
+                    title="Accessibility Learning Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+            <!-- TOOLS -->
+
+            <div class="tools">
+
+                <button
+                    onclick="showTranscript()">
+
+                    📝 Transcript
+
+                </button>
+
+
+                <button
+                    onclick="speakLesson()">
+
+                    🔊 Read Lesson
+
+                </button>
+
+
+                <button
+                    onclick="toggleLargeText()">
+
+                    🔤 Large Text
+
+                </button>
+
+
+                <button
+                    onclick="toggleContrast()">
+
+                    ◐ Contrast
+
+                </button>
+
+            </div>
+
+
+            <!-- TRANSCRIPT -->
+
+            <div
+                id="transcript"
+                class="transcript">
+
+                <h3>
+                    📝 Lesson Transcript
+                </h3>
+
+                <p id="transcriptText">
+
+                    Sign language is an important form
+                    of communication. It helps people
+                    communicate using visual signs,
+                    expressions and movements.
+
+                </p>
+
+            </div>
+
+
+            <button
+                class="complete-btn"
+                onclick="completeLesson()">
+
+                ✅ Complete Lesson
+
+            </button>
+
+
+        </section>
+
+
+        <!-- LESSON LIST -->
+
+        <aside class="lesson-list">
+
+            <h2>
+                6 Lessons
+            </h2>
+
+
+            <button
+                class="lesson active"
+                onclick="selectLesson(1)">
+
+                <span class="lesson-number">
+                    1
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Introduction to Sign Language
+                    </strong>
+
+                    <small>
+                        10 min
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(2)">
+
+                <span class="lesson-number">
+                    2
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Basic Signs & Greetings
+                    </strong>
+
+                    <small>
+                        12 min
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(3)">
+
+                <span class="lesson-number">
+                    3
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Alphabet & Fingerspelling
+                    </strong>
+
+                    <small>
+                        15 min
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(4)">
+
+                <span class="lesson-number">
+                    4
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Common Communication
+                    </strong>
+
+                    <small>
+                        14 min
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(5)">
+
+                <span class="lesson-number">
+                    5
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Captions & Visual Learning
+                    </strong>
+
+                    <small>
+                        12 min
+                    </small>
+
+                </span>
+
+            </button>
+
+
+            <button
+                class="lesson"
+                onclick="selectLesson(6)">
+
+                <span class="lesson-number">
+                    6
+                </span>
+
+                <span class="lesson-info">
+
+                    <strong>
+                        Accessibility Skills
+                    </strong>
+
+                    <small>
+                        15 min
+                    </small>
+
+                </span>
+
+            </button>
+
+        </aside>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <section
+        id="quizBox"
+        class="quiz-box">
+
+        <h2>
+            🎉 Accessibility Course Completed!
+        </h2>
+
+        <p>
+            You completed all 6 lessons.
+            You can now take the final accessibility quiz.
+        </p>
+
+        <button
+            class="quiz-btn"
+            onclick="openQuiz()">
+
+            📝 Start Accessibility Quiz
+
+        </button>
+
+    </section>
+
+
+</main>
+
+
+<script>
+
+
+let currentLesson = 1;
+
+let completedLessons = 0;
+
+const totalLessons = 6;
+
+
+const lessons = [
+
+    {
+        title:
+            "Lesson 1: Introduction to Sign Language",
+
+        description:
+            "Learn why sign language is important and how it supports inclusive communication.",
+
+        video:
+            "https://www.youtube.com/embed/VsnFbywWAcI",
+
+        text:
+            "Sign language is an important form of communication. It helps people communicate using visual signs, expressions and movements."
+    },
+
+
+    {
+        title:
+            "Lesson 2: Basic Signs & Greetings",
+
+        description:
+            "Learn about basic greetings and simple communication concepts.",
+
+        video:
+            "",
+
+        text:
+            "Basic greetings can help begin a conversation. Learning simple signs and communicating respectfully can make interaction easier and more inclusive."
+    },
+
+
+    {
+        title:
+            "Lesson 3: Alphabet & Fingerspelling",
+
+        description:
+            "Understand the idea of representing letters through hand signs.",
+
+        video:
+            "",
+
+        text:
+            "Fingerspelling is a way of representing individual letters using hand shapes. It can be useful for spelling names and words."
+    },
+
+
+    {
+        title:
+            "Lesson 4: Common Communication",
+
+        description:
+            "Learn how visual communication can support everyday conversations.",
+
+        video:
+            "",
+
+        text:
+            "Effective communication includes patience, attention and respect. Visual communication can support conversations in classrooms and everyday situations."
+    },
+
+
+    {
+        title:
+            "Lesson 5: Captions & Visual Learning",
+
+        description:
+            "Learn why captions, transcripts and visual information are useful.",
+
+        video:
+            "",
+
+        text:
+            "Captions and transcripts provide written access to spoken information. Visual learning resources can make educational content easier to understand and follow."
+    },
+
+
+    {
+        title:
+            "Lesson 6: Accessibility Skills",
+
+        description:
+            "Review important accessibility concepts and inclusive learning practices.",
+
+        video:
+            "",
+
+        text:
+            "Accessibility means designing learning experiences that can be used by people with different needs. Inclusive design benefits many different learners."
+    }
+
+];
+
+
+function selectLesson(number) {
+
+    currentLesson = number;
+
+
+    const buttons =
+        document.querySelectorAll(".lesson");
+
+
+    buttons.forEach(function(button) {
+
+        button.classList.remove("active");
+
+    });
+
+
+    buttons[number - 1]
+        .classList.add("active");
+
+
+    const lesson =
+        lessons[number - 1];
+
+
+    document.getElementById("lessonTitle")
+        .textContent =
+        lesson.title;
+
+
+    document.getElementById("lessonDescription")
+        .textContent =
+        lesson.description;
+
+
+    document.getElementById("transcriptText")
+        .textContent =
+        lesson.text;
+
+
+    const container =
+        document.getElementById("videoContainer");
+
+
+    if (lesson.video) {
+
+        container.innerHTML =
+
+        `<iframe
+            id="lessonVideo"
+            src="${lesson.video}"
+            title="Accessibility Learning Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>`;
+
+    } else {
+
+        container.innerHTML =
+
+        `<div class="no-video">
+            <div>
+                <h3>📚 Lesson Content</h3>
+                <p>
+                    Video for this lesson will be added soon.
+                    Read the lesson transcript and continue learning.
+                </p>
+            </div>
+        </div>`;
+
+    }
+
+
+    document.getElementById("transcript")
+        .style.display = "none";
+
+}
+
+
+function completeLesson() {
+
+    if (completedLessons < currentLesson) {
+
+        completedLessons = currentLesson;
+
+    }
+
+
+    const progress =
+        Math.round(
+            (completedLessons / totalLessons) * 100
+        );
+
+
+    document.getElementById("progressFill")
+        .style.width =
+        progress + "%";
+
+
+    document.getElementById("progressText")
+        .textContent =
+        progress + "%";
+
+
+    const buttons =
+        document.querySelectorAll(".lesson");
+
+
+    for (
+        let i = 0;
+        i < completedLessons;
+        i++
+    ) {
+
+        buttons[i]
+            .classList.add("completed");
+
+    }
+
+
+    if (progress === 100) {
+
+        document.getElementById("quizBox")
+            .style.display = "block";
+
+
+        alert(
+            "🎉 All 6 accessibility lessons completed!"
+        );
+
+    } else {
+
+        alert(
+            "✅ Lesson " +
+            currentLesson +
+            " completed!"
+        );
+
+    }
+
+}
+
+
+function showTranscript() {
+
+    const transcript =
+        document.getElementById("transcript");
+
+
+    if (
+        transcript.style.display === "block"
+    ) {
+
+        transcript.style.display = "none";
+
+    } else {
+
+        transcript.style.display = "block";
+
+    }
+
+}
+
+
+function speakLesson() {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        alert(
+            "Text-to-speech is not supported in this browser."
+        );
+
+        return;
+
+    }
+
+
+    const text =
+        document.getElementById("transcriptText")
+            .textContent;
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.rate = 0.9;
+
+    speech.pitch = 1;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+function toggleLargeText() {
+
+    document.body.classList.toggle(
+        "large-text"
+    );
+
+}
+
+
+function toggleContrast() {
+
+    document.body.classList.toggle(
+        "high-contrast"
+    );
+
+}
+
+
+function openQuiz() {
+
+    /*
+       If your quiz page is named
+       accessibility-quiz.html,
+       this opens that page.
+    */
+
+    window.location.href =
+        "accessibility-quiz.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

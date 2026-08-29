@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Missions - Learning Universe</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+    <style>
+
+        .missions-page {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .missions-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .missions-header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .missions-header p {
+            color: #697188;
+            font-size: 17px;
+        }
+
+        .progress-box {
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 14px;
+            background: #e8e6f5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #6c4df6;
+            transition: width .4s ease;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .mission-card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            text-align: center;
+            transition: transform .2s;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .mission-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .mission-card h2 {
+            margin: 10px 0;
+        }
+
+        .mission-card p {
+            color: #697188;
+            line-height: 1.5;
+            min-height: 48px;
+        }
+
+        .points {
+            display: block;
+            margin: 18px 0;
+            color: #6c4df6;
+            font-size: 17px;
+        }
+
+        .mission-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #6c4df6;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .mission-button:hover {
+            opacity: .9;
+        }
+
+        .mission-button.completed {
+            background: #2e9b62;
+            cursor: default;
+        }
+
+        .total-points {
+            text-align: center;
+            margin-top: 30px;
+            padding: 22px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+        }
+
+        .total-points h2 {
+            margin: 0;
+        }
+
+        #pointsValue {
+            color: #6c4df6;
+        }
+
+        @media (max-width: 700px) {
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .missions-header h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="courses.html">
+            Courses
+        </a>
+
+        <a href="missions.html">
+            Missions
+        </a>
+
+        <a href="career.html">
+            Career
+        </a>
+
+    </nav>
+
+
+    <button
+        class="login-btn"
+        onclick="location.href='index.html'">
+
+        Home
+
+    </button>
+
+</header>
+
+
+
+<main class="missions-page">
+
+
+    <section class="missions-header">
+
+        <h1>
+            🎯 Learning Missions
+        </h1>
+
+        <p>
+            Complete challenges and improve your
+            programming skills.
+        </p>
+
+    </section>
+
+
+
+    <!-- PROGRESS -->
+
+    <section class="progress-box">
+
+        <div class="progress-top">
+
+            <span>
+                Mission Progress
+            </span>
+
+            <span id="progressText">
+                0 / 4 Completed
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                id="progressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MISSIONS -->
+
+    <div class="mission-grid">
+
+
+        <!-- PYTHON BEGINNER -->
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🐍
+            </div>
+
+            <h2>
+                Python Beginner
+            </h2>
+
+            <p>
+                Complete your first Python course
+                and learn the basics of programming.
+            </p>
+
+            <strong class="points">
+                ⭐ 100 Points
+            </strong>
+
+            <button
+                class="mission-button"
+                onclick="completeMission(
+                    this,
+                    'pythonBeginner',
+                    100
+                )">
+
+                Start Mission
+
+            </button>
+
+        </div>
+
+
+
+        <!-- FIRST PROGRAM -->
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                💻
+            </div>
+
+            <h2>
+                First Program
+            </h2>
+
+            <p>
+                Write and understand your
+                first programming program.
+            </p>
+
+            <strong class="points">
+                ⭐ 150 Points
+            </strong>
+
+            <button
+                class="mission-button"
+                onclick="completeMission(
+                    this,
+                    'firstProgram',
+                    150
+                )">
+
+                Start Mission
+
+            </button>
+
+        </div>
+
+
+
+        <!-- QUIZ MASTER -->
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🏆
+            </div>
+
+            <h2>
+                Quiz Master
+            </h2>
+
+            <p>
+                Score 70% or more in a
+                course quiz.
+            </p>
+
+            <strong class="points">
+                ⭐ 200 Points
+            </strong>
+
+            <button
+                class="mission-button"
+                onclick="completeMission(
+                    this,
+                    'quizMaster',
+                    200
+                )">
+
+                Start Mission
+
+            </button>
+
+        </div>
+
+
+
+        <!-- BUILD PROJECT -->
+
+        <div class="mission-card">
+
+            <div class="mission-icon">
+                🚀
+            </div>
+
+            <h2>
+                Build a Project
+            </h2>
+
+            <p>
+                Complete your first programming
+                project and showcase your skills.
+            </p>
+
+            <strong class="points">
+                ⭐ 300 Points
+            </strong>
+
+            <button
+                class="mission-button"
+                onclick="completeMission(
+                    this,
+                    'buildProject',
+                    300
+                )">
+
+                Start Mission
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TOTAL POINTS -->
+
+    <section class="total-points">
+
+        <h2>
+            🌟 Total Points:
+            <span id="pointsValue">
+                0
+            </span>
+        </h2>
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================
+   MISSION DATA
+========================= */
+
+const missions = {
+
+    pythonBeginner: 100,
+
+    firstProgram: 150,
+
+    quizMaster: 200,
+
+    buildProject: 300
+
+};
+
+
+
+/* =========================
+   LOAD SAVED PROGRESS
+========================= */
+
+function loadProgress() {
+
+    let totalPoints = 0;
+
+    let completedCount = 0;
+
+
+    Object.keys(missions).forEach(
+        function(id) {
+
+            const completed =
+                localStorage.getItem(
+                    "mission_" + id
+                );
+
+
+            if (completed === "completed") {
+
+                completedCount++;
+
+                totalPoints += missions[id];
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "pointsValue"
+    ).textContent = totalPoints;
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+        completedCount + " / 4 Completed";
+
+
+    const percentage =
+        (completedCount / 4) * 100;
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        percentage + "%";
+
+
+    updateButtons();
+
+}
+
+
+
+/* =========================
+   UPDATE BUTTONS
+========================= */
+
+function updateButtons() {
+
+    Object.keys(missions).forEach(
+        function(id) {
+
+            const button =
+                document.querySelector(
+                    '[onclick*="' + id + '"]'
+                );
+
+
+            if (!button) {
+
+                return;
+
+            }
+
+
+            const completed =
+                localStorage.getItem(
+                    "mission_" + id
+                );
+
+
+            if (
+                completed === "completed"
+            ) {
+
+                button.textContent =
+                    "✅ Mission Completed";
+
+                button.classList.add(
+                    "completed"
+                );
+
+                button.disabled = true;
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   COMPLETE MISSION
+========================= */
+
+function completeMission(
+    button,
+    missionId,
+    points
+) {
+
+    const alreadyCompleted =
+        localStorage.getItem(
+            "mission_" + missionId
+        );
+
+
+    if (
+        alreadyCompleted === "completed"
+    ) {
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "mission_" + missionId,
+        "completed"
+    );
+
+
+    button.textContent =
+        "✅ Mission Completed";
+
+
+    button.classList.add(
+        "completed"
+    );
+
+
+    button.disabled = true;
+
+
+    loadProgress();
+
+}
+
+
+
+/* =========================
+   START
+========================= */
+
+loadProgress();
+
+</script>
+
+
+</body>
+
+</html>

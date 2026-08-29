@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Course Quiz - Learning Universe</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f6f7ff;
+            color: #20243a;
+        }
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #6c4df6;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #30344b;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #697188;
+        }
+
+        .course-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .course-card .icon {
+            font-size: 45px;
+        }
+
+        .course-card h2 {
+            margin: 12px 0;
+        }
+
+        .course-card p {
+            color: #697188;
+            min-height: 50px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 10px;
+            background: #6c4df6;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quiz-area {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .question {
+            margin-top: 25px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 15px;
+            background: #f5f3ff;
+            color: #30344b;
+            text-align: left;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            border-color: #6c4df6;
+        }
+
+        .option.selected {
+            border-color: #6c4df6;
+            background: #eeeaff;
+        }
+
+        .next-btn {
+            margin-top: 20px;
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .result h2 {
+            font-size: 30px;
+        }
+
+        .back-btn {
+            background: #30344b;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 800px) {
+            .course-selection {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🌌 Learning Universe
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="missions.html">Missions</a>
+        <a href="career.html">Career</a>
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <h1>📝 Final Course Quiz</h1>
+
+        <p>
+            Select the course you want to test your knowledge in.
+        </p>
+
+    </section>
+
+
+    <!-- COURSE SELECTION -->
+
+    <section
+        id="courseSelection"
+        class="course-selection">
+
+
+        <div class="course-card">
+
+            <div class="icon">🐍</div>
+
+            <h2>Python</h2>
+
+            <p>
+                Test your Python programming knowledge.
+            </p>
+
+            <button onclick="startQuiz('python')">
+                Start Python Quiz
+            </button>
+
+        </div>
+
+
+        <div class="course-card">
+
+            <div class="icon">☕</div>
+
+            <h2>Java</h2>
+
+            <p>
+                Test your Java programming knowledge.
+            </p>
+
+            <button onclick="startQuiz('java')">
+                Start Java Quiz
+            </button>
+
+        </div>
+
+
+        <div class="course-card">
+
+            <div class="icon">🌐</div>
+
+            <h2>Web Development</h2>
+
+            <p>
+                Test your HTML, CSS and JavaScript knowledge.
+            </p>
+
+            <button onclick="startQuiz('web')">
+                Start Web Quiz
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <section
+        id="quizArea"
+        class="quiz-area">
+
+        <div class="quiz-header">
+
+            <h2 id="quizTitle">
+                Course Quiz
+            </h2>
+
+            <strong id="questionNumber">
+                Question 1 / 15
+            </strong>
+
+        </div>
+
+
+        <div class="question">
+
+            <h3 id="questionText">
+                Question goes here
+            </h3>
+
+            <div id="options"></div>
+
+        </div>
+
+
+        <button
+            class="next-btn"
+            onclick="nextQuestion()">
+
+            Next Question →
+
+        </button>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section
+        id="result"
+        class="result">
+
+        <h2>
+            🎉 Quiz Completed!
+        </h2>
+
+        <p id="scoreText"></p>
+
+        <button onclick="location.reload()">
+            Choose Another Course
+        </button>
+
+        <button
+            class="back-btn"
+            onclick="location.href='courses.html'">
+
+            Back to Courses
+
+        </button>
+
+    </section>
+
+</main>
+
+
+<script>
+
+
+let currentCourse = "";
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let selectedAnswer = null;
+
+
+const quizData = {
+
+
+    python: [
+
+        {
+            q: "Which keyword is used to define a function in Python?",
+            options: ["function", "def", "fun", "define"],
+            answer: 1
+        },
+
+        {
+            q: "Which symbol is used for comments in Python?",
+            options: ["//", "#", "/*", "--"],
+            answer: 1
+        },
+
+        {
+            q: "Which data type stores True or False?",
+            options: ["String", "Integer", "Boolean", "Float"],
+            answer: 2
+        },
+
+        {
+            q: "Which function displays output in Python?",
+            options: ["show()", "display()", "print()", "write()"],
+            answer: 2
+        },
+
+        {
+            q: "Which collection is ordered and changeable?",
+            options: ["Tuple", "List", "Set", "String"],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword is used for a condition?",
+            options: ["if", "when", "check", "condition"],
+            answer: 0
+        },
+
+        {
+            q: "Which loop is commonly used to iterate over a sequence?",
+            options: ["for", "repeat", "loop", "each"],
+            answer: 0
+        },
+
+        {
+            q: "What does len() return?",
+            options: [
+                "The length",
+                "The type",
+                "The value",
+                "The index"
+            ],
+            answer: 0
+        },
+
+        {
+            q: "Which symbol is used for exponentiation?",
+            options: ["^", "**", "//", "%%"],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword creates a class?",
+            options: ["object", "class", "struct", "new"],
+            answer: 1
+        },
+
+        {
+            q: "Which file extension is used for Python?",
+            options: [".java", ".py", ".html", ".js"],
+            answer: 1
+        },
+
+        {
+            q: "Which value represents no value?",
+            options: ["None", "Null", "Empty", "Zero"],
+            answer: 0
+        },
+
+        {
+            q: "Which statement handles exceptions?",
+            options: [
+                "try/except",
+                "if/error",
+                "check/catch",
+                "error/handle"
+            ],
+            answer: 0
+        },
+
+        {
+            q: "Which keyword imports a module?",
+            options: ["include", "using", "import", "module"],
+            answer: 2
+        },
+
+        {
+            q: "Python is mainly known as a...",
+            options: [
+                "Low-level language",
+                "High-level programming language",
+                "Markup language",
+                "Database"
+            ],
+            answer: 1
+        }
+
+    ],
+
+
+    java: [
+
+        {
+            q: "Which keyword is used to create a class in Java?",
+            options: ["class", "define", "newclass", "object"],
+            answer: 0
+        },
+
+        {
+            q: "Which method is the entry point of a Java program?",
+            options: ["start()", "main()", "run()", "begin()"],
+            answer: 1
+        },
+
+        {
+            q: "Which symbol ends most Java statements?",
+            options: [".", ":", ";", ","],
+            answer: 2
+        },
+
+        {
+            q: "Which keyword creates an object?",
+            options: ["create", "object", "new", "make"],
+            answer: 2
+        },
+
+        {
+            q: "Which type stores whole numbers?",
+            options: ["float", "int", "char", "boolean"],
+            answer: 1
+        },
+
+        {
+            q: "Which type stores true or false?",
+            options: ["boolean", "bool", "logical", "bit"],
+            answer: 0
+        },
+
+        {
+            q: "Which keyword is used for inheritance?",
+            options: ["inherits", "extends", "parent", "using"],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword prevents a class from being inherited?",
+            options: ["stop", "final", "private", "static"],
+            answer: 1
+        },
+
+        {
+            q: "Java source files usually use which extension?",
+            options: [".js", ".java", ".class", ".jav"],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword is used to define a constant?",
+            options: ["constant", "const", "final", "fixed"],
+            answer: 2
+        },
+
+        {
+            q: "Java is primarily a...",
+            options: [
+                "Markup language",
+                "Programming language",
+                "Database",
+                "Style sheet"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword handles exceptions?",
+            options: ["try", "test", "check", "error"],
+            answer: 0
+        },
+
+        {
+            q: "Which collection does not allow duplicate elements?",
+            options: ["List", "Set", "ArrayList", "Vector"],
+            answer: 1
+        },
+
+        {
+            q: "Which concept hides implementation details?",
+            options: [
+                "Abstraction",
+                "Compilation",
+                "Looping",
+                "Iteration"
+            ],
+            answer: 0
+        },
+
+        {
+            q: "Java programs run on the...",
+            options: [
+                "JVM",
+                "HTML",
+                "CSS",
+                "Browser only"
+            ],
+            answer: 0
+        }
+
+    ],
+
+
+    web: [
+
+        {
+            q: "What does HTML stand for?",
+            options: [
+                "Hyper Text Markup Language",
+                "High Text Machine Language",
+                "Hyperlink Text Management Language",
+                "Home Tool Markup Language"
+            ],
+            answer: 0
+        },
+
+        {
+            q: "Which language styles a web page?",
+            options: ["HTML", "CSS", "Java", "SQL"],
+            answer: 1
+        },
+
+        {
+            q: "Which language adds interactivity to websites?",
+            options: ["HTML", "CSS", "JavaScript", "XML"],
+            answer: 2
+        },
+
+        {
+            q: "Which HTML tag creates a heading?",
+            options: ["<head>", "<h1>", "<title>", "<heading>"],
+            answer: 1
+        },
+
+        {
+            q: "Which tag creates a link?",
+            options: ["<link>", "<a>", "<url>", "<href>"],
+            answer: 1
+        },
+
+        {
+            q: "Which CSS property changes text color?",
+            options: ["font-color", "text-color", "color", "foreground"],
+            answer: 2
+        },
+
+        {
+            q: "Which CSS property changes background color?",
+            options: ["background-color", "bg", "background-style", "color-bg"],
+            answer: 0
+        },
+
+        {
+            q: "Which HTML tag displays an image?",
+            options: ["<image>", "<img>", "<picture>", "<src>"],
+            answer: 1
+        },
+
+        {
+            q: "Which symbol starts a JavaScript comment on one line?",
+            options: ["##", "//", "<!--", "--"],
+            answer: 1
+        },
+
+        {
+            q: "Which keyword declares a JavaScript variable?",
+            options: ["let", "var", "const", "All of these"],
+            answer: 3
+        },
+
+        {
+            q: "Which HTML element creates a paragraph?",
+            options: ["<text>", "<p>", "<para>", "<paragraph>"],
+            answer: 1
+        },
+
+        {
+            q: "CSS stands for...",
+            options: [
+                "Creative Style System",
+                "Cascading Style Sheets",
+                "Computer Style Sheets",
+                "Colorful Style Syntax"
+            ],
+            answer: 1
+        },
+
+        {
+            q: "JavaScript is mainly used for...",
+            options: [
+                "Styling only",
+                "Page structure only",
+                "Web interactivity",
+                "Database storage only"
+            ],
+            answer: 2
+        },
+
+        {
+            q: "Which tag creates a button?",
+            options: ["<button>", "<btn>", "<click>", "<input-button>"],
+            answer: 0
+        },
+
+        {
+            q: "Which protocol is commonly used for secure websites?",
+            options: ["HTTP", "HTTPS", "FTP", "SMTP"],
+            answer: 1
+        }
+
+    ]
+
+};
+
+
+function startQuiz(course) {
+
+    currentCourse = course;
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    selectedAnswer = null;
+
+
+    document.getElementById("courseSelection")
+        .style.display = "none";
+
+
+    document.getElementById("quizArea")
+        .style.display = "block";
+
+
+    let title = "";
+
+
+    if (course === "python") {
+
+        title = "🐍 Python Quiz";
+
+    }
+
+    else if (course === "java") {
+
+        title = "☕ Java Quiz";
+
+    }
+
+    else {
+
+        title = "🌐 Web Development Quiz";
+
+    }
+
+
+    document.getElementById("quizTitle")
+        .textContent = title;
+
+
+    showQuestion();
+
+}
+
+
+function showQuestion() {
+
+    const questions =
+        quizData[currentCourse];
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    selectedAnswer = null;
+
+
+    document.getElementById("questionNumber")
+        .textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " / " +
+        questions.length;
+
+
+    document.getElementById("questionText")
+        .textContent =
+        question.q;
+
+
+    const options =
+        document.getElementById("options");
+
+
+    options.innerHTML = "";
+
+
+    question.options.forEach(
+        function(option, index) {
+
+            const button =
+                document.createElement("button");
+
+
+            button.className = "option";
+
+
+            button.textContent =
+                option;
+
+
+            button.onclick =
+                function() {
+
+                    selectAnswer(
+                        index,
+                        button
+                    );
+
+                };
+
+
+            options.appendChild(button);
+
+        }
+    );
+
+
+    document.querySelector(".next-btn")
+        .textContent =
+        currentQuestion === questions.length - 1
+        ? "Finish Quiz"
+        : "Next Question →";
+
+}
+
+
+function selectAnswer(index, button) {
+
+    selectedAnswer = index;
+
+
+    const buttons =
+        document.querySelectorAll(".option");
+
+
+    buttons.forEach(
+        function(item) {
+
+            item.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    button.classList.add("selected");
+
+}
+
+
+function nextQuestion() {
+
+    if (selectedAnswer === null) {
+
+        alert(
+            "Please select an answer first."
+        );
+
+        return;
+
+    }
+
+
+    const question =
+        quizData[currentCourse]
+            [currentQuestion];
+
+
+    if (
+        selectedAnswer ===
+        question.answer
+    ) {
+
+        score++;
+
+    }
+
+
+    if (
+        currentQuestion <
+        quizData[currentCourse].length - 1
+    ) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+function showResult() {
+
+    document.getElementById("quizArea")
+        .style.display = "none";
+
+
+    document.getElementById("result")
+        .style.display = "block";
+
+
+    const total =
+        quizData[currentCourse].length;
+
+
+    document.getElementById("scoreText")
+        .textContent =
+        "Your Score: " +
+        score +
+        " / " +
+        total;
+
+}
+
+
+</script>
+
+</body>
+
+</html>

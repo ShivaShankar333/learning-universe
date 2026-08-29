@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deaf Accessibility Login - Learning Universe</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #dff8f3, transparent 35%),
+        radial-gradient(circle at bottom right, #e9e4ff, transparent 35%),
+        #f7f8ff;
+    color: #20243a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-container {
+    width: 500px;
+    max-width: 100%;
+    background: white;
+    padding: 38px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(40,40,80,0.15);
+}
+
+.back {
+    color: #6c4df6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.icon {
+    text-align: center;
+    font-size: 50px;
+    margin: 25px 0 10px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #697188;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 16px 0 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 11px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #16a085;
+    outline: 3px solid rgba(22,160,133,0.2);
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 11px;
+    background: #16a085;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+.caption-info {
+    margin-top: 25px;
+    padding: 18px;
+    background: #effbf8;
+    border-left: 5px solid #16a085;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.visual-status {
+    display: none;
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    background: #eef8ff;
+    color: #155a80;
+    font-weight: bold;
+}
+
+.keyboard-help {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f5f3ff;
+    border-radius: 12px;
+    line-height: 1.7;
+}
+
+@media(max-width:550px) {
+    .login-container {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+<a href="disability-login.html" class="back">
+    ← Back to Accessibility
+</a>
+
+<div class="icon" aria-hidden="true">
+    👂
+</div>
+
+<h1>
+    Deaf / Hearing Accessibility
+</h1>
+
+<p class="subtitle">
+    A visual-friendly learning experience with
+    captions and clear on-screen notifications.
+</p>
+
+<form id="loginForm">
+
+<label for="email">
+    Email Address
+</label>
+
+<input
+    id="email"
+    type="email"
+    placeholder="Enter your email"
+    autocomplete="email"
+    required
+>
+
+<label for="password">
+    Password
+</label>
+
+<input
+    id="password"
+    type="password"
+    placeholder="Enter your password"
+    autocomplete="current-password"
+    required
+>
+
+<button
+    class="login-btn"
+    type="submit">
+
+    Login
+
+</button>
+
+</form>
+
+<div class="caption-info">
+    🎬 <strong>Caption Mode Enabled</strong><br>
+    Course videos will use captions and
+    important audio information will also
+    be displayed visually.
+</div>
+
+<div
+    class="visual-status"
+    id="status">
+</div>
+
+<div class="keyboard-help">
+    <strong>Keyboard Navigation</strong><br>
+    Tab = Move between controls<br>
+    Enter = Select / Activate<br>
+    L = Login
+</div>
+
+</div>
+
+
+<script>
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const statusBox =
+    document.getElementById("status");
+
+
+/* =========================
+   VISUAL NOTIFICATION
+========================= */
+
+function showStatus(message) {
+
+    statusBox.style.display = "block";
+    statusBox.textContent = message;
+}
+
+
+/* =========================
+   KEYBOARD LOGIN
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key =
+            event.key.toLowerCase();
+
+        if (
+            key === "l" &&
+            event.target.tagName !== "INPUT"
+        ) {
+
+            event.preventDefault();
+
+            loginForm.requestSubmit();
+        }
+
+    }
+);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email")
+            .value.trim();
+
+        const password =
+            document.getElementById("password")
+            .value;
+
+        showStatus("Logging in...");
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://localhost:3000/api/login",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                showStatus(
+                    data.message ||
+                    "Login failed."
+                );
+
+                return;
+            }
+
+
+            localStorage.setItem(
+                "token",
+                data.token
+            );
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+
+
+            showStatus(
+                "Login successful ✅"
+            );
+
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "deaf-dashboard.html";
+
+            }, 700);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showStatus(
+                "Backend connection failed. Start the server first."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
