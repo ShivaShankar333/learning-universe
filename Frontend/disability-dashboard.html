@@ -37,17 +37,14 @@ header {
 }
 
 header button,
-.voice-panel button,
-.card a,
-.card button {
+.edith-button {
     border: none;
-    padding: 12px 18px;
+    padding: 13px 20px;
     border-radius: 10px;
     background: #6c4df6;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    text-decoration: none;
 }
 
 main {
@@ -69,28 +66,31 @@ main {
     font-size: 34px;
 }
 
-.welcome p,
-.card p {
+.welcome p {
     color: #697188;
 }
 
-.voice-panel {
+.edith-panel {
     background: #eeeaff;
-    padding: 25px;
-    border-radius: 18px;
+    padding: 28px;
+    border-radius: 20px;
     margin-bottom: 25px;
 }
 
-.voice-panel h2 {
+.edith-panel h2 {
     margin-top: 0;
 }
 
 .edith-status {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 12px;
+    margin: 15px 0;
+    padding: 14px;
     background: white;
+    border-radius: 12px;
     font-weight: bold;
+}
+
+.edith-help {
+    color: #555d75;
 }
 
 .grid {
@@ -106,14 +106,33 @@ main {
     border: 2px solid #e5e5ef;
 }
 
+.card:focus,
+button:focus,
+a:focus {
+    outline: 4px solid #16a085;
+    outline-offset: 3px;
+}
+
 .card h2 {
     margin-top: 0;
+}
+
+.card p {
+    color: #697188;
 }
 
 .card a,
 .card button {
     display: inline-block;
     margin-top: 10px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 9px;
+    background: #6c4df6;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .progress {
@@ -175,6 +194,7 @@ main {
 </style>
 </head>
 
+
 <body>
 
 <header>
@@ -200,6 +220,7 @@ main {
 
 <main>
 
+
 <section
     class="welcome"
     aria-labelledby="welcomeTitle">
@@ -215,146 +236,186 @@ main {
 </section>
 
 
-<!-- =========================
+<!-- =====================================
      EDITH VOICE ASSISTANT
-========================= -->
+===================================== -->
 
 <section
-    class="voice-panel"
+    class="edith-panel"
     aria-labelledby="edithTitle">
 
     <h2 id="edithTitle">
-        🎙️ Edith Voice Assistant
+        🤖 Edith Voice Assistant
     </h2>
 
     <p>
-        Edith helps you control the dashboard using your voice.
-        Say "Edith" and then give a command.
+        Edith helps you navigate Learning Universe
+        using voice commands.
     </p>
-
-    <button
-        id="edithButton"
-        type="button"
-        onclick="startEdith()">
-
-        🎙️ Activate Edith
-
-    </button>
 
     <div
         id="edithStatus"
         class="edith-status"
+        role="status"
         aria-live="assertive">
 
-        Edith is ready.
-
+        Edith is preparing...
+        
     </div>
+
+    <button
+        id="edithButton"
+        class="edith-button"
+        type="button"
+        onclick="startEdithListening()">
+
+        🎤 Talk to Edith
+
+    </button>
+
+    <p class="edith-help">
+
+        You can say:
+        <br><br>
+
+        <strong>
+            "Edith, open my courses"
+        </strong>
+        <br>
+
+        <strong>
+            "Edith, open AI assistant"
+        </strong>
+        <br>
+
+        <strong>
+            "Edith, start quiz"
+        </strong>
+        <br>
+
+        <strong>
+            "Edith, open certificate"
+        </strong>
+
+    </p>
 
 </section>
 
 
-<!-- =========================
+<!-- =====================================
      LEARNING OPTIONS
-========================= -->
+===================================== -->
 
 <section
     class="grid"
     aria-label="Learning options">
 
 
-    <article class="card">
+<article
+    class="card"
+    tabindex="0"
+    aria-labelledby="courseTitle">
 
-        <h2>
-            📚 My Courses
-        </h2>
+    <h2 id="courseTitle">
+        📚 My Courses
+    </h2>
 
-        <p>
-            Continue learning programming,
-            web development and AI courses.
-        </p>
+    <p>
+        Continue learning programming,
+        web development and AI courses.
+    </p>
 
-        <a
-            href="courses.html"
-            onclick="announce('Opening courses')">
+    <a
+        href="courses.html"
+        onclick="announce('Opening courses')">
 
-            Open Courses
+        Open Courses
 
-        </a>
+    </a>
 
-    </article>
-
-
-    <article class="card">
-
-        <h2>
-            🤖 AI Learning Assistant
-        </h2>
-
-        <p>
-            Get help understanding concepts
-            and writing programming code.
-        </p>
-
-        <a
-            href="ai-assistance.html"
-            onclick="announce('Opening AI Learning Assistant')">
-
-            Open AI Assistant
-
-        </a>
-
-    </article>
+</article>
 
 
-    <article class="card">
+<article
+    class="card"
+    tabindex="0"
+    aria-labelledby="aiTitle">
 
-        <h2>
-            🎯 Accessibility Quiz
-        </h2>
+    <h2 id="aiTitle">
+        🤖 AI Learning Assistant
+    </h2>
 
-        <p>
-            Test your knowledge after
-            completing your accessibility lessons.
-        </p>
+    <p>
+        Get help understanding concepts
+        and writing programming code.
+    </p>
 
-        <a
-            href="accessibility-quiz.html"
-            onclick="announce('Opening accessibility quiz')">
+    <a
+        href="ai-assistance.html"
+        onclick="announce('Opening AI Learning Assistant')">
 
-            Start Quiz
+        Open AI Assistant
 
-        </a>
+    </a>
 
-    </article>
+</article>
 
 
-    <article class="card">
+<article
+    class="card"
+    tabindex="0"
+    aria-labelledby="quizTitle">
 
-        <h2>
-            🏆 Certificate
-        </h2>
+    <h2 id="quizTitle">
+        🎯 Quiz
+    </h2>
 
-        <p>
-            View your course completion
-            certificate.
-        </p>
+    <p>
+        Test your knowledge after
+        completing your courses.
+    </p>
 
-        <a
-            href="certificate.html"
-            onclick="announce('Opening certificate')">
+    <button
+        type="button"
+        onclick="openQuiz()">
 
-            View Certificate
+        Start Quiz
 
-        </a>
+    </button>
 
-    </article>
+</article>
+
+
+<article
+    class="card"
+    tabindex="0"
+    aria-labelledby="certificateTitle">
+
+    <h2 id="certificateTitle">
+        🏆 Certificate
+    </h2>
+
+    <p>
+        View your course completion
+        certificate.
+    </p>
+
+    <a
+        href="certificate.html"
+        onclick="announce('Opening certificate')">
+
+        View Certificate
+
+    </a>
+
+</article>
 
 </section>
 
 
-<!-- =========================
+<!-- =====================================
      PROGRESS
-========================= -->
+===================================== -->
 
 <section
     class="progress"
@@ -388,7 +449,7 @@ main {
     id="status"
     aria-live="assertive">
 
-    Blind accessibility mode is active.
+    Accessible mode is active.
 
 </div>
 
@@ -400,40 +461,29 @@ main {
     aria-atomic="true">
 </div>
 
+
 </main>
+
+
 <script>
 
 "use strict";
 
 
-/* ==========================================
+/* =====================================
    EDITH SETTINGS
-========================================== */
+===================================== */
 
-let edithActive = false;
+let edithListening = false;
 
 let recognition = null;
 
-let isListening = false;
+let voiceReady = false;
 
 
-/* ==========================================
-   ELEMENTS
-========================================== */
-
-const edithButton =
-    document.getElementById("edithButton");
-
-const edithStatus =
-    document.getElementById("edithStatus");
-
-const announcement =
-    document.getElementById("announcement");
-
-
-/* ==========================================
-   VOICE OUTPUT
-========================================== */
+/* =====================================
+   SPEAK
+===================================== */
 
 function speak(text) {
 
@@ -450,22 +500,29 @@ function speak(text) {
     speech.pitch = 1;
     speech.volume = 1;
 
-    window.speechSynthesis.speak(speech);
+    window.speechSynthesis.speak(
+        speech
+    );
+
 }
 
 
-/* ==========================================
-   ANNOUNCEMENT
-========================================== */
+/* =====================================
+   ANNOUNCE
+===================================== */
 
 function announce(message) {
 
-    announcement.textContent = "";
+    const box =
+        document.getElementById(
+            "announcement"
+        );
+
+    box.textContent = "";
 
     setTimeout(function() {
 
-        announcement.textContent =
-            message;
+        box.textContent = message;
 
         speak(message);
 
@@ -474,500 +531,22 @@ function announce(message) {
 }
 
 
-/* ==========================================
-   UPDATE EDITH STATUS
-========================================== */
+/* =====================================
+   EDITH STATUS
+===================================== */
 
 function setEdithStatus(message) {
 
-    edithStatus.textContent =
-        message;
+    document.getElementById(
+        "edithStatus"
+    ).textContent = message;
 
 }
 
 
-/* ==========================================
-   ACTIVATE EDITH
-========================================== */
-
-function startEdith() {
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-    if (!SpeechRecognition) {
-
-        announce(
-            "Voice recognition is not supported in this browser. Please use Chrome."
-        );
-
-        return;
-
-    }
-
-
-    edithActive = true;
-
-
-    edithButton.textContent =
-        "🎙️ Edith Active";
-
-
-    setEdithStatus(
-        "Edith is listening for your command."
-    );
-
-
-    announce(
-        "Edith activated. Please say your command."
-    );
-
-
-    listenForCommand();
-
-}
-
-
-/* ==========================================
-   LISTEN FOR COMMAND
-========================================== */
-
-function listenForCommand() {
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-    if (!SpeechRecognition) {
-        return;
-    }
-
-
-    if (isListening) {
-        return;
-    }
-
-
-    recognition =
-        new SpeechRecognition();
-
-
-    recognition.lang =
-        "en-IN";
-
-
-    recognition.interimResults =
-        false;
-
-
-    recognition.maxAlternatives =
-        1;
-
-
-    isListening = true;
-
-
-    setEdithStatus(
-        "🎙️ Edith is listening..."
-    );
-
-
-    try {
-
-        recognition.start();
-
-    } catch(error) {
-
-        isListening = false;
-
-        console.log(error);
-
-    }
-
-
-    recognition.onresult =
-        function(event) {
-
-            const command =
-                event
-                .results[0][0]
-                .transcript
-                .toLowerCase()
-                .trim();
-
-
-            isListening = false;
-
-
-            setEdithStatus(
-                "You said: " + command
-            );
-
-
-            processCommand(command);
-
-        };
-
-
-    recognition.onerror =
-        function(event) {
-
-            isListening = false;
-
-            console.log(
-                "Edith voice error:",
-                event.error
-            );
-
-
-            setEdithStatus(
-                "Edith could not understand. Please try again."
-            );
-
-
-            speak(
-                "I could not understand that command. Please try again."
-            );
-
-        };
-
-
-    recognition.onend =
-        function() {
-
-            isListening = false;
-
-        };
-
-}
-
-
-/* ==========================================
-   PROCESS USER COMMAND
-========================================== */
-
-function processCommand(command) {
-
-
-    /* =========================
-       COURSES
-    ========================= */
-
-    if (
-        command.includes("open my course") ||
-        command.includes("open courses") ||
-        command.includes("my courses") ||
-        command.includes("courses")
-    ) {
-
-        speak(
-            "Opening your courses."
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "courses.html";
-
-        }, 700);
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       AI ASSISTANT
-    ========================= */
-
-    if (
-        command.includes("open ai") ||
-        command.includes("ai assistant") ||
-        command.includes("open assistant")
-    ) {
-
-        speak(
-            "Opening AI Learning Assistant."
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "ai-assistance.html";
-
-        }, 700);
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       QUIZ
-    ========================= */
-
-    if (
-        command.includes("open quiz") ||
-        command.includes("start quiz") ||
-        command.includes("accessibility quiz")
-    ) {
-
-        speak(
-            "Opening the accessibility quiz."
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "accessibility-quiz.html";
-
-        }, 700);
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       CERTIFICATE
-    ========================= */
-
-    if (
-        command.includes("open certificate") ||
-        command.includes("certificate")
-    ) {
-
-        speak(
-            "Opening your certificate."
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "certificate.html";
-
-        }, 700);
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       HOME
-    ========================= */
-
-    if (
-        command.includes("go home") ||
-        command.includes("open home") ||
-        command === "home"
-    ) {
-
-        speak(
-            "Opening Learning Universe home."
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href =
-                "index.html";
-
-        }, 700);
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       READ DASHBOARD
-    ========================= */
-
-    if (
-        command.includes("read dashboard") ||
-        command.includes("read options") ||
-        command.includes("what can i do")
-    ) {
-
-        speak(
-            "You are on the accessible Learning Universe dashboard. " +
-            "You can open My Courses, AI Learning Assistant, Accessibility Quiz, or Certificate."
-        );
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       READ PROGRESS
-    ========================= */
-
-    if (
-        command.includes("read progress") ||
-        command.includes("my progress") ||
-        command.includes("progress")
-    ) {
-
-        speak(
-            "Your current learning progress is 35 percent."
-        );
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       STOP VOICE
-    ========================= */
-
-    if (
-        command.includes("stop voice") ||
-        command.includes("stop speaking") ||
-        command.includes("be quiet")
-    ) {
-
-        if ("speechSynthesis" in window) {
-
-            window.speechSynthesis.cancel();
-
-        }
-
-
-        setEdithStatus(
-            "Edith voice output stopped."
-        );
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       HELP
-    ========================= */
-
-    if (
-        command.includes("help") ||
-        command.includes("what commands")
-    ) {
-
-        speak(
-            "You can say: open my courses, open AI assistant, start quiz, open certificate, go home, read dashboard, or read progress."
-        );
-
-
-        return;
-
-    }
-
-
-    /* =========================
-       UNKNOWN COMMAND
-    ========================= */
-
-    speak(
-        "Sorry, I do not know that command yet. Say help to hear available commands."
-    );
-
-
-    setEdithStatus(
-        "Command not recognized."
-    );
-
-}
-
-
-/* ==========================================
-   KEYBOARD ACCESS
-   E = ACTIVATE EDITH
-========================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.target.tagName === "INPUT" ||
-            event.target.tagName === "TEXTAREA"
-        ) {
-            return;
-        }
-
-
-        if (
-            event.key.toLowerCase() === "e"
-        ) {
-
-            event.preventDefault();
-
-            startEdith();
-
-        }
-
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            if ("speechSynthesis" in window) {
-
-                window.speechSynthesis.cancel();
-
-            }
-
-
-            if (
-                recognition &&
-                isListening
-            ) {
-
-                recognition.stop();
-
-            }
-
-
-            setEdithStatus(
-                "Edith stopped."
-            );
-
-        }
-
-    }
-);
-
-
-/* ==========================================
-   NORMAL ANNOUNCEMENT
-========================================== */
-
-function announcePage(message) {
-
-    announce(message);
-
-}
-
-
-/* ==========================================
+/* =====================================
    PAGE LOAD
-========================================== */
+===================================== */
 
 window.addEventListener(
     "load",
@@ -984,7 +563,6 @@ window.addEventListener(
                 const userData =
                     JSON.parse(user);
 
-
                 const name =
                     userData.name ||
                     "Student";
@@ -997,7 +575,9 @@ window.addEventListener(
                     name +
                     ". Your accessible learning dashboard is ready.";
 
-            } catch(error) {
+            }
+
+            catch(error) {
 
                 console.log(
                     "User information unavailable."
@@ -1009,28 +589,51 @@ window.addEventListener(
 
 
         /*
-          Blind mode already selected
-          during accessibility login.
+           Check whether browser supports
+           voice recognition.
         */
 
-        localStorage.setItem(
-            "accessibilityMode",
-            "blind"
-        );
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
 
 
-        localStorage.setItem(
-            "voiceGuidance",
-            "enabled"
-        );
+        if (!SpeechRecognition) {
 
+            setEdithStatus(
+                "Voice recognition is not supported by this browser."
+            );
+
+            speak(
+                "Welcome to Learning Universe. " +
+                "Edith voice assistant is available, " +
+                "but this browser does not support voice recognition."
+            );
+
+            return;
+
+        }
+
+
+        voiceReady = true;
+
+
+        /*
+           Edith introduction
+        */
 
         setTimeout(function() {
 
+            setEdithStatus(
+                "Edith is ready. Say a command."
+            );
+
             speak(
-                "Welcome to your accessible Learning Universe dashboard. " +
-                "Edith voice assistant is ready. " +
-                "Press E or activate Edith to give a voice command."
+                "Welcome to Learning Universe. " +
+                "I am Edith, your voice assistant. " +
+                "You can ask me to open your courses, " +
+                "AI assistant, quiz, or certificate. " +
+                "Say Edith followed by your command."
             );
 
         }, 700);
@@ -1039,15 +642,407 @@ window.addEventListener(
 );
 
 
-/* ==========================================
+/* =====================================
+   START EDITH
+===================================== */
+
+function startEdithListening() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    if (!SpeechRecognition) {
+
+        announce(
+            "Voice recognition is not supported by this browser."
+        );
+
+        return;
+
+    }
+
+
+    if (edithListening) {
+        return;
+    }
+
+
+    recognition =
+        new SpeechRecognition();
+
+
+    /*
+       Indian English.
+    */
+
+    recognition.lang =
+        "en-IN";
+
+
+    recognition.interimResults =
+        false;
+
+
+    recognition.maxAlternatives =
+        1;
+
+
+    edithListening = true;
+
+
+    document.getElementById(
+        "edithButton"
+    ).textContent =
+        "🎙️ Edith is Listening...";
+
+
+    setEdithStatus(
+        "Edith is listening. Speak your command."
+    );
+
+
+    speak(
+        "I am listening. Please say your command."
+    );
+
+
+    try {
+
+        recognition.start();
+
+    }
+
+    catch(error) {
+
+        edithListening = false;
+
+        document.getElementById(
+            "edithButton"
+        ).textContent =
+            "🎤 Talk to Edith";
+
+        setEdithStatus(
+            "Edith could not start listening."
+        );
+
+    }
+
+
+    recognition.onresult =
+        function(event) {
+
+            const transcript =
+                event.results[0][0]
+                    .transcript
+                    .toLowerCase()
+                    .trim();
+
+
+            console.log(
+                "Edith heard:",
+                transcript
+            );
+
+
+            setEdithStatus(
+                "Edith heard: " +
+                transcript
+            );
+
+
+            handleEdithCommand(
+                transcript
+            );
+
+        };
+
+
+    recognition.onerror =
+        function(event) {
+
+            console.log(
+                "Edith voice error:",
+                event.error
+            );
+
+
+            edithListening = false;
+
+
+            document.getElementById(
+                "edithButton"
+            ).textContent =
+                "🎤 Talk to Edith";
+
+
+            setEdithStatus(
+                "Edith could not understand the voice input."
+            );
+
+
+            speak(
+                "I could not understand that command. " +
+                "Please try again."
+            );
+
+        };
+
+
+    recognition.onend =
+        function() {
+
+            edithListening = false;
+
+
+            document.getElementById(
+                "edithButton"
+            ).textContent =
+                "🎤 Talk to Edith";
+
+        };
+
+}
+
+
+/* =====================================
+   EDITH COMMAND PROCESSOR
+===================================== */
+
+function handleEdithCommand(command) {
+
+    /*
+       Remove "Edith" from command.
+    */
+
+    command =
+        command
+        .replace(/\bedith\b/g, "")
+        .trim();
+
+
+    /* ===============================
+       COURSES
+    =============================== */
+
+    if (
+        command.includes("course") ||
+        command.includes("courses") ||
+        command.includes("my course") ||
+        command.includes("my courses")
+    ) {
+
+        speak(
+            "Opening your courses."
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "courses.html";
+
+        }, 900);
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       AI ASSISTANT
+    =============================== */
+
+    if (
+        command.includes("ai assistant") ||
+        command.includes("artificial intelligence") ||
+        command.includes("learning assistant")
+    ) {
+
+        speak(
+            "Opening AI Learning Assistant."
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "ai-assistance.html";
+
+        }, 900);
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       QUIZ
+    =============================== */
+
+    if (
+        command.includes("quiz") ||
+        command.includes("test")
+    ) {
+
+        speak(
+            "Opening the quiz."
+        );
+
+
+        setTimeout(function() {
+
+            openQuiz();
+
+        }, 900);
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       CERTIFICATE
+    =============================== */
+
+    if (
+        command.includes("certificate") ||
+        command.includes("certificates")
+    ) {
+
+        speak(
+            "Opening your certificate."
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "certificate.html";
+
+        }, 900);
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       HOME
+    =============================== */
+
+    if (
+        command.includes("home") ||
+        command.includes("homepage")
+    ) {
+
+        speak(
+            "Opening the Learning Universe home page."
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "index.html";
+
+        }, 900);
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       STOP
+    =============================== */
+
+    if (
+        command.includes("stop voice") ||
+        command.includes("stop speaking") ||
+        command.includes("quiet")
+    ) {
+
+        if (
+            "speechSynthesis"
+            in window
+        ) {
+
+            window.speechSynthesis.cancel();
+
+        }
+
+
+        setEdithStatus(
+            "Edith stopped speaking."
+        );
+
+
+        return;
+
+    }
+
+
+    /* ===============================
+       UNKNOWN COMMAND
+    =============================== */
+
+    speak(
+        "I did not understand that command. " +
+        "You can say: open my courses, " +
+        "open AI assistant, start quiz, " +
+        "open certificate, or go home."
+    );
+
+
+    setEdithStatus(
+        "Command not recognized. Please try again."
+    );
+
+}
+
+
+/* =====================================
+   QUIZ
+===================================== */
+
+function openQuiz() {
+
+    /*
+       Change this filename if your quiz
+       page has a different name.
+    */
+
+    window.location.href =
+        "accessibility-quiz.html";
+
+}
+
+
+/* =====================================
    LOGOUT
-========================================== */
+===================================== */
 
 function logout() {
 
-    localStorage.removeItem("token");
+    speak(
+        "Logging out of Learning Universe."
+    );
 
-    localStorage.removeItem("user");
+
+    localStorage.removeItem(
+        "token"
+    );
+
+    localStorage.removeItem(
+        "user"
+    );
 
     localStorage.removeItem(
         "accessibilityMode"
@@ -1058,17 +1053,91 @@ function logout() {
     );
 
 
-    if ("speechSynthesis" in window) {
+    setTimeout(function() {
 
-        window.speechSynthesis.cancel();
+        window.location.href =
+            "index.html";
 
-    }
-
-
-    window.location.href =
-        "index.html";
+    }, 700);
 
 }
+
+
+/* =====================================
+   ESC = STOP SPEECH
+===================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            if (
+                "speechSynthesis"
+                in window
+            ) {
+
+                window.speechSynthesis.cancel();
+
+            }
+
+            if (
+                recognition &&
+                edithListening
+            ) {
+
+                recognition.stop();
+
+            }
+
+            setEdithStatus(
+                "Edith stopped."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   KEYBOARD ACCESSIBILITY
+===================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+           E = Edith
+        */
+
+        if (
+            event.key.toLowerCase() === "e"
+        ) {
+
+            /*
+               Don't trigger while typing.
+            */
+
+            if (
+                event.target.tagName !== "INPUT" &&
+                event.target.tagName !== "TEXTAREA"
+            ) {
+
+                event.preventDefault();
+
+                startEdithListening();
+
+            }
+
+        }
+
+    }
+);
 
 </script>
 
