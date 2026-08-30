@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+
         .sr-only {
             position: absolute;
             width: 1px;
@@ -115,7 +116,43 @@
             margin-top: 20px;
             font-size: 14px;
         }
+
+        /* ACCESSIBILITY MODE */
+
+        .mode-option {
+            width: 100%;
+            margin-top: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ddd;
+            background: #f7f5ff;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .mode-option:hover,
+        .mode-option:focus {
+            border-color: #6c4df6;
+            background: #f0edff;
+        }
+
+        .mode-icon {
+            font-size: 28px;
+            margin-right: 10px;
+        }
+
+        .mode-option small {
+            display: block;
+            margin-top: 8px;
+            margin-left: 42px;
+            color: #697188;
+            font-weight: normal;
+        }
+
     </style>
+
 </head>
 
 <body>
@@ -213,9 +250,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">📚</div>
+                <div class="icon" aria-hidden="true">
+                    📚
+                </div>
 
-                <h3>Quality Learning</h3>
+                <h3>
+                    Quality Learning
+                </h3>
 
                 <p>
                     Learn through structured courses,
@@ -228,9 +269,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">♿</div>
+                <div class="icon" aria-hidden="true">
+                    ♿
+                </div>
 
-                <h3>Accessible Education</h3>
+                <h3>
+                    Accessible Education
+                </h3>
 
                 <p>
                     Designed with accessibility and
@@ -242,9 +287,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">🤖</div>
+                <div class="icon" aria-hidden="true">
+                    🤖
+                </div>
 
-                <h3>AI Assistance</h3>
+                <h3>
+                    AI Assistance
+                </h3>
 
                 <p>
                     Get intelligent assistance while
@@ -256,9 +305,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">🎯</div>
+                <div class="icon" aria-hidden="true">
+                    🎯
+                </div>
 
-                <h3>Learn at Your Pace</h3>
+                <h3>
+                    Learn at Your Pace
+                </h3>
 
                 <p>
                     Study whenever you want and continue
@@ -270,9 +323,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">🏆</div>
+                <div class="icon" aria-hidden="true">
+                    🏆
+                </div>
 
-                <h3>Achieve Your Goals</h3>
+                <h3>
+                    Achieve Your Goals
+                </h3>
 
                 <p>
                     Complete courses, take quizzes and
@@ -284,9 +341,13 @@
 
             <article class="feature-card">
 
-                <div class="icon" aria-hidden="true">🌍</div>
+                <div class="icon" aria-hidden="true">
+                    🌍
+                </div>
 
-                <h3>Learning for Everyone</h3>
+                <h3>
+                    Learning for Everyone
+                </h3>
 
                 <p>
                     A friendly learning environment where
@@ -300,8 +361,6 @@
     </section>
 
 </main>
-
-
 <!-- VOICE GUIDANCE -->
 
 <button
@@ -416,7 +475,249 @@
 </div>
 
 
+<!-- ACCESSIBILITY MODE MODAL -->
+
+<div
+    class="modal"
+    id="accessibilityModeModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="accessibilityModeTitle"
+    aria-hidden="true">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            type="button"
+            onclick="closeAccessibilityModeModal()"
+            aria-label="Close accessibility mode selection">
+
+            ×
+
+        </button>
+
+
+        <h2 id="accessibilityModeTitle">
+            Choose Accessibility Mode
+        </h2>
+
+
+        <p>
+            Please choose the accessibility mode
+            that best supports your learning.
+        </p>
+
+
+        <!-- BLIND MODE -->
+
+        <button
+            class="mode-option"
+            id="blindModeButton"
+            type="button"
+            onclick="selectBlindMode()"
+            aria-label="Blind mode. Voice guidance will be enabled.">
+
+            <span class="mode-icon">
+                🔊
+            </span>
+
+            Blind Mode
+
+            <small>
+                Voice guidance will be enabled automatically.
+            </small>
+
+        </button>
+
+
+        <!-- DEAF MODE -->
+
+        <button
+            class="mode-option"
+            id="deafModeButton"
+            type="button"
+            onclick="selectDeafMode()"
+            aria-label="Deaf mode. Visual accessibility will be enabled.">
+
+            <span class="mode-icon">
+                👂
+            </span>
+
+            Deaf Mode
+
+            <small>
+                Visual guidance, captions and transcripts will be prioritized.
+            </small>
+
+        </button>
+
+    </div>
+
+</div>
+
+
 <script src="./script.js"></script>
+
+
+<script>
+
+/* ================================
+   ACCESSIBILITY MODE SELECTION
+================================ */
+
+function selectDisability() {
+
+    const loginModal =
+        document.getElementById("loginModal");
+
+    if (loginModal) {
+
+        loginModal.style.display = "none";
+
+        loginModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    const modeModal =
+        document.getElementById(
+            "accessibilityModeModal"
+        );
+
+    modeModal.style.display = "flex";
+
+    modeModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    if (typeof speak === "function") {
+
+        speak(
+            "Accessibility mode selection. " +
+            "Choose Blind Mode for voice guidance, " +
+            "or Deaf Mode for visual accessibility."
+        );
+
+    }
+
+}
+
+
+/* ================================
+   BLIND MODE
+================================ */
+
+function selectBlindMode() {
+
+    localStorage.setItem(
+        "accessibilityMode",
+        "blind"
+    );
+
+    localStorage.setItem(
+        "voiceGuidance",
+        "enabled"
+    );
+
+
+    if (typeof speak === "function") {
+
+        speak(
+            "Blind mode selected. " +
+            "Voice guidance is enabled automatically. " +
+            "Opening Accessibility Student Login."
+        );
+
+    }
+
+
+    setTimeout(function () {
+
+        window.location.href =
+            "disability-login.html?mode=blind";
+
+    }, 700);
+
+}
+
+
+/* ================================
+   DEAF MODE
+================================ */
+
+function selectDeafMode() {
+
+    localStorage.setItem(
+        "accessibilityMode",
+        "deaf"
+    );
+
+    localStorage.setItem(
+        "voiceGuidance",
+        "disabled"
+    );
+
+
+    setTimeout(function () {
+
+        window.location.href =
+            "disability-login.html?mode=deaf";
+
+    }, 400);
+
+}
+
+
+/* ================================
+   CLOSE MODE MODAL
+================================ */
+
+function closeAccessibilityModeModal() {
+
+    const modeModal =
+        document.getElementById(
+            "accessibilityModeModal"
+        );
+
+    if (modeModal) {
+
+        modeModal.style.display = "none";
+
+        modeModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+}
+
+
+/* ================================
+   ESC KEY
+================================ */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeAccessibilityModeModal();
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
 
