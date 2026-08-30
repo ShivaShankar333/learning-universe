@@ -2,752 +2,685 @@
 <html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>Accessibility Learning - Learning Universe</title>
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <title>Accessibility Learning - Learning Universe</title>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f6f7ff;
+    color: #20243a;
+    line-height: 1.6;
+}
 
-    <link rel="stylesheet"
-        href="style.css">
+.navbar {
+    background: white;
+    padding: 18px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
 
-    <style>
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #6c4df6;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #30344b;
+    font-weight: bold;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f6f7ff;
-            color: #20243a;
-        }
+.home-btn {
+    border: none;
+    background: #6c4df6;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .navbar {
-            background: white;
-            padding: 18px 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
+.page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #6c4df6;
-        }
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #30344b;
-            font-weight: bold;
-        }
+.header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
 
-        .home-btn {
-            border: none;
-            background: #6c4df6;
-            color: white;
-            padding: 11px 18px;
-            border-radius: 9px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.header p {
+    color: #697188;
+    font-size: 17px;
+}
 
-        .page {
-            max-width: 1200px;
-            margin: auto;
-            padding: 40px 20px;
-        }
+.progress-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
 
-        .header h1 {
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
+.progress-bar {
+    width: 100%;
+    height: 13px;
+    background: #e4e4ee;
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-        .header p {
-            color: #697188;
-            font-size: 17px;
-        }
+#progressFill {
+    width: 0%;
+    height: 100%;
+    background: #6c4df6;
+    transition: 0.3s;
+}
 
-        .progress-box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        }
+.learning-layout {
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 25px;
+}
 
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
+.lesson-content,
+.lesson-list {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
 
-        .progress-bar {
-            width: 100%;
-            height: 13px;
-            background: #e4e4ee;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+.lesson-content h2 {
+    margin-top: 0;
+}
 
-        #progressFill {
-            width: 0%;
-            height: 100%;
-            background: #6c4df6;
-            transition: 0.3s;
-        }
+.video-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: 20px;
+    background: #111;
+    border-radius: 14px;
+    overflow: hidden;
+}
 
-        .learning-layout {
-            display: grid;
-            grid-template-columns: 1fr 330px;
-            gap: 25px;
-        }
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
-        .lesson-content,
-        .lesson-list {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        }
+.no-video {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
 
-        .lesson-content h2 {
-            margin-top: 0;
-        }
+.tools {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
 
-        .video-container {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            margin-top: 20px;
-            background: #111;
-            border-radius: 14px;
-            overflow: hidden;
-        }
+.tools button,
+.complete-btn {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+.tools button {
+    background: #eeeaff;
+    color: #5b3fe0;
+}
 
-        .no-video {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
+.complete-btn {
+    margin-top: 20px;
+    background: #6c4df6;
+    color: white;
+    width: 100%;
+}
 
-        .tools {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+.transcript {
+    display: none;
+    margin-top: 20px;
+    padding: 18px;
+    background: #f5f3ff;
+    border-radius: 12px;
+    line-height: 1.6;
+}
 
-        .tools button,
-        .complete-btn,
-        .quiz-btn {
-            border: none;
-            padding: 12px 18px;
-            border-radius: 9px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.lesson-list h2 {
+    margin-top: 0;
+}
 
-        .tools button {
-            background: #eeeaff;
-            color: #5b3fe0;
-        }
+.lesson {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: #f6f7ff;
+    cursor: pointer;
+}
 
-        .complete-btn {
-            margin-top: 20px;
-            background: #6c4df6;
-            color: white;
-            width: 100%;
-        }
+.lesson.active {
+    border-color: #6c4df6;
+    background: #eeeaff;
+}
 
-        .transcript {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            background: #f5f3ff;
-            border-radius: 12px;
-            line-height: 1.6;
-        }
+.lesson.completed {
+    background: #e8f8ee;
+}
 
-        .lesson-list h2 {
-            margin-top: 0;
-        }
+.lesson-number {
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #6c4df6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
 
-        .lesson {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-align: left;
-            margin-bottom: 10px;
-            padding: 14px;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            background: #f6f7ff;
-            cursor: pointer;
-        }
+.lesson-info strong {
+    display: block;
+    margin-bottom: 4px;
+}
 
-        .lesson.active {
-            border-color: #6c4df6;
-            background: #eeeaff;
-        }
+.lesson-info small {
+    color: #697188;
+}
 
-        .lesson.completed {
-            background: #e8f8ee;
-        }
+.quiz-box {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    background: white;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
 
-        .lesson-number {
-            min-width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #6c4df6;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
+.quiz-btn {
+    background: #20243a;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .lesson-info strong {
-            display: block;
-            margin-bottom: 4px;
-        }
+.large-text {
+    font-size: 125%;
+}
 
-        .lesson-info small {
-            color: #697188;
-        }
+.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
 
-        .quiz-box {
-            display: none;
-            margin-top: 25px;
-            padding: 25px;
-            background: white;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        }
+.high-contrast .lesson-content,
+.high-contrast .lesson-list,
+.high-contrast .progress-box,
+.high-contrast .quiz-box,
+.high-contrast .navbar {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid white;
+}
 
-        .quiz-btn {
-            background: #20243a;
-            color: white;
-            margin-top: 12px;
-        }
+/* =====================================
+   EDITH ACCESSIBILITY ASSISTANT
+===================================== */
 
-        .large-text {
-            font-size: 125%;
-        }
+.edith-status {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 5000;
+    background: #20243a;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    display: none;
+    font-weight: bold;
+}
 
-        .high-contrast {
-            background: #000 !important;
-            color: #fff !important;
-        }
+.edith-status.active {
+    display: block;
+}
 
-        .high-contrast .lesson-content,
-        .high-contrast .lesson-list,
-        .high-contrast .progress-box,
-        .high-contrast .quiz-box,
-        .high-contrast .navbar {
-            background: #000 !important;
-            color: #fff !important;
-            border: 1px solid white;
-        }
+.edith-status.listening {
+    background: #6c4df6;
+}
 
-        @media (max-width: 850px) {
+.edith-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
 
-            .learning-layout {
-                grid-template-columns: 1fr;
-            }
+button:focus,
+a:focus {
+    outline: 4px solid #16a085;
+    outline-offset: 3px;
+}
 
-            nav {
-                display: none;
-            }
+@media(max-width:850px) {
 
-        }
+    .learning-layout {
+        grid-template-columns: 1fr;
+    }
 
-    </style>
+    nav {
+        display: none;
+    }
 
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-
 <header class="navbar">
 
-    <div class="logo">
+    <div class="logo" aria-label="Learning Universe">
         🌌 Learning Universe
     </div>
 
-    <nav>
-
+    <nav aria-label="Main navigation">
         <a href="index.html">Home</a>
-
         <a href="courses.html">Courses</a>
-
         <a href="accessibility.html">Accessibility</a>
-
     </nav>
 
-    <button onclick="location.href='disability-login.html'">
-    Accessibility Student Login
-</button>
-
-<button onclick="location.href='ai-assistance.html'">
-    Open AI Assistant
-</button>
-
-<button onclick="location.href='ai-assistance.html'">
-    Start Voice Assistant
-</button>
+    <button
+        class="home-btn"
+        type="button"
+        onclick="logout()">
+        Logout
+    </button>
 
 </header>
 
-
 <main class="page">
 
+<section class="header">
 
-    <section class="header">
+    <h1>
+        ♿ Accessibility Learning
+    </h1>
 
-        <h1>
-            ♿ Accessibility Learning
-        </h1>
+    <p id="pageIntro">
+        Welcome to your accessible learning space.
+    </p>
 
-        <p>
-            Learn accessibility and inclusive communication
-            through six structured lessons.
-        </p>
+</section>
 
-    </section>
+<section class="progress-box">
 
+    <div class="progress-info">
+        <span>Course Progress</span>
+        <span id="progressText">0%</span>
+    </div>
 
-    <!-- PROGRESS -->
+    <div
+        class="progress-bar"
+        role="progressbar"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-label="Course progress">
 
-    <section class="progress-box">
-
-        <div class="progress-info">
-
-            <span>
-                Course Progress
-            </span>
-
-            <span id="progressText">
-                0%
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div id="progressFill"></div>
-
-        </div>
-
-    </section>
-
-
-    <div class="learning-layout">
-
-
-        <!-- LESSON CONTENT -->
-
-        <section class="lesson-content">
-
-            <h2 id="lessonTitle">
-                Lesson 1: Introduction to Sign Language
-            </h2>
-
-
-            <p id="lessonDescription">
-                Learn why sign language is important
-                and how it supports inclusive communication.
-            </p>
-
-
-            <!-- VIDEO -->
-
-            <div class="video-container"
-                 id="videoContainer">
-
-                <iframe
-                    id="lessonVideo"
-                    src="https://www.youtube.com/embed/VsnFbywWAcI"
-                    title="Accessibility Learning Video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-
-            <!-- TOOLS -->
-
-            <div class="tools">
-
-                <button
-                    onclick="showTranscript()">
-
-                    📝 Transcript
-
-                </button>
-
-
-                <button
-                    onclick="speakLesson()">
-
-                    🔊 Read Lesson
-
-                </button>
-
-
-                <button
-                    onclick="toggleLargeText()">
-
-                    🔤 Large Text
-
-                </button>
-
-
-                <button
-                    onclick="toggleContrast()">
-
-                    ◐ Contrast
-
-                </button>
-
-            </div>
-
-
-            <!-- TRANSCRIPT -->
-
-            <div
-                id="transcript"
-                class="transcript">
-
-                <h3>
-                    📝 Lesson Transcript
-                </h3>
-
-                <p id="transcriptText">
-
-                    Sign language is an important form
-                    of communication. It helps people
-                    communicate using visual signs,
-                    expressions and movements.
-
-                </p>
-
-            </div>
-
-
-            <button
-                class="complete-btn"
-                onclick="completeLesson()">
-
-                ✅ Complete Lesson
-
-            </button>
-
-
-        </section>
-
-
-        <!-- LESSON LIST -->
-
-        <aside class="lesson-list">
-
-            <h2>
-                6 Lessons
-            </h2>
-
-
-            <button
-                class="lesson active"
-                onclick="selectLesson(1)">
-
-                <span class="lesson-number">
-                    1
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Introduction to Sign Language
-                    </strong>
-
-                    <small>
-                        10 min
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                class="lesson"
-                onclick="selectLesson(2)">
-
-                <span class="lesson-number">
-                    2
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Basic Signs & Greetings
-                    </strong>
-
-                    <small>
-                        12 min
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                class="lesson"
-                onclick="selectLesson(3)">
-
-                <span class="lesson-number">
-                    3
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Alphabet & Fingerspelling
-                    </strong>
-
-                    <small>
-                        15 min
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                class="lesson"
-                onclick="selectLesson(4)">
-
-                <span class="lesson-number">
-                    4
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Common Communication
-                    </strong>
-
-                    <small>
-                        14 min
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                class="lesson"
-                onclick="selectLesson(5)">
-
-                <span class="lesson-number">
-                    5
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Captions & Visual Learning
-                    </strong>
-
-                    <small>
-                        12 min
-                    </small>
-
-                </span>
-
-            </button>
-
-
-            <button
-                class="lesson"
-                onclick="selectLesson(6)">
-
-                <span class="lesson-number">
-                    6
-                </span>
-
-                <span class="lesson-info">
-
-                    <strong>
-                        Accessibility Skills
-                    </strong>
-
-                    <small>
-                        15 min
-                    </small>
-
-                </span>
-
-            </button>
-
-        </aside>
+        <div id="progressFill"></div>
 
     </div>
 
+</section>
 
-    <!-- QUIZ -->
+<div class="learning-layout">
 
-    <section
-        id="quizBox"
-        class="quiz-box">
+<section class="lesson-content">
 
-        <h2>
-            🎉 Accessibility Course Completed!
-        </h2>
+    <h2 id="lessonTitle">
+        Lesson 1: Introduction to Sign Language
+    </h2>
 
-        <p>
-            You completed all 6 lessons.
-            You can now take the final accessibility quiz.
-        </p>
+    <p id="lessonDescription">
+        Learn why sign language is important
+        and how it supports inclusive communication.
+    </p>
+
+    <div
+        class="video-container"
+        id="videoContainer">
+
+        <iframe
+            id="lessonVideo"
+            src="https://www.youtube.com/embed/VsnFbywWAcI"
+            title="Accessibility Learning Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+    <div class="tools">
 
         <button
-            class="quiz-btn"
-            onclick="openQuiz()">
-
-            📝 Start Accessibility Quiz
-
+            type="button"
+            onclick="showTranscript()">
+            📝 Transcript
         </button>
 
-    </section>
+        <button
+            type="button"
+            onclick="speakLesson()">
+            🔊 Read Lesson
+        </button>
 
+        <button
+            type="button"
+            onclick="toggleLargeText()">
+            🔤 Large Text
+        </button>
+
+        <button
+            type="button"
+            onclick="toggleContrast()">
+            ◐ Contrast
+        </button>
+
+    </div>
+
+    <div
+        id="transcript"
+        class="transcript">
+
+        <h3>📝 Lesson Transcript</h3>
+
+        <p id="transcriptText">
+            Sign language is an important form
+            of communication. It helps people
+            communicate using visual signs,
+            expressions and movements.
+        </p>
+
+    </div>
+
+    <button
+        class="complete-btn"
+        type="button"
+        onclick="completeLesson()">
+        ✅ Complete Lesson
+    </button>
+
+</section>
+
+<aside class="lesson-list">
+
+    <h2>6 Lessons</h2>
+
+    <button
+        class="lesson active"
+        type="button"
+        onclick="selectLesson(1)">
+
+        <span class="lesson-number">1</span>
+
+        <span class="lesson-info">
+            <strong>
+                Introduction to Sign Language
+            </strong>
+            <small>10 min</small>
+        </span>
+
+    </button>
+
+    <button
+        class="lesson"
+        type="button"
+        onclick="selectLesson(2)">
+
+        <span class="lesson-number">2</span>
+
+        <span class="lesson-info">
+            <strong>
+                Basic Signs & Greetings
+            </strong>
+            <small>12 min</small>
+        </span>
+
+    </button>
+
+    <button
+        class="lesson"
+        type="button"
+        onclick="selectLesson(3)">
+
+        <span class="lesson-number">3</span>
+
+        <span class="lesson-info">
+            <strong>
+                Alphabet & Fingerspelling
+            </strong>
+            <small>15 min</small>
+        </span>
+
+    </button>
+
+    <button
+        class="lesson"
+        type="button"
+        onclick="selectLesson(4)">
+
+        <span class="lesson-number">4</span>
+
+        <span class="lesson-info">
+            <strong>
+                Common Communication
+            </strong>
+            <small>14 min</small>
+        </span>
+
+    </button>
+
+    <button
+        class="lesson"
+        type="button"
+        onclick="selectLesson(5)">
+
+        <span class="lesson-number">5</span>
+
+        <span class="lesson-info">
+            <strong>
+                Captions & Visual Learning
+            </strong>
+            <small>12 min</small>
+        </span>
+
+    </button>
+
+    <button
+        class="lesson"
+        type="button"
+        onclick="selectLesson(6)">
+
+        <span class="lesson-number">6</span>
+
+        <span class="lesson-info">
+            <strong>
+                Accessibility Skills
+            </strong>
+            <small>15 min</small>
+        </span>
+
+    </button>
+
+</aside>
+
+</div>
+
+<section
+    id="quizBox"
+    class="quiz-box">
+
+    <h2>
+        🎉 Accessibility Course Completed!
+    </h2>
+
+    <p>
+        You completed all 6 lessons.
+        You can now take the final accessibility quiz.
+    </p>
+
+    <button
+        class="quiz-btn"
+        type="button"
+        onclick="openQuiz()">
+        📝 Start Accessibility Quiz
+    </button>
+
+</section>
 
 </main>
 
+<!-- EDITH STATUS -->
+<div
+    id="edithStatus"
+    class="edith-status"
+    aria-live="assertive">
+    Edith is starting...
+</div>
 
+<div
+    id="edithAnnouncement"
+    class="edith-sr"
+    aria-live="assertive"
+    aria-atomic="true">
+</div>
 <script>
 
+"use strict";
+
+/* =====================================
+   LESSON DATA
+===================================== */
 
 let currentLesson = 1;
-
 let completedLessons = 0;
 
 const totalLessons = 6;
 
-
 const lessons = [
 
     {
-        title:
-            "Lesson 1: Introduction to Sign Language",
-
+        title: "Lesson 1: Introduction to Sign Language",
         description:
             "Learn why sign language is important and how it supports inclusive communication.",
-
         video:
             "https://www.youtube.com/embed/VsnFbywWAcI",
-
         text:
             "Sign language is an important form of communication. It helps people communicate using visual signs, expressions and movements."
     },
 
-
     {
-        title:
-            "Lesson 2: Basic Signs & Greetings",
-
+        title: "Lesson 2: Basic Signs & Greetings",
         description:
             "Learn about basic greetings and simple communication concepts.",
-
-        video:
-            "",
-
+        video: "",
         text:
             "Basic greetings can help begin a conversation. Learning simple signs and communicating respectfully can make interaction easier and more inclusive."
     },
 
-
     {
-        title:
-            "Lesson 3: Alphabet & Fingerspelling",
-
+        title: "Lesson 3: Alphabet & Fingerspelling",
         description:
             "Understand the idea of representing letters through hand signs.",
-
-        video:
-            "",
-
+        video: "",
         text:
             "Fingerspelling is a way of representing individual letters using hand shapes. It can be useful for spelling names and words."
     },
 
-
     {
-        title:
-            "Lesson 4: Common Communication",
-
+        title: "Lesson 4: Common Communication",
         description:
             "Learn how visual communication can support everyday conversations.",
-
-        video:
-            "",
-
+        video: "",
         text:
             "Effective communication includes patience, attention and respect. Visual communication can support conversations in classrooms and everyday situations."
     },
 
-
     {
-        title:
-            "Lesson 5: Captions & Visual Learning",
-
+        title: "Lesson 5: Captions & Visual Learning",
         description:
             "Learn why captions, transcripts and visual information are useful.",
-
-        video:
-            "",
-
+        video: "",
         text:
             "Captions and transcripts provide written access to spoken information. Visual learning resources can make educational content easier to understand and follow."
     },
 
-
     {
-        title:
-            "Lesson 6: Accessibility Skills",
-
+        title: "Lesson 6: Accessibility Skills",
         description:
             "Review important accessibility concepts and inclusive learning practices.",
-
-        video:
-            "",
-
+        video: "",
         text:
             "Accessibility means designing learning experiences that can be used by people with different needs. Inclusive design benefits many different learners."
     }
@@ -755,145 +688,124 @@ const lessons = [
 ];
 
 
+/* =====================================
+   NORMAL LESSON FUNCTIONS
+===================================== */
+
 function selectLesson(number) {
 
     currentLesson = number;
 
-
     const buttons =
         document.querySelectorAll(".lesson");
 
-
     buttons.forEach(function(button) {
-
         button.classList.remove("active");
-
     });
 
+    buttons[number - 1].classList.add("active");
 
-    buttons[number - 1]
-        .classList.add("active");
-
-
-    const lesson =
-        lessons[number - 1];
-
+    const lesson = lessons[number - 1];
 
     document.getElementById("lessonTitle")
-        .textContent =
-        lesson.title;
-
+        .textContent = lesson.title;
 
     document.getElementById("lessonDescription")
-        .textContent =
-        lesson.description;
-
+        .textContent = lesson.description;
 
     document.getElementById("transcriptText")
-        .textContent =
-        lesson.text;
-
+        .textContent = lesson.text;
 
     const container =
         document.getElementById("videoContainer");
 
-
     if (lesson.video) {
 
         container.innerHTML =
-
-        `<iframe
-            id="lessonVideo"
-            src="${lesson.video}"
-            title="Accessibility Learning Video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>`;
+            `<iframe
+                id="lessonVideo"
+                src="${lesson.video}"
+                title="Accessibility Learning Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>`;
 
     } else {
 
         container.innerHTML =
-
-        `<div class="no-video">
-            <div>
-                <h3>📚 Lesson Content</h3>
-                <p>
-                    Video for this lesson will be added soon.
-                    Read the lesson transcript and continue learning.
-                </p>
-            </div>
-        </div>`;
+            `<div class="no-video">
+                <div>
+                    <h3>📚 Lesson Content</h3>
+                    <p>
+                        Video for this lesson will be added soon.
+                        Read the lesson transcript and continue learning.
+                    </p>
+                </div>
+            </div>`;
 
     }
-
 
     document.getElementById("transcript")
         .style.display = "none";
 
+    edithSpeak(
+        lesson.title + ". " +
+        lesson.description
+    );
 }
 
 
 function completeLesson() {
 
     if (completedLessons < currentLesson) {
-
         completedLessons = currentLesson;
-
     }
-
 
     const progress =
         Math.round(
             (completedLessons / totalLessons) * 100
         );
 
-
     document.getElementById("progressFill")
-        .style.width =
-        progress + "%";
-
+        .style.width = progress + "%";
 
     document.getElementById("progressText")
-        .textContent =
-        progress + "%";
+        .textContent = progress + "%";
 
+    document.querySelector(".progress-bar")
+        .setAttribute("aria-valuenow", progress);
 
     const buttons =
         document.querySelectorAll(".lesson");
-
 
     for (
         let i = 0;
         i < completedLessons;
         i++
     ) {
-
-        buttons[i]
-            .classList.add("completed");
-
+        buttons[i].classList.add("completed");
     }
-
 
     if (progress === 100) {
 
         document.getElementById("quizBox")
             .style.display = "block";
 
-
-        alert(
-            "🎉 All 6 accessibility lessons completed!"
+        edithSpeak(
+            "Congratulations. All six lessons are completed. " +
+            "The accessibility quiz is now available."
         );
 
     } else {
 
-        alert(
-            "✅ Lesson " +
+        edithSpeak(
+            "Lesson " +
             currentLesson +
-            " completed!"
+            " completed. " +
+            "You can continue to the next lesson."
         );
 
     }
-
 }
 
 
@@ -902,96 +814,753 @@ function showTranscript() {
     const transcript =
         document.getElementById("transcript");
 
-
-    if (
-        transcript.style.display === "block"
-    ) {
+    if (transcript.style.display === "block") {
 
         transcript.style.display = "none";
+
+        edithSpeak("Transcript closed.");
 
     } else {
 
         transcript.style.display = "block";
 
-    }
+        edithSpeak(
+            "Transcript opened. " +
+            document.getElementById("transcriptText").textContent
+        );
 
+    }
 }
 
 
 function speakLesson() {
 
-    if (
-        !("speechSynthesis" in window)
-    ) {
-
-        alert(
-            "Text-to-speech is not supported in this browser."
-        );
-
-        return;
-
-    }
-
-
     const text =
         document.getElementById("transcriptText")
             .textContent;
 
-
-    window.speechSynthesis.cancel();
-
-
-    const speech =
-        new SpeechSynthesisUtterance(text);
-
-
-    speech.rate = 0.9;
-
-    speech.pitch = 1;
-
-
-    window.speechSynthesis.speak(
-        speech
-    );
-
+    edithSpeak(text);
 }
 
 
 function toggleLargeText() {
 
-    document.body.classList.toggle(
-        "large-text"
-    );
+    document.body.classList.toggle("large-text");
 
+    edithSpeak(
+        document.body.classList.contains("large-text")
+        ? "Large text enabled."
+        : "Large text disabled."
+    );
 }
 
 
 function toggleContrast() {
 
-    document.body.classList.toggle(
-        "high-contrast"
-    );
+    document.body.classList.toggle("high-contrast");
 
+    edithSpeak(
+        document.body.classList.contains("high-contrast")
+        ? "High contrast enabled."
+        : "High contrast disabled."
+    );
 }
 
 
 function openQuiz() {
 
-    /*
-       If your quiz page is named
-       accessibility-quiz.html,
-       this opens that page.
-    */
+    edithSpeak(
+        "Opening accessibility quiz."
+    );
 
-    window.location.href =
-        "accessibility-quiz.html";
+    setTimeout(function() {
+
+        window.location.href =
+            "accessibility-quiz.html";
+
+    }, 700);
+}
+
+
+/* =====================================
+   EDITH
+   BLIND ACCESSIBILITY MODE ONLY
+===================================== */
+
+let edithActive = false;
+let edithListening = false;
+let edithRecognition = null;
+
+function isBlindMode() {
+
+    return (
+        localStorage.getItem("accessibilityMode")
+        === "blind"
+    );
 
 }
 
 
+/* =====================================
+   EDITH SPEECH
+===================================== */
+
+function edithSpeak(text) {
+
+    if (!isBlindMode()) {
+        return;
+    }
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.rate = 0.9;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    window.speechSynthesis.speak(speech);
+
+    const announcement =
+        document.getElementById("edithAnnouncement");
+
+    if (announcement) {
+        announcement.textContent = text;
+    }
+}
+
+
+/* =====================================
+   EDITH STATUS
+===================================== */
+
+function setEdithStatus(text, listening) {
+
+    const status =
+        document.getElementById("edithStatus");
+
+    if (!status) {
+        return;
+    }
+
+    status.textContent = text;
+
+    status.classList.toggle(
+        "active",
+        edithActive
+    );
+
+    status.classList.toggle(
+        "listening",
+        !!listening
+    );
+}
+
+
+/* =====================================
+   START EDITH
+===================================== */
+
+function startEdith() {
+
+    if (!isBlindMode()) {
+        return;
+    }
+
+    if (edithActive) {
+        return;
+    }
+
+    edithActive = true;
+
+    setEdithStatus(
+        "Edith is ready. Say Hey Edith.",
+        false
+    );
+
+    edithSpeak(
+        "Welcome to Learning Universe. " +
+        "I am Edith, your voice assistant. " +
+        "You do not need to click anything. " +
+        "Say Hey Edith whenever you need me. " +
+        "I can help you open courses, lessons, quizzes, " +
+        "AI assistance and other learning pages."
+    );
+
+    setTimeout(function() {
+        startEdithListening();
+    }, 2500);
+}
+
+
+/* =====================================
+   SPEECH RECOGNITION
+===================================== */
+
+function createRecognition() {
+
+    const Recognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!Recognition) {
+        edithSpeak(
+            "Voice recognition is not supported in this browser. " +
+            "Please use a browser with speech recognition support."
+        );
+        return null;
+    }
+
+    const recognition =
+        new Recognition();
+
+    recognition.lang = "en-IN";
+
+    recognition.continuous = true;
+
+    recognition.interimResults = false;
+
+    recognition.maxAlternatives = 3;
+
+    return recognition;
+}
+
+
+/* =====================================
+   START LISTENING
+===================================== */
+
+function startEdithListening() {
+
+    if (!edithActive) {
+        return;
+    }
+
+    if (edithListening) {
+        return;
+    }
+
+    if (!edithRecognition) {
+
+        edithRecognition =
+            createRecognition();
+
+        if (!edithRecognition) {
+            return;
+        }
+
+        edithRecognition.onstart =
+            function() {
+
+                edithListening = true;
+
+                setEdithStatus(
+                    "🎙️ Edith is listening...",
+                    true
+                );
+            };
+
+
+        edithRecognition.onresult =
+            function(event) {
+
+                for (
+                    let i = event.resultIndex;
+                    i < event.results.length;
+                    i++
+                ) {
+
+                    if (
+                        !event.results[i].isFinal
+                    ) {
+                        continue;
+                    }
+
+                    const command =
+                        event.results[i][0]
+                            .transcript
+                            .toLowerCase()
+                            .trim();
+
+                    console.log(
+                        "Edith heard:",
+                        command
+                    );
+
+                    handleEdithCommand(command);
+                }
+            };
+
+
+        edithRecognition.onerror =
+            function(event) {
+
+                console.log(
+                    "Edith recognition error:",
+                    event.error
+                );
+
+                edithListening = false;
+
+                setEdithStatus(
+                    "Edith is waiting...",
+                    false
+                );
+
+                /*
+                   Automatically retry after
+                   temporary browser errors.
+                */
+
+                if (edithActive) {
+
+                    setTimeout(function() {
+                        startEdithListening();
+                    }, 1200);
+
+                }
+            };
+
+
+        edithRecognition.onend =
+            function() {
+
+                edithListening = false;
+
+                if (edithActive) {
+
+                    setTimeout(function() {
+                        startEdithListening();
+                    }, 700);
+
+                }
+
+            };
+
+    }
+
+    try {
+
+        edithRecognition.start();
+
+    } catch(error) {
+
+        console.log(
+            "Edith start:",
+            error
+        );
+
+    }
+}
+
+
+/* =====================================
+   EDITH COMMAND PROCESSOR
+===================================== */
+
+function handleEdithCommand(command) {
+
+    if (!command) {
+        return;
+    }
+
+
+    /* Remove wake words */
+
+    let cleanCommand =
+        command
+            .replace(
+                /^(hey\s+edith|edith)\s*/i,
+                ""
+            )
+            .trim();
+
+
+    /*
+       If user only says Edith,
+       acknowledge and continue listening.
+    */
+
+    if (!cleanCommand) {
+
+        edithSpeak(
+            "Yes, I am listening. What would you like to open?"
+        );
+
+        return;
+    }
+
+
+    /* ===============================
+       COURSES
+    =============================== */
+
+    if (
+        cleanCommand.includes("course") ||
+        cleanCommand.includes("courses") ||
+        cleanCommand.includes("my course") ||
+        cleanCommand.includes("open course")
+    ) {
+
+        edithSpeak(
+            "Opening your courses."
+        );
+
+        setTimeout(function() {
+
+            window.location.href =
+                "courses.html";
+
+        }, 700);
+
+        return;
+    }
+
+
+    /* ===============================
+       QUIZ
+    =============================== */
+
+    if (
+        cleanCommand.includes("quiz") ||
+        cleanCommand.includes("test")
+    ) {
+
+        edithSpeak(
+            "Opening the accessibility quiz."
+        );
+
+        setTimeout(function() {
+
+            window.location.href =
+                "accessibility-quiz.html";
+
+        }, 700);
+
+        return;
+    }
+
+
+    /* ===============================
+       AI ASSISTANT
+    =============================== */
+
+    if (
+        cleanCommand.includes("ai assistant") ||
+        cleanCommand.includes("ai assistance") ||
+        cleanCommand.includes("open ai")
+    ) {
+
+        edithSpeak(
+            "Opening AI Learning Assistant."
+        );
+
+        setTimeout(function() {
+
+            window.location.href =
+                "ai-assistance.html";
+
+        }, 700);
+
+        return;
+    }
+
+
+    /* ===============================
+       HOME
+    =============================== */
+
+    if (
+        cleanCommand.includes("home") ||
+        cleanCommand.includes("go home")
+    ) {
+
+        edithSpeak(
+            "Opening home."
+        );
+
+        setTimeout(function() {
+
+            window.location.href =
+                "index.html";
+
+        }, 700);
+
+        return;
+    }
+
+
+    /* ===============================
+       NEXT LESSON
+    =============================== */
+
+    if (
+        cleanCommand.includes("next lesson") ||
+        cleanCommand.includes("next")
+    ) {
+
+        if (currentLesson < totalLessons) {
+
+            selectLesson(
+                currentLesson + 1
+            );
+
+        } else {
+
+            edithSpeak(
+                "You are already on the last lesson."
+            );
+
+        }
+
+        return;
+    }
+
+
+    /* ===============================
+       PREVIOUS LESSON
+    =============================== */
+
+    if (
+        cleanCommand.includes("previous lesson") ||
+        cleanCommand.includes("previous")
+    ) {
+
+        if (currentLesson > 1) {
+
+            selectLesson(
+                currentLesson - 1
+            );
+
+        } else {
+
+            edithSpeak(
+                "You are already on the first lesson."
+            );
+
+        }
+
+        return;
+    }
+
+
+    /* ===============================
+       READ LESSON
+    =============================== */
+
+    if (
+        cleanCommand.includes("read lesson") ||
+        cleanCommand.includes("read this") ||
+        cleanCommand.includes("explain lesson")
+    ) {
+
+        speakLesson();
+
+        return;
+    }
+
+
+    /* ===============================
+       TRANSCRIPT
+    =============================== */
+
+    if (
+        cleanCommand.includes("transcript") ||
+        cleanCommand.includes("show transcript")
+    ) {
+
+        const transcript =
+            document.getElementById("transcript");
+
+        transcript.style.display = "block";
+
+        edithSpeak(
+            document.getElementById("transcriptText")
+                .textContent
+        );
+
+        return;
+    }
+
+
+    /* ===============================
+       COMPLETE LESSON
+    =============================== */
+
+    if (
+        cleanCommand.includes("complete lesson") ||
+        cleanCommand.includes("mark complete")
+    ) {
+
+        completeLesson();
+
+        return;
+    }
+
+
+    /* ===============================
+       LARGE TEXT
+    =============================== */
+
+    if (
+        cleanCommand.includes("large text") ||
+        cleanCommand.includes("bigger text")
+    ) {
+
+        toggleLargeText();
+
+        return;
+    }
+
+
+    /* ===============================
+       CONTRAST
+    =============================== */
+
+    if (
+        cleanCommand.includes("contrast") ||
+        cleanCommand.includes("high contrast")
+    ) {
+
+        toggleContrast();
+
+        return;
+    }
+
+
+    /* ===============================
+       STOP EDITH
+    =============================== */
+
+    if (
+        cleanCommand.includes("stop edith") ||
+        cleanCommand.includes("stop listening")
+    ) {
+
+        stopEdith();
+
+        return;
+    }
+
+
+    /* ===============================
+       UNKNOWN COMMAND
+    =============================== */
+
+    edithSpeak(
+        "I heard " +
+        command +
+        ". " +
+        "Try saying open courses, open quiz, " +
+        "open AI assistant, next lesson, previous lesson, " +
+        "read lesson, or go home."
+    );
+}
+
+
+/* =====================================
+   STOP EDITH
+===================================== */
+
+function stopEdith() {
+
+    edithActive = false;
+    edithListening = false;
+
+    if (edithRecognition) {
+
+        try {
+            edithRecognition.stop();
+        } catch(error) {
+            console.log(error);
+        }
+
+    }
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+    }
+
+    const status =
+        document.getElementById("edithStatus");
+
+    if (status) {
+        status.classList.remove("active");
+        status.classList.remove("listening");
+    }
+}
+
+
+/* =====================================
+   PAGE LOAD
+===================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        /*
+           Edith is enabled ONLY when
+           accessibilityMode = blind.
+        */
+
+        if (!isBlindMode()) {
+            return;
+        }
+
+        setTimeout(
+            startEdith,
+            1000
+        );
+
+    }
+);
+
+
+/* =====================================
+   KEYBOARD ESC
+===================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            isBlindMode()
+        ) {
+
+            stopEdith();
+
+        }
+
+    }
+);
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+function logout() {
+
+    stopEdith();
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessibilityMode");
+    localStorage.removeItem("voiceGuidance");
+
+    window.location.href =
+        "index.html";
+}
+
 </script>
 
-
 </body>
-
 </html>

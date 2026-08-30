@@ -2,14 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Accessible Dashboard - Learning Universe</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -36,18 +34,14 @@ header {
     font-weight: bold;
 }
 
-header button,
-.edith-button,
-.card a,
-.card button {
+header button {
     border: none;
-    padding: 13px 20px;
+    padding: 12px 18px;
     border-radius: 10px;
     background: #6c4df6;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    text-decoration: none;
 }
 
 main {
@@ -86,7 +80,7 @@ main {
 
 .edith-status {
     font-weight: bold;
-    margin: 12px 0;
+    color: #5b3fe0;
 }
 
 .grid {
@@ -115,6 +109,20 @@ a:focus {
 
 .card p {
     color: #697188;
+}
+
+.card a,
+.card button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 9px;
+    background: #6c4df6;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .progress {
@@ -157,7 +165,6 @@ a:focus {
 }
 
 @media(max-width:700px) {
-
     header {
         flex-direction: column;
         gap: 15px;
@@ -171,139 +178,92 @@ a:focus {
     .welcome h1 {
         font-size: 27px;
     }
-
 }
-
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
-    <div
-        class="logo"
-        aria-label="Learning Universe">
-
+    <div class="logo" aria-label="Learning Universe">
         Learning Universe 🌌
-
     </div>
-
 
     <button
         type="button"
         onclick="logout()">
-
         Logout
-
     </button>
 
 </header>
 
-
 <main>
-
 
 <section
     class="welcome"
     aria-labelledby="welcomeTitle">
 
     <h1 id="welcomeTitle">
-
         Accessible Learning Dashboard
-
     </h1>
 
     <p id="welcomeMessage">
-
         Welcome to your accessible learning space.
-
     </p>
 
 </section>
 
 
-<!-- =========================
-     EDITH
-========================= -->
+<!-- EDITH -->
 
 <section
     class="edith-panel"
     aria-labelledby="edithTitle">
 
     <h2 id="edithTitle">
-
-        🤖 Edith - Accessibility Assistant
-
+        🤖 Edith Accessibility Assistant
     </h2>
 
     <p>
-
-        Edith is ready for voice commands.
-
-        Say <strong>“Hey Edith”</strong>
-        followed by your command.
-
+        Edith is automatically available in blind accessibility mode.
+        Say <strong>Hey Edith</strong> followed by your command.
     </p>
 
     <p
         id="edithStatus"
-        class="edith-status">
+        class="edith-status"
+        aria-live="polite">
 
-        🎙️ Edith is getting ready...
+        🎙️ Starting Edith...
 
     </p>
-
-
-    <button
-        id="edithButton"
-        class="edith-button"
-        type="button"
-        onclick="startEdithListening()">
-
-        🎤 Talk to Edith
-
-    </button>
 
 </section>
 
 
-<!-- =========================
-     LEARNING OPTIONS
-========================= -->
+<!-- LEARNING OPTIONS -->
 
 <section
     class="grid"
     aria-label="Learning options">
 
-
 <article
     class="card"
-    tabindex="0"
-    aria-labelledby="courseTitle">
+    tabindex="0">
 
-    <h2 id="courseTitle">
-
+    <h2>
         📚 My Courses
-
     </h2>
 
     <p>
-
         Continue learning programming,
         web development and AI courses.
-
     </p>
 
-    <a
-        href="courses.html"
-        onclick="announce('Opening courses')">
-
+    <a href="courses.html">
         Open Courses
-
     </a>
 
 </article>
@@ -311,28 +271,19 @@ a:focus {
 
 <article
     class="card"
-    tabindex="0"
-    aria-labelledby="aiTitle">
+    tabindex="0">
 
-    <h2 id="aiTitle">
-
+    <h2>
         🤖 AI Learning Assistant
-
     </h2>
 
     <p>
-
         Get help understanding concepts
         and programming.
-
     </p>
 
-    <a
-        href="ai-assistance.html"
-        onclick="announce('Opening AI Learning Assistant')">
-
+    <a href="ai-assistance.html">
         Open AI Assistant
-
     </a>
 
 </article>
@@ -340,20 +291,15 @@ a:focus {
 
 <article
     class="card"
-    tabindex="0"
-    aria-labelledby="quizTitle">
+    tabindex="0">
 
-    <h2 id="quizTitle">
-
+    <h2>
         🎯 Quiz
-
     </h2>
 
     <p>
-
         Test your knowledge after
         completing your courses.
-
     </p>
 
     <button
@@ -369,55 +315,39 @@ a:focus {
 
 <article
     class="card"
-    tabindex="0"
-    aria-labelledby="certificateTitle">
+    tabindex="0">
 
-    <h2 id="certificateTitle">
-
+    <h2>
         🏆 Certificate
-
     </h2>
 
     <p>
-
         View your course completion
         certificate.
-
     </p>
 
-    <a
-        href="certificate.html"
-        onclick="announce('Opening certificate')">
-
+    <a href="certificate.html">
         View Certificate
-
     </a>
 
 </article>
 
-
 </section>
 
 
-<!-- =========================
-     PROGRESS
-========================= -->
+<!-- PROGRESS -->
 
 <section
     class="progress"
     aria-labelledby="progressTitle">
 
     <h2 id="progressTitle">
-
         📊 Learning Progress
-
     </h2>
 
     <p>
-
         Your current learning progress is
         35 percent.
-
     </p>
 
     <div
@@ -441,7 +371,7 @@ a:focus {
     aria-live="assertive">
 
     Accessible mode is active.
-    Edith voice assistant is ready.
+    Edith is available automatically.
 
 </div>
 
@@ -453,45 +383,39 @@ a:focus {
     aria-atomic="true">
 </div>
 
-
 </main>
-
-
 <script>
 
 "use strict";
 
 
-/* =========================
-   VARIABLES
-========================= */
+/* =====================================
+   EDITH VARIABLES
+===================================== */
 
-let recognition = null;
+let edithRecognition = null;
+let commandRecognition = null;
 
-let edithReady = false;
+let edithActive = false;
+let commandMode = false;
 
-let listeningForCommand = false;
-
-let wakeWordRecognition = null;
+let restartTimer = null;
 
 
-/* =========================
+/* =====================================
    ELEMENTS
-========================= */
+===================================== */
 
 const edithStatus =
     document.getElementById("edithStatus");
-
-const edithButton =
-    document.getElementById("edithButton");
 
 const announcement =
     document.getElementById("announcement");
 
 
-/* =========================
+/* =====================================
    SPEAK
-========================= */
+===================================== */
 
 function speak(text) {
 
@@ -512,90 +436,28 @@ function speak(text) {
 }
 
 
-/* =========================
+/* =====================================
    ANNOUNCE
-========================= */
+===================================== */
 
-function announce(message) {
+function announce(text) {
 
     announcement.textContent = "";
 
     setTimeout(function() {
 
-        announcement.textContent =
-            message;
+        announcement.textContent = text;
 
-        speak(message);
+        speak(text);
 
-    }, 80);
+    }, 100);
 
 }
 
 
-/* =========================
-   PAGE LOAD
-========================= */
-
-window.addEventListener(
-    "load",
-    function() {
-
-        const user =
-            localStorage.getItem("user");
-
-
-        if (user) {
-
-            try {
-
-                const userData =
-                    JSON.parse(user);
-
-                const name =
-                    userData.name ||
-                    "Student";
-
-                document.getElementById(
-                    "welcomeMessage"
-                ).textContent =
-                    "Welcome " +
-                    name +
-                    ". Your accessible learning dashboard is ready.";
-
-            } catch(error) {
-
-                console.log(
-                    "User information unavailable."
-                );
-
-            }
-
-        }
-
-
-        setTimeout(function() {
-
-            edithReady = true;
-
-            announce(
-                "Hello. I am Edith, your accessibility assistant. " +
-                "I am ready to help you. " +
-                "Say Hey Edith followed by a command. " +
-                "For example, say Hey Edith, open my courses."
-            );
-
-
-            startWakeWordDetection();
-
-        }, 1200);
-
-    }
-);
-
-
-/* =========================
-   SPEECH RECOGNITION
-========================= */
+/* =====================================
+   GET SPEECH API
+===================================== */
 
 function getSpeechRecognition() {
 
@@ -607,11 +469,78 @@ function getSpeechRecognition() {
 }
 
 
-/* =========================
-   WAKE WORD DETECTION
-========================= */
+/* =====================================
+   PAGE LOAD
+===================================== */
 
-function startWakeWordDetection() {
+window.addEventListener(
+    "load",
+    function() {
+
+        const user =
+            localStorage.getItem("user");
+
+        if (user) {
+
+            try {
+
+                const userData =
+                    JSON.parse(user);
+
+                const name =
+                    userData.name || "Student";
+
+                document.getElementById(
+                    "welcomeMessage"
+                ).textContent =
+                    "Welcome " +
+                    name +
+                    ". Your accessible learning dashboard is ready.";
+
+            } catch(error) {
+
+                console.log(error);
+
+            }
+
+        }
+
+
+        /*
+           Edith only works in blind mode.
+        */
+
+        const mode =
+            localStorage.getItem(
+                "accessibilityMode"
+            );
+
+
+        if (mode !== "blind") {
+
+            edithStatus.textContent =
+                "Edith is available only in blind accessibility mode.";
+
+            return;
+
+        }
+
+
+        setTimeout(function() {
+
+            startEdith();
+
+        }, 1500);
+
+    }
+);
+
+
+/* =====================================
+   START EDITH
+===================================== */
+
+function startEdith() {
 
     const SpeechRecognition =
         getSpeechRecognition();
@@ -620,11 +549,10 @@ function startWakeWordDetection() {
     if (!SpeechRecognition) {
 
         edithStatus.textContent =
-            "⚠️ Voice recognition is not supported in this browser.";
+            "Voice recognition is not supported by this browser.";
 
-        speak(
-            "Voice recognition is not supported in this browser. " +
-            "You can use the Talk to Edith button."
+        announce(
+            "Voice recognition is not supported by this browser."
         );
 
         return;
@@ -632,25 +560,81 @@ function startWakeWordDetection() {
     }
 
 
+    edithActive = true;
+
+
+    announce(
+        "Hello. I am Edith, your accessibility assistant. " +
+        "I am ready. " +
+        "Say Hey Edith followed by your command. " +
+        "For example, Hey Edith, open my courses."
+    );
+
+
+    setTimeout(function() {
+
+        startWakeWordListener();
+
+    }, 3500);
+
+}
+
+
+/* =====================================
+   WAKE WORD LISTENER
+===================================== */
+
+function startWakeWordListener() {
+
+    if (!edithActive || commandMode) {
+        return;
+    }
+
+
+    const SpeechRecognition =
+        getSpeechRecognition();
+
+
+    if (!SpeechRecognition) {
+        return;
+    }
+
+
+    stopWakeWordListener();
+
+
     try {
 
-        wakeWordRecognition =
+        edithRecognition =
             new SpeechRecognition();
 
-        wakeWordRecognition.lang =
+
+        edithRecognition.lang =
             "en-IN";
 
-        wakeWordRecognition.continuous =
+
+        edithRecognition.continuous =
             true;
 
-        wakeWordRecognition.interimResults =
+
+        edithRecognition.interimResults =
             true;
 
-        wakeWordRecognition.maxAlternatives =
+
+        edithRecognition.maxAlternatives =
             1;
 
 
-        wakeWordRecognition.onresult =
+        edithRecognition.onstart =
+            function() {
+
+                edithStatus.textContent =
+                    "🎙️ Edith is ready. Say Hey Edith.";
+
+            };
+
+
+        edithRecognition.onresult =
             function(event) {
 
                 let transcript = "";
@@ -674,36 +658,29 @@ function startWakeWordDetection() {
                     .trim();
 
 
-                if (
+                console.log(
+                    "Edith heard:",
+                    transcript
+                );
+
+
+                const wakeWordFound =
                     transcript.includes("hey edith") ||
                     transcript.includes("hey edit") ||
-                    transcript.includes("edith")
-                ) {
+                    transcript.includes("hey added") ||
+                    transcript.includes("edith");
 
-                    if (!listeningForCommand) {
 
-                        listeningForCommand =
-                            true;
+                if (wakeWordFound) {
 
-                        stopWakeWordDetection();
-
-                        speak(
-                            "Yes, I am listening."
-                        );
-
-                        setTimeout(
-                            startCommandListening,
-                            700
-                        );
-
-                    }
+                    activateEdith();
 
                 }
 
             };
 
 
-        wakeWordRecognition.onerror =
+        edithRecognition.onerror =
             function(event) {
 
                 console.log(
@@ -714,51 +691,68 @@ function startWakeWordDetection() {
             };
 
 
-        wakeWordRecognition.onend =
+        edithRecognition.onend =
             function() {
 
                 if (
-                    edithReady &&
-                    !listeningForCommand
+                    edithActive &&
+                    !commandMode
                 ) {
 
-                    setTimeout(
-                        startWakeWordDetection,
-                        1000
-                    );
+                    restartTimer =
+                        setTimeout(
+                            startWakeWordListener,
+                            800
+                        );
 
                 }
 
             };
 
 
-        wakeWordRecognition.start();
-
-
-        edithStatus.textContent =
-            "🎙️ Edith is listening for “Hey Edith”";
-
+        edithRecognition.start();
 
     } catch(error) {
 
-        console.log(error);
+        console.log(
+            "Edith error:",
+            error
+        );
+
+
+        restartTimer =
+            setTimeout(
+                startWakeWordListener,
+                1500
+            );
 
     }
 
 }
 
 
-/* =========================
-   STOP WAKE WORD
-========================= */
+/* =====================================
+   STOP WAKE LISTENER
+===================================== */
 
-function stopWakeWordDetection() {
+function stopWakeWordListener() {
 
-    if (wakeWordRecognition) {
+    if (restartTimer) {
+
+        clearTimeout(restartTimer);
+
+        restartTimer = null;
+
+    }
+
+
+    if (edithRecognition) {
 
         try {
 
-            wakeWordRecognition.stop();
+            edithRecognition.onend = null;
+
+            edithRecognition.stop();
 
         } catch(error) {
 
@@ -766,38 +760,53 @@ function stopWakeWordDetection() {
 
         }
 
+        edithRecognition = null;
+
     }
 
 }
 
 
-/* =========================
-   TALK TO EDITH
-========================= */
+/* =====================================
+   ACTIVATE EDITH
+===================================== */
 
-function startEdithListening() {
+function activateEdith() {
 
-    stopWakeWordDetection();
+    if (commandMode) {
+        return;
+    }
 
-    listeningForCommand = true;
+
+    commandMode = true;
+
+
+    stopWakeWordListener();
+
+
+    edithStatus.textContent =
+        "🎙️ Edith activated. Listening...";
+
 
     speak(
-        "Edith is listening. Tell me what you want to open."
+        "Yes. I am listening."
     );
 
-    setTimeout(
-        startCommandListening,
-        700
-    );
+
+    setTimeout(function() {
+
+        startCommandListener();
+
+    }, 1000);
 
 }
 
 
-/* =========================
-   COMMAND LISTENING
-========================= */
+/* =====================================
+   COMMAND LISTENER
+===================================== */
 
-function startCommandListening() {
+function startCommandListener() {
 
     const SpeechRecognition =
         getSpeechRecognition();
@@ -805,11 +814,7 @@ function startCommandListening() {
 
     if (!SpeechRecognition) {
 
-        announce(
-            "Voice recognition is not supported in this browser."
-        );
-
-        listeningForCommand = false;
+        commandMode = false;
 
         return;
 
@@ -818,35 +823,31 @@ function startCommandListening() {
 
     try {
 
-        recognition =
+        commandRecognition =
             new SpeechRecognition();
 
-        recognition.lang =
+
+        commandRecognition.lang =
             "en-IN";
 
-        recognition.continuous =
+
+        commandRecognition.continuous =
             false;
 
-        recognition.interimResults =
+
+        commandRecognition.interimResults =
             false;
 
-        recognition.maxAlternatives =
+
+        commandRecognition.maxAlternatives =
             1;
 
 
         edithStatus.textContent =
-            "🎙️ Edith is listening to your command...";
+            "🎙️ Edith is listening. Tell me what you want.";
 
 
-        edithButton.textContent =
-            "🎙️ Listening...";
-
-
-        edithButton.disabled =
-            true;
-
-
-        recognition.onresult =
+        commandRecognition.onresult =
             function(event) {
 
                 let command =
@@ -872,7 +873,7 @@ function startCommandListening() {
             };
 
 
-        recognition.onerror =
+        commandRecognition.onerror =
             function(event) {
 
                 console.log(
@@ -881,76 +882,116 @@ function startCommandListening() {
                 );
 
 
-                resetEdith();
+                commandMode = false;
 
 
                 speak(
-                    "I could not understand that command. " +
-                    "Please say Hey Edith and try again."
+                    "I could not understand that. " +
+                    "Say Hey Edith and try again."
                 );
 
+
+                restartEdith();
+
             };
 
 
-        recognition.onend =
+        commandRecognition.onend =
             function() {
 
-                edithButton.disabled =
-                    false;
-
-                edithButton.textContent =
-                    "🎤 Talk to Edith";
+                commandRecognition = null;
 
             };
 
 
-        recognition.start();
+        commandRecognition.start();
+
+
+        /*
+           User gets 10 seconds
+           to complete the command.
+        */
+
+        setTimeout(function() {
+
+            if (commandMode) {
+
+                try {
+
+                    commandRecognition.stop();
+
+                } catch(error) {
+
+                    console.log(error);
+
+                }
+
+            }
+
+        }, 10000);
 
     } catch(error) {
 
         console.log(error);
 
-        resetEdith();
+        commandMode = false;
+
+        restartEdith();
 
     }
 
 }
 
 
-/* =========================
-   COMMAND PROCESSOR
-========================= */
+/* =====================================
+   PROCESS COMMAND
+===================================== */
 
 function processEdithCommand(command) {
 
-    listeningForCommand = false;
+    commandMode = false;
 
+
+    command =
+        command
+        .replace(/hey edith/g, "")
+        .replace(/hey edit/g, "")
+        .replace(/edith/g, "")
+        .trim();
+
+
+    /* COURSES */
 
     if (
         command.includes("course") ||
         command.includes("courses") ||
-        command.includes("my course")
+        command.includes("my course") ||
+        command.includes("learning")
     ) {
 
         speak(
             "Opening your courses."
         );
 
+
         setTimeout(function() {
 
             window.location.href =
                 "courses.html";
 
-        }, 700);
+        }, 900);
+
 
         return;
 
     }
 
 
+    /* AI ASSISTANT */
+
     if (
         command.includes("ai assistant") ||
-        command.includes("ai") ||
+        command.includes("open ai") ||
         command.includes("artificial intelligence")
     ) {
 
@@ -958,17 +999,21 @@ function processEdithCommand(command) {
             "Opening the AI learning assistant."
         );
 
+
         setTimeout(function() {
 
             window.location.href =
                 "ai-assistance.html";
 
-        }, 700);
+        }, 900);
+
 
         return;
 
     }
 
+
+    /* QUIZ */
 
     if (
         command.includes("quiz") ||
@@ -979,16 +1024,20 @@ function processEdithCommand(command) {
             "Opening the quiz."
         );
 
+
         setTimeout(function() {
 
             openQuiz();
 
-        }, 700);
+        }, 900);
+
 
         return;
 
     }
 
+
+    /* CERTIFICATE */
 
     if (
         command.includes("certificate") ||
@@ -999,17 +1048,21 @@ function processEdithCommand(command) {
             "Opening your certificate."
         );
 
+
         setTimeout(function() {
 
             window.location.href =
                 "certificate.html";
 
-        }, 700);
+        }, 900);
+
 
         return;
 
     }
 
+
+    /* DASHBOARD */
 
     if (
         command.includes("home") ||
@@ -1017,15 +1070,18 @@ function processEdithCommand(command) {
     ) {
 
         speak(
-            "You are already on the accessible dashboard."
+            "You are already on your accessible dashboard."
         );
 
-        resetEdith();
+
+        restartEdith();
 
         return;
 
     }
 
+
+    /* STOP */
 
     if (
         command.includes("stop") ||
@@ -1038,58 +1094,54 @@ function processEdithCommand(command) {
 
         }
 
-        resetEdith();
+
+        restartEdith();
 
         return;
 
     }
 
 
+    /* UNKNOWN */
+
     speak(
         "I did not understand that command. " +
-        "You can say open my courses, open AI assistant, " +
-        "open quiz, or open certificate."
+        "You can say open my courses, " +
+        "open AI assistant, open quiz, " +
+        "or open certificate."
     );
 
 
-    resetEdith();
+    restartEdith();
 
 }
 
 
-/* =========================
-   RESET EDITH
-========================= */
+/* =====================================
+   RESTART EDITH
+===================================== */
 
-function resetEdith() {
+function restartEdith() {
 
-    listeningForCommand =
-        false;
-
-
-    edithButton.disabled =
-        false;
-
-
-    edithButton.textContent =
-        "🎤 Talk to Edith";
+    commandMode = false;
 
 
     edithStatus.textContent =
-        "🎙️ Edith is listening for “Hey Edith”";
+        "🎙️ Edith is ready. Say Hey Edith.";
 
 
-    setTimeout(
-        startWakeWordDetection,
-        1200
-    );
+    setTimeout(function() {
+
+        startWakeWordListener();
+
+    }, 1500);
 
 }
 
 
-/* =========================
+/* =====================================
    QUIZ
-========================= */
+===================================== */
 
 function openQuiz() {
 
@@ -1099,23 +1151,30 @@ function openQuiz() {
 }
 
 
-/* =========================
+/* =====================================
    LOGOUT
-========================= */
+===================================== */
 
 function logout() {
 
+    edithActive = false;
+
+
+    stopWakeWordListener();
+
+
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.cancel();
+
+    }
+
+
     localStorage.removeItem("token");
-
     localStorage.removeItem("user");
+    localStorage.removeItem("accessibilityMode");
+    localStorage.removeItem("voiceGuidance");
 
-    localStorage.removeItem(
-        "accessibilityMode"
-    );
-
-    localStorage.removeItem(
-        "voiceGuidance"
-    );
 
     window.location.href =
         "index.html";
@@ -1123,22 +1182,17 @@ function logout() {
 }
 
 
-/* =========================
+/* =====================================
    ESC = STOP SPEECH
-========================= */
+===================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
-        if (
-            event.key === "Escape"
-        ) {
+        if (event.key === "Escape") {
 
-            if (
-                "speechSynthesis"
-                in window
-            ) {
+            if ("speechSynthesis" in window) {
 
                 window.speechSynthesis.cancel();
 
@@ -1152,5 +1206,4 @@ document.addEventListener(
 </script>
 
 </body>
-
 </html>
