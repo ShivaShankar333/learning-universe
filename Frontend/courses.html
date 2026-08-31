@@ -1763,7 +1763,18 @@ displayCourses();
 
 </script>
 
-<script src="edith.js"></script>
+<script>
+    if (
+        localStorage.getItem("accessibilityMode") === "blind"
+    ) {
+        const edithScript =
+            document.createElement("script");
+
+        edithScript.src = "edith.js";
+
+        document.body.appendChild(edithScript);
+    }
+</script>
 
 </body>
 
