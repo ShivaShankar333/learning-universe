@@ -615,236 +615,186 @@ let selectedLanguage = "";
 const videos = {
 
     "Java Programming": [
+
         {
             title: "Java Full Course for Beginners",
             channel: "Java Course 1",
             id: "eIrMbAQSU34"
         },
+
         {
             title: "Java Programming Course",
             channel: "Java Course 2",
             id: "BGTx91t8q50"
         },
+
         {
             title: "Java Programming Tutorial",
             channel: "Java Course 3",
             id: "ZFnRvpxpnOc"
         },
+
         {
             title: "Java Full Course",
             channel: "Java Course 4",
             id: "xTtL8E4LzTQ"
         },
+
         {
             title: "Java Programming for Beginners",
             channel: "Java Course 5",
             id: "A74TOX803D0"
         },
+
         {
             title: "Java OOP Concepts",
             channel: "Durga Sir",
             id: "5NQjLBuNL0I"
         }
+
     ],
 
-    "Python Programming": [
-        {
-            title: "Python Programming Course",
-            channel: "Python Learning Channel 1",
-            id: "VIDEO_ID_1"
-        },
-        {
-            title: "Python for Beginners",
-            channel: "Python Learning Channel 2",
-            id: "VIDEO_ID_2"
-        },
-        {
-            title: "Complete Python Tutorial",
-            channel: "Python Learning Channel 3",
-            id: "VIDEO_ID_3"
-        }
-    ],
+    "Python Programming": {
 
-    "C Programming": [
-        {
-            title: "C Programming Course",
-            channel: "C Learning Channel 1",
-            id: "VIDEO_ID_1"
-        },
-        {
-            title: "C Programming for Beginners",
-            channel: "C Learning Channel 2",
-            id: "VIDEO_ID_2"
-        },
-        {
-            title: "Complete C Tutorial",
-            channel: "C Learning Channel 3",
-            id: "VIDEO_ID_3"
-        }
-    ],
+        "English": [
+            {
+                title: "Python Programming Course",
+                channel: "English",
+                id: "j_JuhAWlEaI"
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "Python Programming Course",
+                channel: "Telugu",
+                id: "fHKPQEVCX-s"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "Python Programming Course",
+                channel: "Hindi",
+                id: "ERCMXc8x7mc"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "Python Malayalam Full Playlist",
+                channel: "Malayalam",
+                playlist: "PL1JrLEBAapUVrpygeDJTbddX7TGsCT8AN"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "Python Kannada Full Playlist",
+                channel: "Kannada",
+                playlist: "PLlGueSbLhZoBRnTsGiDJeTXuQCALOTN07"
+            }
+        ]
+
+    },
+
+    "C Programming": {
+
+        "English": [
+            {
+                title: "C Programming Course",
+                channel: "English",
+                id: "xND0t1pr3KY"
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "C Programming Course",
+                channel: "Telugu",
+                id: "uLfCFa1Vaj0"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "C Programming Full Playlist",
+                channel: "Hindi",
+                playlist: "PLu0W_9lII9aiXlHcLx-mDH1Qul38wD3aR"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "C Programming Full Playlist",
+                channel: "Malayalam",
+                playlist: "PL1JrLEBAapUXh0dSzCk3dvQtGmjT9fBBj"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "C Programming Full Playlist",
+                channel: "Kannada",
+                playlist: "PLjvPj4x59YBUYkNJr4kCKOXsP3NyM4-ik"
+            }
+        ]
+
+    },
 
     "C++ Programming": [],
+
     "JavaScript": [],
-    "Web Development": [],
+
+    "Web Development": {
+
+        "English": [
+            {
+                title: "Web Development Full Playlist",
+                channel: "English",
+                playlist: "PL9ooVrP1hQOEloRCBI97ZXkWUg6MJn0Yf"
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "Web Development Full Playlist",
+                channel: "Telugu",
+                playlist: "PLzdWZT-ZJD09_3tZhnl7AGCb3U3CTBfoQ"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "Web Development Full Playlist",
+                channel: "Hindi",
+                playlist: "PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "Web Development Full Playlist",
+                channel: "Malayalam",
+                playlist: "PLPvjxHx5Kob1pE-M4p2x82xclElJFLFIC"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "Web Development Full Playlist",
+                channel: "Kannada",
+                playlist: "PLUZkVL-W-8GIKmd5HqE2iuXASOi5KOkOK"
+            }
+        ]
+
+    },
+
     "SQL & Databases": [],
+
     "AI & Machine Learning": []
 
 };
-
-function announce(message) {
-
-    const box =
-        document.getElementById("announcement");
-
-    box.textContent = "";
-
-    setTimeout(function() {
-
-        box.textContent = message;
-
-    }, 50);
-
-}
-
-function displayCourses() {
-
-    const grid =
-        document.getElementById("courseGrid");
-
-    grid.innerHTML = "";
-
-    courses.forEach(function(course) {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "course-card";
-
-        card.tabIndex = 0;
-
-        card.setAttribute(
-            "role",
-            "button"
-        );
-
-        card.setAttribute(
-            "aria-label",
-            "Open " +
-            course.name +
-            ", " +
-            course.level
-        );
-
-        card.innerHTML = `
-
-            <div class="course-icon"
-                 aria-hidden="true">
-
-                ${course.icon}
-
-            </div>
-
-            <h2>
-                ${course.name}
-            </h2>
-
-            <p>
-                ${course.level}
-            </p>
-
-        `;
-
-        card.addEventListener(
-            "click",
-            function() {
-
-                showLanguageSelectionFor(
-                    course.name
-                );
-
-            }
-        );
-
-        card.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    showLanguageSelectionFor(
-                        course.name
-                    );
-
-                }
-
-            }
-        );
-
-        grid.appendChild(card);
-
-    });
-
-}
-
-function showLanguageSelectionFor(courseName) {
-
-    selectedCourse = courseName;
-    selectedLanguage = "";
-
-    document.getElementById(
-        "coursesSection"
-    ).style.display = "none";
-
-    document.getElementById(
-        "videosSection"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "languageSection"
-    ).classList.add("active");
-
-    document.getElementById(
-        "languageTitle"
-    ).textContent =
-        "🌐 Choose Learning Language";
-
-    document.getElementById(
-        "languageInstruction"
-    ).textContent =
-        "Choose the language for " +
-        courseName +
-        ".";
-
-    announce(
-        courseName +
-        " selected. Please choose English, Telugu, Hindi, Malayalam, or Kannada."
-    );
-
-}
-
-function showLanguageSelection() {
-
-    closeVideo();
-
-    document.getElementById(
-        "videosSection"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "languageSection"
-    ).classList.add("active");
-
-    announce(
-        "Choose your learning language."
-    );
-
-}
-
 function selectLanguage(language) {
 
     selectedLanguage = language;
@@ -881,6 +831,7 @@ function selectLanguage(language) {
 
 }
 
+
 document.querySelectorAll(
     ".language-button"
 ).forEach(function(button) {
@@ -898,6 +849,254 @@ document.querySelectorAll(
 
 });
 
+
+/* ==========================================
+   LANGUAGE VIDEO DATA
+========================================== */
+
+const languageVideos = {
+
+    "Python Programming": {
+
+        "English": [
+            {
+                title: "Python Programming Course",
+                channel: "English Python Course",
+                type: "video",
+                id: "j_JuhAWlEaI"
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "Python Programming Telugu",
+                channel: "Telugu Python Course",
+                type: "video",
+                id: "fHKPQEVCX-s"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "Python Programming Hindi",
+                channel: "Hindi Python Course",
+                type: "video",
+                id: "ERCMXc8x7mc"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "Python Malayalam Full Playlist",
+                channel: "Malayalam Python Course",
+                type: "playlist",
+                id: "PL1JrLEBAapUVrpygeDJTbddX7TGsCT8AN"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "Python Kannada Full Playlist",
+                channel: "Kannada Python Course",
+                type: "playlist",
+                id: "PLlGueSbLhZoBRnTsGiDJeTXuQCALOTN07"
+            }
+        ]
+
+    },
+
+
+    "C Programming": {
+
+        "English": [
+            {
+                title: "C Programming Course",
+                channel: "English C Course",
+                type: "none",
+                id: ""
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "C Programming Telugu",
+                channel: "Telugu C Course",
+                type: "video",
+                id: "uLfCFa1Vaj0"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "C Programming Hindi Full Playlist",
+                channel: "Hindi C Course",
+                type: "playlist",
+                id: "PLu0W_9lII9aiXlHcLx-mDH1Qul38wD3aR"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "C Programming Malayalam Full Playlist",
+                channel: "Malayalam C Course",
+                type: "playlist",
+                id: "PL1JrLEBAapUXh0dSzCk3dvQtGmjT9fBBj"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "C Programming Kannada Full Playlist",
+                channel: "Kannada C Course",
+                type: "playlist",
+                id: "PLjvPj4x59YBUYkNJr4kCKOXsP3NyM4-ik"
+            }
+        ],
+
+        "English": [
+            {
+                title: "C Programming English",
+                channel: "English C Course",
+                type: "video",
+                id: "xND0t1pr3KY"
+            }
+        ]
+
+    },
+
+
+    "Java Programming": {
+
+        "English": [
+            {
+                title: "Java Full Course for Beginners",
+                channel: "Java Course 1",
+                type: "video",
+                id: "eIrMbAQSU34"
+            },
+            {
+                title: "Java Programming Course",
+                channel: "Java Course 2",
+                type: "video",
+                id: "BGTx91t8q50"
+            },
+            {
+                title: "Java Programming Tutorial",
+                channel: "Java Course 3",
+                type: "video",
+                id: "ZFnRvpxpnOc"
+            },
+            {
+                title: "Java Full Course",
+                channel: "Java Course 4",
+                type: "video",
+                id: "xTtL8E4LzTQ"
+            },
+            {
+                title: "Java Programming for Beginners",
+                channel: "Java Course 5",
+                type: "video",
+                id: "A74TOX803D0"
+            },
+            {
+                title: "Java OOP Concepts",
+                channel: "Durga Sir",
+                type: "video",
+                id: "5NQjLBuNL0I"
+            }
+        ],
+
+        "Telugu": [
+            {
+                title: "Java Programming Telugu",
+                channel: "Telugu Java Course",
+                type: "video",
+                id: "prfwlnq2vJY"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "Java Full Playlist Hindi",
+                channel: "Hindi Java Course",
+                type: "playlist",
+                id: "PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "Java Full Playlist Malayalam",
+                channel: "Malayalam Java Course",
+                type: "playlist",
+                id: "PL1JrLEBAapUXndScHzvMaSVOspebvFOsH"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "Java Programming Kannada",
+                channel: "Kannada Java Course",
+                type: "video",
+                id: "2w2ggu8vUc0"
+            }
+        ]
+
+    },
+
+
+    "Web Development": {
+
+        "Telugu": [
+            {
+                title: "Web Development Full Playlist Telugu",
+                channel: "Telugu Web Development",
+                type: "playlist",
+                id: "PLzdWZT-ZJD09_3tZhnl7AGCb3U3CTBfoQ"
+            }
+        ],
+
+        "English": [
+            {
+                title: "Web Development Full Playlist English",
+                channel: "English Web Development",
+                type: "playlist",
+                id: "PL9ooVrP1hQOEloRCBI97ZXkWUg6MJn0Yf"
+            }
+        ],
+
+        "Hindi": [
+            {
+                title: "Web Development Full Playlist Hindi",
+                channel: "Hindi Web Development",
+                type: "playlist",
+                id: "PLu0W_9lII9agq5TrH9XLIKQvv0iaF2X3w"
+            }
+        ],
+
+        "Malayalam": [
+            {
+                title: "Web Development Full Playlist Malayalam",
+                channel: "Malayalam Web Development",
+                type: "playlist",
+                id: "PLPvjxHx5Kob1pE-M4p2x82xclElJFLFIC"
+            }
+        ],
+
+        "Kannada": [
+            {
+                title: "Web Development Full Playlist Kannada",
+                channel: "Kannada Web Development",
+                type: "playlist",
+                id: "PLUZkVL-W-8GIKmd5HqE2iuXASOi5KOkOK"
+            }
+        ]
+
+    }
+
+};
+
+
 function loadVideos() {
 
     const grid =
@@ -905,8 +1104,14 @@ function loadVideos() {
 
     grid.innerHTML = "";
 
+    const courseData =
+        languageVideos[selectedCourse];
+
     const courseVideos =
-        videos[selectedCourse] || [];
+        courseData
+        ? courseData[selectedLanguage] || []
+        : [];
+
 
     if (courseVideos.length === 0) {
 
@@ -933,16 +1138,36 @@ function loadVideos() {
 
         `;
 
+        announce(
+            "Videos for " +
+            selectedCourse +
+            " in " +
+            selectedLanguage +
+            " are coming soon."
+        );
+
         return;
 
     }
+
+
+    announce(
+        courseVideos.length +
+        " learning option available for " +
+        selectedCourse +
+        " in " +
+        selectedLanguage
+    );
+
 
     courseVideos.forEach(function(video) {
 
         const card =
             document.createElement("div");
 
-        card.className = "video-card";
+        card.className =
+            "video-card";
+
 
         card.innerHTML = `
 
@@ -958,7 +1183,8 @@ function loadVideos() {
 
                 <button
                     class="watch-button"
-                    type="button">
+                    type="button"
+                    aria-label="Watch ${video.title}">
 
                     ▶ Watch Class
 
@@ -967,6 +1193,7 @@ function loadVideos() {
             </div>
 
         `;
+
 
         card.querySelector(
             ".watch-button"
@@ -977,27 +1204,29 @@ function loadVideos() {
                 playVideo(
                     video.id,
                     video.title,
-                    video.channel
+                    video.channel,
+                    video.type
                 );
 
             }
         );
+
 
         grid.appendChild(card);
 
     });
 
 }
+
+
 function playVideo(
     videoId,
     title,
-    channel
+    channel,
+    type
 ) {
 
-    if (
-        !videoId ||
-        videoId.startsWith("VIDEO_ID_")
-    ) {
+    if (!videoId || type === "none") {
 
         announce(
             "This video is not available yet."
@@ -1006,6 +1235,7 @@ function playVideo(
         return;
 
     }
+
 
     const player =
         document.getElementById("player");
@@ -1020,18 +1250,33 @@ function playVideo(
             "playerTitle"
         );
 
+
     titleBox.textContent =
         "Playing " +
         title +
         " by " +
         channel;
 
-    iframe.src =
-        "https://www.youtube.com/embed/" +
-        videoId +
-        "?autoplay=1";
+
+    if (type === "playlist") {
+
+        iframe.src =
+            "https://www.youtube.com/embed/videoseries?list=" +
+            videoId +
+            "&autoplay=1";
+
+    } else {
+
+        iframe.src =
+            "https://www.youtube.com/embed/" +
+            videoId +
+            "?autoplay=1";
+
+    }
+
 
     player.classList.add("active");
+
 
     announce(
         "Playing " +
@@ -1040,12 +1285,14 @@ function playVideo(
         channel
     );
 
+
     player.scrollIntoView({
         behavior: "smooth",
         block: "center"
     });
 
 }
+
 
 function closeVideo() {
 
@@ -1061,7 +1308,12 @@ function closeVideo() {
 
     player.classList.remove("active");
 
+    announce(
+        "Video closed."
+    );
+
 }
+
 
 function showCourses() {
 
@@ -1079,13 +1331,14 @@ function showCourses() {
         "coursesSection"
     ).style.display = "block";
 
+    selectedCourse = "";
+    selectedLanguage = "";
+
     announce(
         "Programming courses are available."
     );
 
 }
-
-
 /* ==========================================
    EDITH PAGE COMMANDS
 ========================================== */
@@ -1107,64 +1360,53 @@ function(command) {
        LANGUAGE COMMANDS
     ========================= */
 
-    if (
-        command.includes("english")
-    ) {
+    if (command.includes("english")) {
 
         if (selectedCourse) {
             selectLanguage("English");
         }
 
         return true;
-
     }
 
-    if (
-        command.includes("telugu")
-    ) {
+
+    if (command.includes("telugu")) {
 
         if (selectedCourse) {
             selectLanguage("Telugu");
         }
 
         return true;
-
     }
 
-    if (
-        command.includes("hindi")
-    ) {
+
+    if (command.includes("hindi")) {
 
         if (selectedCourse) {
             selectLanguage("Hindi");
         }
 
         return true;
-
     }
 
-    if (
-        command.includes("malayalam")
-    ) {
+
+    if (command.includes("malayalam")) {
 
         if (selectedCourse) {
             selectLanguage("Malayalam");
         }
 
         return true;
-
     }
 
-    if (
-        command.includes("kannada")
-    ) {
+
+    if (command.includes("kannada")) {
 
         if (selectedCourse) {
             selectLanguage("Kannada");
         }
 
         return true;
-
     }
 
 
@@ -1182,7 +1424,6 @@ function(command) {
         showCourses();
 
         return true;
-
     }
 
 
@@ -1198,7 +1439,6 @@ function(command) {
         closeVideo();
 
         return true;
-
     }
 
 
@@ -1206,29 +1446,25 @@ function(command) {
        OPEN COURSE
     ========================= */
 
-    if (
-        command.includes("python")
-    ) {
+    if (command.includes("python")) {
 
         showLanguageSelectionFor(
             "Python Programming"
         );
 
         return true;
-
     }
 
-    if (
-        command.includes("java")
-    ) {
+
+    if (command.includes("java")) {
 
         showLanguageSelectionFor(
             "Java Programming"
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("c plus plus") ||
@@ -1240,8 +1476,8 @@ function(command) {
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("c programming") ||
@@ -1254,8 +1490,8 @@ function(command) {
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("javascript") ||
@@ -1267,8 +1503,8 @@ function(command) {
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("web development")
@@ -1279,8 +1515,8 @@ function(command) {
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("sql") ||
@@ -1292,8 +1528,8 @@ function(command) {
         );
 
         return true;
-
     }
+
 
     if (
         command.includes("machine learning") ||
@@ -1306,7 +1542,6 @@ function(command) {
         );
 
         return true;
-
     }
 
 
@@ -1328,6 +1563,7 @@ function(command) {
             })
             .join(", ");
 
+
         if (
             typeof speak === "function"
         ) {
@@ -1339,9 +1575,14 @@ function(command) {
 
         }
 
-        return true;
+        announce(
+            "Available courses are: " +
+            names
+        );
 
+        return true;
     }
+
 
     return false;
 
@@ -1354,13 +1595,15 @@ function(command) {
 
 displayCourses();
 
-/*==================
-  EDITH SCRIPT
-================= */
+
+/* ==========================================
+   EDITH SCRIPT
+========================================== */
 
 </script>
 
 <script src="edith.js"></script>
 
 </body>
+
 </html>
