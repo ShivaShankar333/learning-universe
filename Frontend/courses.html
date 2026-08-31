@@ -290,16 +290,25 @@ iframe {
     cursor: pointer;
 }
 
-.edith-message {
+.captions-box {
     position: fixed;
-    left: 20px;
-    bottom: 20px;
-    padding: 14px 20px;
-    border-radius: 12px;
-    background: #20243a;
+    left: 5%;
+    right: 5%;
+    bottom: 25px;
+    min-height: 50px;
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.9);
     color: white;
+    text-align: center;
+    font-size: 20px;
     font-weight: bold;
-    z-index: 9999;
+    border-radius: 10px;
+    z-index: 9998;
+    display: none;
+}
+
+.captions-box.active {
+    display: block;
 }
 
 .sr-only {
@@ -552,13 +561,19 @@ footer {
 
 </section>
 
+<!-- ACCESSIBILITY MODE -->
+
 <div
-    id="edithMessage"
-    class="edith-message"
-    aria-live="polite">
+    id="accessibilityMode"
+    data-mode="regular"
+    aria-hidden="true">
+</div>
 
-    Edith is ready for voice commands.
-
+<div
+    id="captionsBox"
+    class="captions-box"
+    aria-live="polite"
+    aria-atomic="true">
 </div>
 
 <div
@@ -632,6 +647,91 @@ const courses = [
 
 let selectedCourse = "";
 let selectedLanguage = "";
+/* ==========================================
+   USER ACCESSIBILITY MODE
+========================================== */
+
+const accessibilityMode =
+    localStorage.getItem("accessibilityMode") || "regular";
+
+const modeBox =
+    document.getElementById("accessibilityMode");
+
+modeBox.dataset.mode = accessibilityMode;
+
+
+/* ==========================================
+   MODE HELPERS
+========================================== */
+
+function isBlindMode() {
+    return accessibilityMode === "blind";
+}
+
+function isDeafMode() {
+    return accessibilityMode === "deaf";
+}
+
+function isRegularMode() {
+    return accessibilityMode === "regular";
+}
+
+
+/* ==========================================
+   EDITH CONTROL
+========================================== */
+
+function stopEdithListening() {
+
+    if (
+        typeof window.stopEdithListening === "function"
+    ) {
+        window.stopEdithListening();
+    }
+
+}
+
+function startEdithListening() {
+
+    if (
+        isBlindMode() &&
+        typeof window.startEdithListening === "function"
+    ) {
+        window.startEdithListening();
+    }
+
+}
+
+
+/* ==========================================
+   CAPTIONS
+========================================== */
+
+function showCaptions(text) {
+
+    const box =
+        document.getElementById("captionsBox");
+
+    if (!isDeafMode()) {
+        box.classList.remove("active");
+        box.textContent = "";
+        return;
+    }
+
+    box.textContent = text;
+    box.classList.add("active");
+
+}
+
+function hideCaptions() {
+
+    const box =
+        document.getElementById("captionsBox");
+
+    box.textContent = "";
+    box.classList.remove("active");
+
+}
 
 function announce(message) {
 
@@ -1248,6 +1348,28 @@ function playVideo(
     type
 ) {
 
+    if (!videoId) {
+
+        announce(
+            "This video is not available yet."
+        );
+
+        return;
+
+    }
+
+
+    /* Blind mode:
+       Edith stops while class is playing
+    */
+
+    if (isBlindMode()) {
+
+        stopEdithListening();
+
+    }
+
+
     const player =
         document.getElementById("player");
 
@@ -1260,19 +1382,6 @@ function playVideo(
         document.getElementById(
             "playerTitle"
         );
-
-
-    if (
-        !videoId
-    ) {
-
-        announce(
-            "This video is not available yet."
-        );
-
-        return;
-
-    }
 
 
     titleBox.textContent =
@@ -1301,6 +1410,21 @@ function playVideo(
     player.classList.add("active");
 
 
+    /* Deaf mode:
+       captions information stays on screen
+    */
+
+    if (isDeafMode()) {
+
+        showCaptions(
+            title +
+            " — " +
+            channel
+        );
+
+    }
+
+
     announce(
         "Playing " +
         title +
@@ -1317,7 +1441,9 @@ function playVideo(
 }
 
 
-function closeVideo() {
+function showCourses() {
+
+    function closeVideo() {
 
     const player =
         document.getElementById("player");
@@ -1327,42 +1453,23 @@ function closeVideo() {
             "youtubePlayer"
         );
 
-
     iframe.src = "";
 
     player.classList.remove("active");
 
+    hideCaptions();
+
+    /* Edith can listen again
+       only in Blind mode
+    */
+
+    if (isBlindMode()) {
+
+        startEdithListening();
+
+    }
+
 }
-
-
-function showCourses() {
-
-    closeVideo();
-
-
-    document.getElementById(
-        "videosSection"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "languageSection"
-    ).classList.remove("active");
-
-
-    document.getElementById(
-        "coursesSection"
-    ).style.display = "block";
-
-
-    selectedCourse = "";
-    selectedLanguage = "";
-
-
-    announce(
-        "Programming courses are available."
-    );
-
 }
 
 

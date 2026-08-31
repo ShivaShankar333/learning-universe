@@ -787,6 +787,46 @@ function edithPageGuidance() {
 
 }
 
+/* =====================================
+   EXTERNAL EDITH CONTROL
+   Used by courses.html
+===================================== */
+
+window.stopEdithListening = function () {
+
+    clearTimeout(edithRestartTimer);
+
+    edithCommandMode = false;
+
+    if (edithRecognition) {
+
+        try {
+            edithRecognition.stop();
+        } catch (error) {
+            console.log("Edith stopped.");
+        }
+
+    }
+
+    edithListening = false;
+
+};
+
+
+window.startEdithListening = function () {
+
+    if (!isBlindMode()) {
+        return;
+    }
+
+    if (edithListening) {
+        return;
+    }
+
+    startEdith();
+
+};
+
 
 /* =====================================
    INITIALIZE EDITH
