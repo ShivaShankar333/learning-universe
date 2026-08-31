@@ -197,6 +197,10 @@ document.getElementById("loginForm").addEventListener(
                 "user",
                 JSON.stringify(data.user)
             );
+            localStorage.setItem(
+    "accessibilityMode",
+    "regular"
+);
 
             message.textContent =
                 "Login successful ✅";
