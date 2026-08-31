@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -43,10 +44,6 @@ nav a {
     text-decoration: none;
     color: #30344b;
     font-weight: bold;
-}
-
-nav a:hover {
-    color: #6c4df6;
 }
 
 .hero {
@@ -109,6 +106,66 @@ nav a:hover {
     color: #697188;
 }
 
+.language-section {
+    display: none;
+    padding: 30px 7% 60px;
+}
+
+.language-section.active {
+    display: block;
+}
+
+.language-box {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(40,40,80,0.08);
+    text-align: center;
+}
+
+.language-box h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.language-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.language-button {
+    padding: 18px 10px;
+    border: 2px solid #e5e5ef;
+    border-radius: 14px;
+    background: #f8f8ff;
+    color: #20243a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.language-button:hover,
+.language-button:focus {
+    background: #eeeaff;
+    border-color: #6c4df6;
+    outline: 4px solid #16a085;
+    outline-offset: 3px;
+}
+
+.back-language {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #30344b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .videos-section {
     display: none;
     padding: 40px 7% 70px;
@@ -126,13 +183,6 @@ nav a:hover {
     color: white;
     font-weight: bold;
     cursor: pointer;
-}
-
-.back-button:focus,
-.watch-button:focus,
-.close-button:focus {
-    outline: 4px solid #16a085;
-    outline-offset: 3px;
 }
 
 .videos-section h2 {
@@ -186,15 +236,10 @@ nav a:hover {
     padding: 25px;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(40,40,80,0.12);
 }
 
 .player.active {
     display: block;
-}
-
-.player h2 {
-    margin-top: 0;
 }
 
 .iframe-wrapper {
@@ -263,6 +308,10 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .language-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -272,7 +321,8 @@ footer {
     }
 
     .course-grid,
-    .channel-grid {
+    .channel-grid,
+    .language-grid {
         grid-template-columns: 1fr;
     }
 
@@ -286,9 +336,7 @@ footer {
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -300,29 +348,19 @@ footer {
 
         <a href="index.html">Home</a>
 
-        <a href="courses.html">
-            Courses
-        </a>
+        <a href="courses.html">Courses</a>
 
-        <a href="accessibility.html">
-            Accessibility
-        </a>
+        <a href="accessibility.html">Accessibility</a>
 
-        <a href="missions.html">
-            Missions
-        </a>
+        <a href="missions.html">Missions</a>
 
-        <a href="career.html">
-            Career
-        </a>
+        <a href="career.html">Career</a>
 
     </nav>
 
 </header>
 
-
 <main>
-
 
 <section class="hero">
 
@@ -337,11 +375,6 @@ footer {
 
 </section>
 
-
-<!-- =========================
-     COURSE LIST
-========================= -->
-
 <section
     class="courses"
     id="coursesSection"
@@ -354,10 +387,88 @@ footer {
 
 </section>
 
-
 <!-- =========================
-     VIDEOS
+     LANGUAGE SELECTION
 ========================= -->
+
+<section
+    class="language-section"
+    id="languageSection"
+    aria-labelledby="languageTitle">
+
+    <div class="language-box">
+
+        <h2 id="languageTitle">
+            🌐 Choose Learning Language
+        </h2>
+
+        <p id="languageInstruction">
+            Choose the language in which you want to learn this course.
+        </p>
+
+        <div
+            class="language-grid"
+            id="languageGrid">
+
+            <button
+                class="language-button"
+                type="button"
+                data-language="English">
+
+                🇬🇧 English
+
+            </button>
+
+            <button
+                class="language-button"
+                type="button"
+                data-language="Telugu">
+
+                🇮🇳 Telugu
+
+            </button>
+
+            <button
+                class="language-button"
+                type="button"
+                data-language="Hindi">
+
+                🇮🇳 Hindi
+
+            </button>
+
+            <button
+                class="language-button"
+                type="button"
+                data-language="Malayalam">
+
+                🇮🇳 Malayalam
+
+            </button>
+
+            <button
+                class="language-button"
+                type="button"
+                data-language="Kannada">
+
+                🇮🇳 Kannada
+
+            </button>
+
+        </div>
+
+        <button
+            class="back-language"
+            type="button"
+            onclick="showCourses()">
+
+            ← Back to Courses
+
+        </button>
+
+    </div>
+
+</section>
 
 <section
     class="videos-section"
@@ -367,9 +478,9 @@ footer {
     <button
         class="back-button"
         type="button"
-        onclick="showCourses()">
+        onclick="showLanguageSelection()">
 
-        ← Back to Programming Languages
+        ← Change Language
 
     </button>
 
@@ -378,8 +489,7 @@ footer {
     </h2>
 
     <p
-        id="videoInstruction"
-        class="sr-only"
+        id="selectedLanguageText"
         aria-live="polite">
     </p>
 
@@ -389,11 +499,6 @@ footer {
     </div>
 
 </section>
-
-
-<!-- =========================
-     VIDEO PLAYER
-========================= -->
 
 <section
     class="player"
@@ -426,7 +531,6 @@ footer {
 
 </section>
 
-
 <div
     id="edithMessage"
     class="edith-message"
@@ -436,7 +540,6 @@ footer {
 
 </div>
 
-
 <div
     id="announcement"
     class="sr-only"
@@ -444,9 +547,7 @@ footer {
     aria-atomic="true">
 </div>
 
-
 </main>
-
 
 <footer>
 
@@ -454,13 +555,7 @@ footer {
 
 </footer>
 
-
 <script>
-
-
-/* ==========================================
-   COURSES
-========================================== */
 
 const courses = [
 
@@ -514,152 +609,87 @@ const courses = [
 
 ];
 
-
-/* ==========================================
-   VIDEO DATA
-========================================== */
+let selectedCourse = "";
+let selectedLanguage = "";
 
 const videos = {
 
     "Java Programming": [
-
         {
             title: "Java Full Course for Beginners",
             channel: "Java Course 1",
             id: "eIrMbAQSU34"
         },
-
         {
             title: "Java Programming Course",
             channel: "Java Course 2",
             id: "BGTx91t8q50"
         },
-
         {
             title: "Java Programming Tutorial",
             channel: "Java Course 3",
             id: "ZFnRvpxpnOc"
         },
-
         {
             title: "Java Full Course",
             channel: "Java Course 4",
             id: "xTtL8E4LzTQ"
         },
-
         {
             title: "Java Programming for Beginners",
             channel: "Java Course 5",
             id: "A74TOX803D0"
         },
-
         {
             title: "Java OOP Concepts",
             channel: "Durga Sir",
             id: "5NQjLBuNL0I"
         }
-
     ],
 
-
     "Python Programming": [
-
         {
             title: "Python Programming Course",
             channel: "Python Learning Channel 1",
             id: "VIDEO_ID_1"
         },
-
         {
             title: "Python for Beginners",
             channel: "Python Learning Channel 2",
             id: "VIDEO_ID_2"
         },
-
         {
             title: "Complete Python Tutorial",
             channel: "Python Learning Channel 3",
             id: "VIDEO_ID_3"
-        },
-
-        {
-            title: "Python Full Course",
-            channel: "Python Learning Channel 4",
-            id: "VIDEO_ID_4"
-        },
-
-        {
-            title: "Python Basics",
-            channel: "Python Learning Channel 5",
-            id: "VIDEO_ID_5"
-        },
-
-        {
-            title: "Python Advanced Course",
-            channel: "Python Learning Channel 6",
-            id: "VIDEO_ID_6"
         }
-
     ],
 
-
     "C Programming": [
-
         {
             title: "C Programming Course",
             channel: "C Learning Channel 1",
             id: "VIDEO_ID_1"
         },
-
         {
             title: "C Programming for Beginners",
             channel: "C Learning Channel 2",
             id: "VIDEO_ID_2"
         },
-
         {
             title: "Complete C Tutorial",
             channel: "C Learning Channel 3",
             id: "VIDEO_ID_3"
-        },
-
-        {
-            title: "C Full Course",
-            channel: "C Learning Channel 4",
-            id: "VIDEO_ID_4"
-        },
-
-        {
-            title: "C Programming Basics",
-            channel: "C Learning Channel 5",
-            id: "VIDEO_ID_5"
-        },
-
-        {
-            title: "Advanced C Programming",
-            channel: "C Learning Channel 6",
-            id: "VIDEO_ID_6"
         }
-
     ],
 
-
     "C++ Programming": [],
-
     "JavaScript": [],
-
     "Web Development": [],
-
     "SQL & Databases": [],
-
     "AI & Machine Learning": []
 
 };
-
-
-/* ==========================================
-   ANNOUNCEMENT
-========================================== */
 
 function announce(message) {
 
@@ -676,11 +706,6 @@ function announce(message) {
 
 }
 
-
-/* ==========================================
-   DISPLAY COURSES
-========================================== */
-
 function displayCourses() {
 
     const grid =
@@ -688,14 +713,12 @@ function displayCourses() {
 
     grid.innerHTML = "";
 
-
-    courses.forEach(function(course, index) {
+    courses.forEach(function(course) {
 
         const card =
             document.createElement("div");
 
-        card.className =
-            "course-card";
+        card.className = "course-card";
 
         card.tabIndex = 0;
 
@@ -706,10 +729,11 @@ function displayCourses() {
 
         card.setAttribute(
             "aria-label",
-            "Open " + course.name +
-            ", " + course.level
+            "Open " +
+            course.name +
+            ", " +
+            course.level
         );
-
 
         card.innerHTML = `
 
@@ -730,16 +754,16 @@ function displayCourses() {
 
         `;
 
-
         card.addEventListener(
             "click",
             function() {
 
-                showVideos(course.name);
+                showLanguageSelectionFor(
+                    course.name
+                );
 
             }
         );
-
 
         card.addEventListener(
             "keydown",
@@ -752,13 +776,14 @@ function displayCourses() {
 
                     event.preventDefault();
 
-                    showVideos(course.name);
+                    showLanguageSelectionFor(
+                        course.name
+                    );
 
                 }
 
             }
         );
-
 
         grid.appendChild(card);
 
@@ -766,46 +791,122 @@ function displayCourses() {
 
 }
 
+function showLanguageSelectionFor(courseName) {
 
-/* ==========================================
-   SHOW VIDEOS
-========================================== */
-
-function showVideos(courseName) {
+    selectedCourse = courseName;
+    selectedLanguage = "";
 
     document.getElementById(
         "coursesSection"
     ).style.display = "none";
 
+    document.getElementById(
+        "videosSection"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "languageSection"
+    ).classList.add("active");
+
+    document.getElementById(
+        "languageTitle"
+    ).textContent =
+        "🌐 Choose Learning Language";
+
+    document.getElementById(
+        "languageInstruction"
+    ).textContent =
+        "Choose the language for " +
+        courseName +
+        ".";
+
+    announce(
+        courseName +
+        " selected. Please choose English, Telugu, Hindi, Malayalam, or Kannada."
+    );
+
+}
+
+function showLanguageSelection() {
+
+    closeVideo();
+
+    document.getElementById(
+        "videosSection"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "languageSection"
+    ).classList.add("active");
+
+    announce(
+        "Choose your learning language."
+    );
+
+}
+
+function selectLanguage(language) {
+
+    selectedLanguage = language;
+
+    document.getElementById(
+        "languageSection"
+    ).classList.remove("active");
 
     document.getElementById(
         "videosSection"
     ).classList.add("active");
 
-
     document.getElementById(
         "selectedCourseTitle"
     ).textContent =
-        courseName + " - Learning Videos";
+        selectedCourse +
+        " - " +
+        language +
+        " Learning Videos";
 
+    document.getElementById(
+        "selectedLanguageText"
+    ).textContent =
+        "Selected learning language: " +
+        language;
+
+    loadVideos();
+
+    announce(
+        language +
+        " selected for " +
+        selectedCourse
+    );
+
+}
+
+document.querySelectorAll(
+    ".language-button"
+).forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            selectLanguage(
+                button.dataset.language
+            );
+
+        }
+    );
+
+});
+
+function loadVideos() {
 
     const grid =
         document.getElementById("channelGrid");
 
     grid.innerHTML = "";
 
-
     const courseVideos =
-        videos[courseName] || [];
-
-
-    announce(
-        courseName +
-        " opened. " +
-        courseVideos.length +
-        " learning videos available."
-    );
-
+        videos[selectedCourse] || [];
 
     if (courseVideos.length === 0) {
 
@@ -821,8 +922,9 @@ function showVideos(courseName) {
 
                     <p>
                         Quality learning videos
-                        for this course will be
-                        added soon.
+                        for ${selectedCourse}
+                        in ${selectedLanguage}
+                        will be added soon.
                     </p>
 
                 </div>
@@ -835,75 +937,57 @@ function showVideos(courseName) {
 
     }
 
+    courseVideos.forEach(function(video) {
 
-    courseVideos.forEach(
-        function(video, index) {
+        const card =
+            document.createElement("div");
 
-            const card =
-                document.createElement("div");
+        card.className = "video-card";
 
-            card.className =
-                "video-card";
+        card.innerHTML = `
 
+            <div class="video-info">
 
-            card.innerHTML = `
+                <h3>
+                    🎥 ${video.title}
+                </h3>
 
-                <div class="video-info">
-
-                    <h3>
-                        🎥 ${video.title}
-                    </h3>
-
-                    <div class="channel-name">
-                        ${video.channel}
-                    </div>
-
-                    <button
-                        class="watch-button"
-                        type="button"
-                        aria-label="Watch ${video.title}">
-
-                        ▶ Watch Class
-
-                    </button>
-
+                <div class="channel-name">
+                    ${video.channel}
                 </div>
 
-            `;
+                <button
+                    class="watch-button"
+                    type="button">
 
+                    ▶ Watch Class
 
-            const watchButton =
-                card.querySelector(
-                    ".watch-button"
+                </button>
+
+            </div>
+
+        `;
+
+        card.querySelector(
+            ".watch-button"
+        ).addEventListener(
+            "click",
+            function() {
+
+                playVideo(
+                    video.id,
+                    video.title,
+                    video.channel
                 );
 
+            }
+        );
 
-            watchButton.addEventListener(
-                "click",
-                function() {
+        grid.appendChild(card);
 
-                    playVideo(
-                        video.id,
-                        video.title,
-                        video.channel
-                    );
-
-                }
-            );
-
-
-            grid.appendChild(card);
-
-        }
-    );
+    });
 
 }
-
-
-/* ==========================================
-   PLAY VIDEO
-========================================== */
-
 function playVideo(
     videoId,
     title,
@@ -923,7 +1007,6 @@ function playVideo(
 
     }
 
-
     const player =
         document.getElementById("player");
 
@@ -937,22 +1020,18 @@ function playVideo(
             "playerTitle"
         );
 
-
     titleBox.textContent =
         "Playing " +
         title +
         " by " +
         channel;
 
-
     iframe.src =
         "https://www.youtube.com/embed/" +
         videoId +
         "?autoplay=1";
 
-
     player.classList.add("active");
-
 
     announce(
         "Playing " +
@@ -961,18 +1040,12 @@ function playVideo(
         channel
     );
 
-
     player.scrollIntoView({
         behavior: "smooth",
         block: "center"
     });
 
 }
-
-
-/* ==========================================
-   CLOSE VIDEO
-========================================== */
 
 function closeVideo() {
 
@@ -984,37 +1057,27 @@ function closeVideo() {
             "youtubePlayer"
         );
 
-
     iframe.src = "";
 
     player.classList.remove("active");
 
-
-    announce(
-        "Video closed."
-    );
-
 }
-
-
-/* ==========================================
-   BACK TO COURSES
-========================================== */
 
 function showCourses() {
 
     closeVideo();
 
-
     document.getElementById(
         "videosSection"
     ).classList.remove("active");
 
+    document.getElementById(
+        "languageSection"
+    ).classList.remove("active");
 
     document.getElementById(
         "coursesSection"
     ).style.display = "block";
-
 
     announce(
         "Programming courses are available."
@@ -1027,11 +1090,6 @@ function showCourses() {
    EDITH PAGE COMMANDS
 ========================================== */
 
-/*
-   edith.js can call this function
-   when the user gives a voice command.
-*/
-
 window.edithPageCommand =
 function(command) {
 
@@ -1039,11 +1097,75 @@ function(command) {
         return false;
     }
 
-
     command =
         command
         .toLowerCase()
         .trim();
+
+
+    /* =========================
+       LANGUAGE COMMANDS
+    ========================= */
+
+    if (
+        command.includes("english")
+    ) {
+
+        if (selectedCourse) {
+            selectLanguage("English");
+        }
+
+        return true;
+
+    }
+
+    if (
+        command.includes("telugu")
+    ) {
+
+        if (selectedCourse) {
+            selectLanguage("Telugu");
+        }
+
+        return true;
+
+    }
+
+    if (
+        command.includes("hindi")
+    ) {
+
+        if (selectedCourse) {
+            selectLanguage("Hindi");
+        }
+
+        return true;
+
+    }
+
+    if (
+        command.includes("malayalam")
+    ) {
+
+        if (selectedCourse) {
+            selectLanguage("Malayalam");
+        }
+
+        return true;
+
+    }
+
+    if (
+        command.includes("kannada")
+    ) {
+
+        if (selectedCourse) {
+            selectLanguage("Kannada");
+        }
+
+        return true;
+
+    }
 
 
     /* =========================
@@ -1088,7 +1210,7 @@ function(command) {
         command.includes("python")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "Python Programming"
         );
 
@@ -1096,12 +1218,11 @@ function(command) {
 
     }
 
-
     if (
         command.includes("java")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "Java Programming"
         );
 
@@ -1109,13 +1230,12 @@ function(command) {
 
     }
 
-
     if (
         command.includes("c plus plus") ||
         command.includes("c++")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "C++ Programming"
         );
 
@@ -1123,14 +1243,13 @@ function(command) {
 
     }
 
-
     if (
         command.includes("c programming") ||
         command === "open c" ||
         command.includes("learn c")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "C Programming"
         );
 
@@ -1138,13 +1257,12 @@ function(command) {
 
     }
 
-
     if (
         command.includes("javascript") ||
         command.includes("java script")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "JavaScript"
         );
 
@@ -1152,13 +1270,11 @@ function(command) {
 
     }
 
-
     if (
-        command.includes("web development") ||
-        command.includes("web development course")
+        command.includes("web development")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "Web Development"
         );
 
@@ -1166,13 +1282,12 @@ function(command) {
 
     }
 
-
     if (
         command.includes("sql") ||
         command.includes("database")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "SQL & Databases"
         );
 
@@ -1180,14 +1295,13 @@ function(command) {
 
     }
 
-
     if (
         command.includes("machine learning") ||
         command.includes("artificial intelligence") ||
         command.includes("ai course")
     ) {
 
-        showVideos(
+        showLanguageSelectionFor(
             "AI & Machine Learning"
         );
 
@@ -1197,7 +1311,7 @@ function(command) {
 
 
     /* =========================
-       READ AVAILABLE COURSES
+       READ COURSES
     ========================= */
 
     if (
@@ -1214,7 +1328,6 @@ function(command) {
             })
             .join(", ");
 
-
         if (
             typeof speak === "function"
         ) {
@@ -1226,11 +1339,9 @@ function(command) {
 
         }
 
-
         return true;
 
     }
-
 
     return false;
 
@@ -1243,9 +1354,9 @@ function(command) {
 
 displayCourses();
 
-/*===========================================
+/*==================
   EDITH SCRIPT
-========================================== */
+================= */
 
 </script>
 
