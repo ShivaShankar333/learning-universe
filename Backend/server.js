@@ -268,6 +268,59 @@ app.post("/api/register", async (req, res) => {
 
 });
 
+// ================================
+// FORGOT PASSWORD - CHECK EMAIL
+// ================================
+
+app.post("/api/forgot-password", async (req, res) => {
+
+    try {
+
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({
+                success: false,
+                message: "Email address is required."
+            });
+        }
+
+        const cleanEmail =
+            email.toLowerCase().trim();
+
+        const foundUser =
+            await User.findOne({
+                email: cleanEmail
+            });
+
+        if (!foundUser) {
+            return res.status(404).json({
+                success: false,
+                message: "No account found with this email address."
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Account found. Password reset can continue."
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Forgot Password Error:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            message: "Server error while checking the email."
+        });
+
+    }
+
+});
+
 
 // ================================
 // LOGIN
