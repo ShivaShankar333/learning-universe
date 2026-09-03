@@ -309,6 +309,7 @@ nav a:hover {
 .login-options small {
     color: #737990;
 }
+
 /* LOGIN PAGE */
 
 .login-page {
@@ -346,6 +347,24 @@ nav a:hover {
 .login-box a {
     color: #6c4df6;
     text-decoration: none;
+}
+
+/* FORGOT PASSWORD */
+
+.forgot-password {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: #6c4df6;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
 }
 
 /* DASHBOARD */
@@ -633,6 +652,7 @@ nav a:hover {
     margin: 35px 0;
     line-height: 1.8;
 }
+
 /* MISSIONS */
 
 .missions-page {
