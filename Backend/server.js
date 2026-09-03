@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const User = require("./models/User");
 
@@ -268,8 +269,10 @@ app.post("/api/register", async (req, res) => {
 
 });
 
+
 // ================================
-// FORGOT PASSWORD - CHECK EMAIL
+// FORGOT PASSWORD
+// GENERATE RESET TOKEN
 // ================================
 
 app.post("/api/forgot-password", async (req, res) => {
@@ -278,32 +281,139 @@ app.post("/api/forgot-password", async (req, res) => {
 
         const { email } = req.body;
 
+
+        // ----------------------------
+        // VALIDATION
+        // ----------------------------
+
         if (!email) {
+
             return res.status(400).json({
+
                 success: false,
-                message: "Email address is required."
+
+                message:
+                    "Email address is required."
+
             });
+
         }
+
+
+        // ----------------------------
+        // CLEAN EMAIL
+        // ----------------------------
 
         const cleanEmail =
             email.toLowerCase().trim();
 
+
+        // ----------------------------
+        // FIND USER
+        // ----------------------------
+
         const foundUser =
             await User.findOne({
+
                 email: cleanEmail
+
             });
+
 
         if (!foundUser) {
+
             return res.status(404).json({
+
                 success: false,
-                message: "No account found with this email address."
+
+                message:
+                    "No account found with this email address."
+
             });
+
         }
 
+
+        // ----------------------------
+        // GENERATE RANDOM TOKEN
+        // ----------------------------
+
+        const resetToken =
+            crypto.randomBytes(32).toString("hex");
+
+
+        // ----------------------------
+        // HASH TOKEN
+        // ----------------------------
+
+        const resetTokenHash =
+            crypto
+                .createHash("sha256")
+                .update(resetToken)
+                .digest("hex");
+
+
+        // ----------------------------
+        // TOKEN EXPIRY
+        // 15 MINUTES
+        // ----------------------------
+
+        const resetExpiresAt =
+            new Date(
+                Date.now() + 15 * 60 * 1000
+            );
+
+
+        // ----------------------------
+        // SAVE RESET DATA
+        // ----------------------------
+
+        await User.findByIdAndUpdate(
+
+            foundUser._id,
+
+            {
+                $set: {
+
+                    resetTokenHash:
+                        resetTokenHash,
+
+                    resetExpiresAt:
+                        resetExpiresAt,
+
+                    resetUsedAt:
+                        null
+
+                }
+
+            },
+
+            {
+                strict: false
+            }
+
+        );
+
+
+        // ----------------------------
+        // SUCCESS
+        // ----------------------------
+
         return res.status(200).json({
+
             success: true,
-            message: "Account found. Password reset can continue."
+
+            message:
+                "Password reset token generated.",
+
+            resetToken:
+                resetToken,
+
+            expiresIn:
+                "15 minutes"
+
         });
+
 
     } catch (error) {
 
@@ -312,9 +422,191 @@ app.post("/api/forgot-password", async (req, res) => {
             error
         );
 
+
         return res.status(500).json({
+
             success: false,
-            message: "Server error while checking the email."
+
+            message:
+                "Server error while creating password reset."
+
+        });
+
+    }
+
+});
+
+
+// ================================
+// RESET PASSWORD
+// ================================
+
+app.post("/api/reset-password", async (req, res) => {
+
+    try {
+
+        const {
+            token,
+            newPassword
+        } = req.body;
+
+
+        // ----------------------------
+        // VALIDATION
+        // ----------------------------
+
+        if (!token || !newPassword) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Reset token and new password are required."
+
+            });
+
+        }
+
+
+        // ----------------------------
+        // PASSWORD LENGTH
+        // ----------------------------
+
+        if (newPassword.length < 6) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Password must contain at least 6 characters."
+
+            });
+
+        }
+
+
+        // ----------------------------
+        // HASH RECEIVED TOKEN
+        // ----------------------------
+
+        const resetTokenHash =
+            crypto
+                .createHash("sha256")
+                .update(token)
+                .digest("hex");
+
+
+        // ----------------------------
+        // FIND USER WITH VALID TOKEN
+        // ----------------------------
+
+        const foundUser =
+            await User.findOne({
+
+                resetTokenHash:
+                    resetTokenHash,
+
+                resetExpiresAt: {
+                    $gt: new Date()
+                },
+
+                resetUsedAt: null
+
+            });
+
+
+        if (!foundUser) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Reset token is invalid or expired."
+
+            });
+
+        }
+
+
+        // ----------------------------
+        // HASH NEW PASSWORD
+        // ----------------------------
+
+        const hashedPassword =
+            await bcrypt.hash(
+                newPassword,
+                10
+            );
+
+
+        // ----------------------------
+        // UPDATE PASSWORD
+        // ----------------------------
+
+        await User.findByIdAndUpdate(
+
+            foundUser._id,
+
+            {
+                $set: {
+
+                    password:
+                        hashedPassword,
+
+                    resetUsedAt:
+                        new Date()
+
+                },
+
+                $unset: {
+
+                    resetTokenHash: 1,
+
+                    resetExpiresAt: 1
+
+                }
+
+            },
+
+            {
+                strict: false
+            }
+
+        );
+
+
+        // ----------------------------
+        // SUCCESS
+        // ----------------------------
+
+        return res.status(200).json({
+
+            success: true,
+
+            message:
+                "Password reset successful. You can now login with your new password."
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Reset Password Error:",
+            error
+        );
+
+
+        return res.status(500).json({
+
+            success: false,
+
+            message:
+                "Server error while resetting password."
+
         });
 
     }
@@ -336,6 +628,10 @@ app.post("/api/login", async (req, res) => {
         } = req.body;
 
 
+        // ----------------------------
+        // VALIDATION
+        // ----------------------------
+
         if (!email || !password) {
 
             return res.status(400).json({
@@ -347,6 +643,10 @@ app.post("/api/login", async (req, res) => {
 
         }
 
+
+        // ----------------------------
+        // FIND USER
+        // ----------------------------
 
         const foundUser =
             await User.findOne({
@@ -369,10 +669,17 @@ app.post("/api/login", async (req, res) => {
         }
 
 
+        // ----------------------------
+        // CHECK PASSWORD
+        // ----------------------------
+
         const passwordMatch =
             await bcrypt.compare(
+
                 password,
+
                 foundUser.password
+
             );
 
 
@@ -387,6 +694,10 @@ app.post("/api/login", async (req, res) => {
 
         }
 
+
+        // ----------------------------
+        // LOGIN SUCCESS
+        // ----------------------------
 
         res.status(200).json({
 
@@ -450,7 +761,9 @@ mongoose
 
 
         app.listen(
+
             PORT,
+
             () => {
 
                 console.log(
@@ -471,6 +784,7 @@ mongoose
                 );
 
             }
+
         );
 
     })
