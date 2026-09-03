@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Regular Student Registration</title>
+    <title>Regular Student Registration - Learning Universe</title>
 
     <style>
         * {
@@ -17,254 +17,590 @@
             min-height: 100vh;
             font-family: Arial, sans-serif;
             background: #f5f6ff;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             padding: 20px;
         }
 
         .box {
             width: 450px;
             max-width: 100%;
+
             background: white;
+
             padding: 35px;
+
             border-radius: 20px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+
+            box-shadow:
+                0 15px 45px rgba(0, 0, 0, 0.12);
         }
 
         .back {
             color: #6c4df6;
+
             text-decoration: none;
+
             font-weight: bold;
+
+            font-size: 15px;
+        }
+
+        .back:hover {
+            text-decoration: underline;
         }
 
         h1 {
             text-align: center;
+
             margin-top: 30px;
+            margin-bottom: 10px;
+
             color: #20243a;
+
+            font-size: 30px;
         }
 
         .subtitle {
             text-align: center;
+
             color: #697188;
+
             margin-bottom: 25px;
+
+            line-height: 1.5;
         }
 
         label {
             display: block;
+
             margin-top: 16px;
             margin-bottom: 7px;
+
             font-weight: bold;
+
             color: #30344b;
         }
 
         input {
             width: 100%;
+
             padding: 14px;
+
             border: 1px solid #ddd;
+
             border-radius: 10px;
+
             font-size: 15px;
+
             outline: none;
+
+            transition: 0.2s;
         }
 
         input:focus {
             border-color: #6c4df6;
+
+            box-shadow:
+                0 0 0 3px rgba(108, 77, 246, 0.10);
         }
 
         button {
             width: 100%;
+
             margin-top: 25px;
+
             padding: 14px;
+
             border: none;
+
             border-radius: 10px;
+
             background: #6c4df6;
+
             color: white;
+
             font-size: 16px;
+
             font-weight: bold;
+
             cursor: pointer;
+
+            transition: 0.2s;
         }
 
         button:hover {
             opacity: 0.9;
         }
 
+        button:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
         .login {
             text-align: center;
+
             margin-top: 22px;
+
             color: #697188;
         }
 
         .login a {
             color: #6c4df6;
+
             font-weight: bold;
+
             text-decoration: none;
+        }
+
+        .login a:hover {
+            text-decoration: underline;
         }
 
         #message {
             display: none;
+
             margin-top: 18px;
+
             padding: 12px;
+
             border-radius: 10px;
+
             text-align: center;
+
             font-weight: bold;
+
+            line-height: 1.4;
+        }
+
+        #message.success {
+            display: block;
+
+            background: #e8f8ee;
+
+            color: #1d7a3d;
+
+            border: 1px solid #b9e8c8;
+        }
+
+        #message.error {
+            display: block;
+
+            background: #fff0f0;
+
+            color: #c62828;
+
+            border: 1px solid #f2bcbc;
+        }
+
+        #message.info {
+            display: block;
+
+            background: #f0efff;
+
+            color: #5141b5;
+
+            border: 1px solid #d8d3ff;
         }
     </style>
 </head>
 
+
 <body>
 
-<div class="box">
+    <div class="box">
 
-    <a class="back" href="index.html">
-        ← Back to Home
-    </a>
-
-    <h1>Regular Student Registration</h1>
-
-    <p class="subtitle">
-        Create your Learning Universe account.
-    </p>
-
-    <form id="registerForm">
-
-        <label for="name">
-            Full Name
-        </label>
-
-        <input
-            id="name"
-            type="text"
-            placeholder="Enter your full name"
-            required
-        >
-
-        <label for="email">
-            Email Address
-        </label>
-
-        <input
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            required
-        >
-
-        <label for="password">
-            Create Password
-        </label>
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Create a password"
-            minlength="6"
-            required
-        >
-
-        <button type="submit">
-            Create Account
-        </button>
-
-    </form>
-
-    <div id="message"></div>
-
-    <div class="login">
-        Already have an account?
-        <a href="regular-login.html">
-            Login
+        <a class="back" href="index.html">
+            ← Back to Home
         </a>
+
+
+        <h1>
+            Regular Student Registration
+        </h1>
+
+
+        <p class="subtitle">
+            Create your Learning Universe account.
+        </p>
+
+
+        <form id="registerForm">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+            >
+
+
+            <label for="password">
+                Create Password
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Create a password"
+                minlength="6"
+                autocomplete="new-password"
+                required
+            >
+
+
+            <button
+                id="registerButton"
+                type="submit"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div id="message"></div>
+
+
+        <div class="login">
+
+            Already have an account?
+
+            <a href="regular-login.html">
+                Login
+            </a>
+
+        </div>
+
     </div>
 
-</div>
 
 
 <script>
 
-const registerForm =
-    document.getElementById("registerForm");
+    /* =========================================
+       LEARNING UNIVERSE BACKEND
+       ========================================= */
 
-const message =
-    document.getElementById("message");
+    const API_BASE_URL =
+        "https://learning-universe-p57z.onrender.com";
 
 
-registerForm.addEventListener(
-    "submit",
-    async function(event) {
+    const REGISTER_URL =
+        API_BASE_URL + "/api/register";
 
-        event.preventDefault();
 
-        const name =
-            document.getElementById("name").value.trim();
 
-        const email =
-            document.getElementById("email").value.trim();
+    /* =========================================
+       ELEMENTS
+       ========================================= */
 
-        const password =
-            document.getElementById("password").value;
+    const registerForm =
+        document.getElementById("registerForm");
 
+    const message =
+        document.getElementById("message");
+
+    const registerButton =
+        document.getElementById("registerButton");
+
+
+
+    /* =========================================
+       SHOW MESSAGE
+       ========================================= */
+
+    function showMessage(text, type) {
+
+        message.textContent = text;
+
+        message.className = type;
 
         message.style.display = "block";
-        message.textContent = "Creating account...";
+    }
 
 
-        try {
 
-            const response = await fetch(
-                "https://learning-universe-p57z.onrender.com/api/register",
-                {
-                    method: "POST",
+    /* =========================================
+       REGISTER
+       ========================================= */
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+    registerForm.addEventListener(
+        "submit",
+        async function(event) {
 
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        password: password,
-                        userType: "regular"
-                    })
-                }
-            );
+            event.preventDefault();
 
 
-            const data =
-                await response.json();
+            const name =
+                document.getElementById("name")
+                .value
+                .trim();
 
 
-            if (!response.ok) {
+            const email =
+                document.getElementById("email")
+                .value
+                .trim();
 
-                message.textContent =
-                    data.message || "Registration failed";
+
+            const password =
+                document.getElementById("password")
+                .value;
+
+
+
+            /* Basic validation */
+
+            if (!name) {
+
+                showMessage(
+                    "Please enter your full name.",
+                    "error"
+                );
 
                 return;
             }
 
 
-            message.textContent =
-                "Registration successful ✅";
+            if (!email) {
+
+                showMessage(
+                    "Please enter your email address.",
+                    "error"
+                );
+
+                return;
+            }
 
 
-            setTimeout(function() {
+            if (password.length < 6) {
 
-                window.location.href =
-                    "regular-login.html";
+                showMessage(
+                    "Password must contain at least 6 characters.",
+                    "error"
+                );
 
-            }, 800);
+                return;
+            }
 
 
-        } catch (error) {
 
-            console.error(error);
+            /* Disable button */
 
-            message.textContent =
-                "Backend connection failed. Make sure the server is running.";
+            registerButton.disabled = true;
+
+            registerButton.textContent =
+                "Creating Account...";
+
+
+            showMessage(
+                "Connecting to Learning Universe server...",
+                "info"
+            );
+
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        REGISTER_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    name: name,
+                                    email: email,
+                                    password: password,
+                                    userType: "regular"
+                                })
+                        }
+                    );
+
+
+
+                /* Read response safely */
+
+                const contentType =
+                    response.headers.get(
+                        "content-type"
+                    );
+
+
+                let data = {};
+
+
+                if (
+                    contentType &&
+                    contentType.includes("application/json")
+                ) {
+
+                    data =
+                        await response.json();
+
+                } else {
+
+                    const text =
+                        await response.text();
+
+                    data = {
+                        message: text
+                    };
+
+                }
+
+
+
+                /* =================================
+                   BACKEND ERROR
+                   ================================= */
+
+                if (!response.ok) {
+
+                    console.error(
+                        "Registration error:",
+                        response.status,
+                        data
+                    );
+
+
+                    showMessage(
+                        data.message ||
+                        data.error ||
+                        "Registration failed. Please try again.",
+                        "error"
+                    );
+
+
+                    registerButton.disabled =
+                        false;
+
+                    registerButton.textContent =
+                        "Create Account";
+
+                    return;
+                }
+
+
+
+                /* =================================
+                   SUCCESS
+                   ================================= */
+
+                console.log(
+                    "Registration successful:",
+                    data
+                );
+
+
+                /*
+                 * Regular user mode
+                 *
+                 * Edith should NOT start
+                 * for regular students.
+                 */
+
+                localStorage.setItem(
+                    "accessibilityMode",
+                    "regular"
+                );
+
+
+                /*
+                 * Save returned user data
+                 * if backend provides it.
+                 */
+
+                if (data.user) {
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(data.user)
+                    );
+
+                }
+
+
+
+                showMessage(
+                    "Registration successful! Redirecting to login...",
+                    "success"
+                );
+
+
+                registerButton.textContent =
+                    "Account Created ✓";
+
+
+
+                /* Redirect */
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "regular-login.html";
+
+                    },
+                    1200
+                );
+
+
+
+            } catch (error) {
+
+                console.error(
+                    "Backend connection error:",
+                    error
+                );
+
+
+                showMessage(
+                    "Cannot connect to the backend server. Please check whether the server is running.",
+                    "error"
+                );
+
+
+                registerButton.disabled =
+                    false;
+
+                registerButton.textContent =
+                    "Create Account";
+
+            }
 
         }
-
-    }
-);
+    );
 
 </script>
 
